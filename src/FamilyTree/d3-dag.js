@@ -1118,7 +1118,7 @@ function adjacent() {
     // node's parents or children while maintaining the same ordering in the layer.
     // overlapping nodes can occur because nodes can be placed in the same column
     // although they do not have a children/parents relation with each other
-    if (layers.length == 0) {
+    if (layers.length === 0) {
       return;
     }
 
@@ -1152,7 +1152,7 @@ function adjacent() {
       } else {
         // map each node to its desired location:
         const desiredColumnIndices = layer.map((node, index) => {
-          if (node.children == null || node.children.length === 0) {
+          if (node.children === null || node.children.length === 0) {
             return index;
           }
           const childrenColumnIndices = node.children.map(
@@ -1187,7 +1187,7 @@ function adjacent() {
       } else {
         // map each node to its desired location:
         const desiredColumnIndices = layer.map((node, index) => {
-          if (node.parents == null || node.parents.length === 0) {
+          if (node.parents === null || node.parents.length === 0) {
             return index;
           }
           const parentColumnIndices = node.parents.map(
@@ -1257,7 +1257,7 @@ function complex() {
 
   function columnIndexAssignmentSubtree(layers) {
     // starts at root nodes and assigns column indices based on their subtrees
-    if (layers.length == 0) {
+    if (layers.length === 0) {
       return;
     }
 
@@ -1265,7 +1265,7 @@ function complex() {
     let roots = [];
     layers.forEach((layer) =>
       layer.forEach((node) => {
-        if (node.parents == null || node.parents.length === 0) {
+        if (node.parents === null || node.parents.length === 0) {
           roots.push(node);
         }
       })
@@ -5563,8 +5563,8 @@ function bisector(compare) {
   if (compare.length === 1) compare = ascendingComparator(compare);
   return {
     left: function (a, x, lo, hi) {
-      if (lo == null) lo = 0;
-      if (hi == null) hi = a.length;
+      if (lo === null) lo = 0;
+      if (hi === null) hi = a.length;
       while (lo < hi) {
         var mid = (lo + hi) >>> 1;
         if (compare(a[mid], x) < 0) lo = mid + 1;
@@ -5573,8 +5573,8 @@ function bisector(compare) {
       return lo;
     },
     right: function (a, x, lo, hi) {
-      if (lo == null) lo = 0;
-      if (hi == null) hi = a.length;
+      if (lo === null) lo = 0;
+      if (hi === null) hi = a.length;
       while (lo < hi) {
         var mid = (lo + hi) >>> 1;
         if (compare(a[mid], x) > 0) hi = mid;
@@ -5591,14 +5591,12 @@ function ascendingComparator(f) {
   };
 }
 
-var ascendingBisect = bisector(ascending);
-
 function number(x) {
   return x === null ? NaN : +x;
 }
 
 function quantile(values, p, valueof) {
-  if (valueof == null) valueof = number;
+  if (valueof === null) valueof = number;
   if (!(n = values.length)) return;
   if ((p = +p) <= 0 || n < 2) return +valueof(values[0], 0, values);
   if (p >= 1) return +valueof(values[n - 1], n - 1, values);
@@ -5616,7 +5614,7 @@ function median(values, valueof) {
     value,
     numbers = [];
 
-  if (valueof == null) {
+  if (valueof === null) {
     while (++i < n) {
       if (!isNaN((value = number(values[i])))) {
         numbers.push(value);
@@ -5821,7 +5819,7 @@ var FastPriorityQueue_1 = createCommonjsModule(function (module) {
   // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/undefined
   //
   FastPriorityQueue.prototype.peek = function () {
-    if (this.size == 0) return undefined;
+    if (this.size === 0) return undefined;
     return this.array[0];
   };
 
@@ -5836,7 +5834,7 @@ var FastPriorityQueue_1 = createCommonjsModule(function (module) {
   // storing large objects, you may  want to call the trim function
   // at strategic times to recover allocated memory.
   FastPriorityQueue.prototype.poll = function () {
-    if (this.size == 0) return undefined;
+    if (this.size === 0) return undefined;
     var ans = this.array[0];
     if (this.size > 1) {
       this.array[0] = this.array[--this.size];
@@ -6613,14 +6611,14 @@ function index$2() {
       createParentsRelation(dag);
       let totalLayerSeparation = layers.reduce(
         (prevVal, layer, i) =>
-          prevVal + (i == 0 ? 0 : interLayerSeparation(layer, i)),
+          prevVal + (i === 0 ? 0 : interLayerSeparation(layer, i)),
         0
       );
       let pathLength = longestPathValue + totalLayerSeparation;
       let cummulativeLayerSeparation = 0;
       layers.forEach((layer, i) => {
         cummulativeLayerSeparation +=
-          i == 0 ? 0 : interLayerSeparation(layer, i);
+          i === 0 ? 0 : interLayerSeparation(layer, i);
         layer.forEach((n) => {
           let pathValueToRoot = getLongestPathValueToRoot(n);
           n.y1 = (cummulativeLayerSeparation + pathValueToRoot) / pathLength;
