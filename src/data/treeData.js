@@ -22,7 +22,7 @@ export const data = {
       own_unions: ["u1"],
     },
     id2: {
-      name: "Reetha Robinson",
+      name: "Retha Robinson",
       birthyear: 1921,
       deathyear: 2000,
       own_unions: ["u1"],
@@ -107,8 +107,8 @@ export const data = {
       parent_union: "u2",
     },
     id17: {
-      name: "Becky",
-      own_unions: ["u3"],
+      name: "Rebecca Davis",
+      own_unions: ["u22"],
       parent_union: "u2",
     },
     id18: {
@@ -287,6 +287,66 @@ export const data = {
       name: "Akanksha Mehta",
       own_unions: ["u18"],
     },
+    id52: {
+      name: "Ross Davis",
+      birthyear: 1938,
+      deathyear: 2008,
+      own_unions: [],
+      parent_union: "u2",
+    },
+    id53: {
+      name: "Rex (Sonny) Davis",
+      own_unions: ["u19"],
+      parent_union: "u2",
+    },
+    id54: {
+      name: "Brian Davis",
+      own_unions: ["u21"],
+      parent_union: "u19",
+    },
+
+    id55: {
+      name: "Steven Davis",
+      own_unions: ["u20"],
+      parent_union: "u19",
+    },
+
+    id56: {
+      name: "Julie Soltis",
+      own_unions: ["u20"],
+    },
+    id57: {
+      name: "Emilee Davis",
+      own_unions: ["u20"],
+    },
+    id58: {
+      name: "Josh Davis",
+      own_unions: ["u20"],
+    },
+    id59: {
+      name: "Tina Davis",
+      own_unions: ["u21"],
+    },
+    id60: {
+      name: "Hallie Davis",
+      own_unions: ["u21"],
+    },
+    id61: {
+      name: "Andrew Davis",
+      own_unions: ["u21"],
+    },
+    id62: {
+      name: "Jessica Davis",
+      own_unions: ["u21"],
+    },
+    id63: {
+      name: "Jane Davis",
+      own_unions: [],
+    },
+    id64: {
+      name: "Kevin Davis",
+      own_unions: [],
+    },
   },
   unions: {
     u1: {
@@ -294,8 +354,8 @@ export const data = {
       children: ["id3", "id4"], //Ron and Jim
     },
     u2: {
-      partner: ["id6", "id7"],
-      children: ["id5", "id15", "id16", "id17"], //Sandra
+      partner: ["id6", "id7"], //Wilma, Rex
+      children: ["id5", "id15", "id16", "id17", "id53", "id52"],
     },
     u3: {
       partner: ["id3", "id5"],
@@ -360,6 +420,22 @@ export const data = {
     u18: {
       partner: ["id45", "id51"],
       children: [],
+    },
+    u19: {
+      partner: ["id53"],
+      children: ["id54", "id55"],
+    },
+    u20: {
+      partner: ["id55", "id56"],
+      children: ["id57", "id58"],
+    },
+    u21: {
+      partner: ["id54", "id59"],
+      children: ["id60", "id61", "id62"],
+    },
+    u22: {
+      partner: ["id17"],
+      children: ["id63", "id64"],
     },
   },
 };
