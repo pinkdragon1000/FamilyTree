@@ -2144,16 +2144,6 @@ Tableau.prototype.initialize = function (
     this.matrix[j] = tmpRow.slice();
   }
 
-  //
-  // TODO: Benchmark This
-  //this.matrix = new Array(height).fill(0).map(() => new Array(width).fill(0));
-
-  // console.timeEnd("tableau_build");
-  // console.log("height",height);
-  // console.log("width",width);
-  // console.log("------");
-  // console.log("");
-
   this.varIndexByRow = new Array(this.height);
   this.varIndexByCol = new Array(this.width);
 
@@ -2298,13 +2288,6 @@ Tableau.prototype.getSolution = function () {
     return new Solution_1(this, evaluation, this.feasible, this.bounded);
   }
 };
-
-/*global describe*/
-/*global require*/
-/*global module*/
-/*global it*/
-/*global console*/
-/*global process*/
 
 //-------------------------------------------------------------------
 // Function: solve
@@ -3043,7 +3026,6 @@ Tableau_1.prototype._addLowerBoundMIRCut = function (rowIndex) {
     return false;
   }
 
-  var model = this.model;
   var matrix = this.matrix;
 
   var intVar = this.variablesPerIndex[this.varIndexByRow[rowIndex]];
@@ -3180,9 +3162,6 @@ Tableau_1.prototype.applyMIRCuts = function () {
   //    this._addLowerBoundMIRCut(cst);
   // }
 };
-
-/*global require*/
-/*global console*/
 
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
@@ -3493,9 +3472,6 @@ Tableau_1.prototype.removeVariable = function (variable) {
   this.width -= 1;
 };
 
-/*global require*/
-/*global console*/
-
 //-------------------------------------------------------------------
 // Description: Display a tableau matrix
 //              and additional tableau information
@@ -3654,8 +3630,6 @@ Tableau_1.prototype.log = function (message, force) {
   return this;
 };
 
-/*global require*/
-
 Tableau_1.prototype.copy = function () {
   var copy = new Tableau_1(this.precision);
 
@@ -3771,8 +3745,6 @@ Tableau_1.prototype.restore = function () {
     }
   }
 };
-
-/*global require*/
 
 function VariableData(index, value) {
   this.index = index;
@@ -3927,17 +3899,7 @@ Tableau_1.prototype.computeFractionalVolume = function (ignoreIntegerValues) {
   return volume;
 };
 
-/*global require*/
-/*global module*/
-
 var Tableau$1 = Tableau_1;
-
-/*global describe*/
-/*global require*/
-/*global module*/
-/*global it*/
-/*global console*/
-/*global process*/
 
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
@@ -4210,13 +4172,6 @@ Tableau_1.prototype.branchAndCut = function () {
 };
 
 var branchAndCut = {};
-
-/*global describe*/
-/*global require*/
-/*global module*/
-/*global it*/
-/*global console*/
-/*global process*/
 
 var Constraint$1 = expressions.Constraint;
 var Equality$1 = expressions.Equality;
@@ -4696,14 +4651,6 @@ Model.prototype.log = function (message) {
   return this.tableau.log(message);
 };
 
-/*global describe*/
-/*global require*/
-/*global module*/
-/*global it*/
-/*global console*/
-/*global process*/
-/*global exports*/
-
 // All functions in this module that
 // get exported to main ***MUST***
 // return a functional LPSolve JSON style
@@ -4775,14 +4722,6 @@ var Validation = {
   CleanObjectiveAttributes: CleanObjectiveAttributes,
 };
 
-/*global describe*/
-/*global require*/
-/*global module*/
-/*global it*/
-/*global console*/
-/*global process*/
-/*jshint -W083 */
-
 /*************************************************************
  * Method: to_JSON
  * Scope: Public:
@@ -4795,20 +4734,20 @@ function to_JSON(input) {
   var rxo = {
       /* jshint ignore:start */
       is_blank: /^\W{0,}$/,
-      is_objective: /(max|min)(imize){0,}\:/i,
+      is_objective: /(max|min)(imize){0,}:/i,
       //previous version
       //"is_int": /^\W{0,}int/i,
       //new version to avoid comments
       is_int: /^(?!\/\*)\W{0,}int/i,
       is_bin: /^(?!\/\*)\W{0,}bin/i,
-      is_constraint: /(\>|\<){0,}\=/i,
+      is_constraint: /(>|<){0,}=/i,
       is_unrestricted: /^\S{0,}unrestricted/i,
-      parse_lhs: /(\-|\+){0,1}\s{0,1}\d{0,}\.{0,}\d{0,}\s{0,}[A-Za-z]\S{0,}/gi,
-      parse_rhs: /(\-|\+){0,1}\d{1,}\.{0,}\d{0,}\W{0,}\;{0,1}$/i,
-      parse_dir: /(\>|\<){0,}\=/gi,
-      parse_int: /[^\s|^\,]+/gi,
-      parse_bin: /[^\s|^\,]+/gi,
-      get_num: /(\-|\+){0,1}(\W|^)\d+\.{0,1}\d{0,}/g, // Why accepting character \W before the first digit?
+      parse_lhs: /(-|\+){0,1}\s{0,1}\d{0,}\.{0,}\d{0,}\s{0,}[A-Za-z]\S{0,}/gi,
+      parse_rhs: /(-|\+){0,1}\d{1,}\.{0,}\d{0,}\W{0,};{0,1}$/i,
+      parse_dir: /(>|<){0,}=/gi,
+      parse_int: /[^\s|^,]+/gi,
+      parse_bin: /[^\s|^,]+/gi,
+      get_num: /(-|\+){0,1}(\W|^)\d+\.{0,1}\d{0,}/g, // Why accepting character \W before the first digit?
       get_word: /[A-Za-z].*/,
       /* jshint ignore:end */
     },
@@ -5066,13 +5005,6 @@ var Reformat = function (model) {
   }
 };
 
-/*global describe*/
-/*global require*/
-/*global module*/
-/*global it*/
-/*global console*/
-/*global process*/
-
 /***************************************************************
    * Method: polyopt
    * Scope: private
@@ -5263,14 +5195,6 @@ var Polyopt = function (solver, model) {
     ranges: obj,
   };
 };
-
-/*global describe*/
-/*global require*/
-/*global module*/
-/*global it*/
-/*global console*/
-/*global process*/
-/*global setTimeout*/
 
 //-------------------------------------------------------------------
 // SimplexJS
@@ -5849,7 +5773,7 @@ var FastPriorityQueue_1 = createCommonjsModule(function (module) {
   //  and returning the peek value (like poll). The size of the priority
   // thus remains unchanged.
   FastPriorityQueue.prototype.replaceTop = function (myval) {
-    if (this.size == 0) return undefined;
+    if (this.size === 0) return undefined;
     var ans = this.array[0];
     this.array[0] = myval;
     this._percolateDown(0 | 0);
@@ -5892,7 +5816,7 @@ var FastPriorityQueue_1 = createCommonjsModule(function (module) {
   // it has a better computational complexity, which can be
   // important for large data sets.
   FastPriorityQueue.prototype.kSmallest = function (k) {
-    if (this.size == 0) return [];
+    if (this.size === 0) return [];
     var comparator = this.compare;
     var arr = this.array;
     var fpq = new FastPriorityQueue(function (a, b) {

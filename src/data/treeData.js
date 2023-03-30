@@ -1,3 +1,27 @@
+const getUnions = () => {
+  const unions = {};
+
+  for (const union in data.persons) {
+    const currentPerson = data.persons[union];
+    for (const ownUnion of currentPerson.own_unions) {
+      if (ownUnion in unions) {
+        unions[ownUnion].partner.push(union);
+      } else {
+        unions[ownUnion] = { partner: [union], children: [] };
+      }
+    }
+    if ("parent_union" in currentPerson) {
+      const parentUnion = currentPerson.parent_union;
+      if (parentUnion in unions) {
+        unions[parentUnion].children.push(union);
+      } else {
+        unions[parentUnion] = { partner: [], children: [union] };
+      }
+    }
+  }
+  return unions;
+};
+
 const getLinks = () => {
   const links = [];
   for (const union in data.unions) {
@@ -30,7 +54,7 @@ export const data = {
     id3: {
       name: "Jim Robinson",
       birthyear: 1942,
-      own_unions: ["u3", "u4"],
+      own_unions: ["u3"],
       parent_union: "u1",
     },
     id4: {
@@ -40,19 +64,19 @@ export const data = {
       parent_union: "u1",
     },
     id5: {
+      name: "Rex Davis",
+      own_unions: ["u2"],
+    },
+    id6: {
+      name: "Wilma Davis",
+      own_unions: ["u2"],
+    },
+    id7: {
       name: "Sandra Robinson",
       birthyear: 1944,
       deathyear: 2006,
       own_unions: ["u3"],
       parent_union: "u2",
-    },
-    id6: {
-      name: "Rex Davis",
-      own_unions: ["u2"],
-    },
-    id7: {
-      name: "Wilma Davis",
-      own_unions: ["u2"],
     },
     id8: {
       name: "John Robinson",
@@ -95,9 +119,8 @@ export const data = {
       birthyear: 1970,
       own_unions: ["u7", "u4"],
     },
-
     id15: {
-      name: "Belinda Kamaan",
+      name: "Belinda Kamann",
       own_unions: ["u6"],
       parent_union: "u2",
     },
@@ -112,29 +135,29 @@ export const data = {
       parent_union: "u2",
     },
     id18: {
-      name: "Kevin Kamaan",
-      own_unions: [],
+      name: "Kevin Kamann *",
+      own_unions: ["u6"],
     },
 
     id19: {
-      name: "Jared Kamaan",
+      name: "Jared Kamann",
       own_unions: [],
       parent_union: "u6",
     },
     id20: {
-      name: "Kurt Kamaan",
+      name: "Kurt Kamann",
       own_unions: [],
       parent_union: "u6",
     },
     id21: {
-      name: "Gabe Kamaan",
+      name: "Gabe Kamann",
       own_unions: [],
       parent_union: "u6",
     },
     id22: {
       name: "Padma Robinson",
       birthyear: 1961,
-      own_unions: [],
+      own_unions: ["u5"],
       parent_union: "u13",
     },
 
@@ -146,7 +169,7 @@ export const data = {
 
     id24: {
       name: "Lois Kincaid",
-      own_unions: [],
+      own_unions: ["u8"],
     },
 
     id25: {
@@ -161,17 +184,14 @@ export const data = {
       own_unions: ["u11"],
       parent_union: "u8",
     },
-
     id27: {
       name: "Chris Gardill",
-      own_unions: [],
+      own_unions: ["u10"],
     },
-
     id28: {
       name: "Jason Hager",
-      own_unions: [],
+      own_unions: ["u11"],
     },
-
     id29: {
       name: "Maddie Hager",
       own_unions: [],
@@ -182,13 +202,11 @@ export const data = {
       own_unions: [],
       parent_union: "u11",
     },
-
     id31: {
       name: "Meghan Hager *",
       own_unions: [],
       parent_union: "u11",
     },
-
     id32: {
       name: "Kaleb Gardill",
       own_unions: [],
@@ -208,21 +226,23 @@ export const data = {
 
     id35: {
       name: "Alex Malov",
-      own_unions: [],
+      own_unions: ["u9"],
     },
 
     id36: {
       name: "Kayden Johnson",
-      own_unions: [],
+      own_unions: ["u12"],
     },
 
     id37: {
       name: "R.L.N. Sastry",
       own_unions: ["u13"],
+      parent_union: "u28",
     },
     id38: {
-      name: "R Sita Royyuru",
+      name: "Sita Devi Royyuru",
       own_unions: ["u13"],
+      parent_union: "u31",
     },
     id39: {
       name: "Subba Hota",
@@ -231,9 +251,10 @@ export const data = {
       parent_union: "u13",
     },
     id40: {
-      name: "Sarma",
+      name: "Sarma Royyuru ",
       own_unions: ["u15"],
       parent_union: "u13",
+      full: "Lakshminarayana",
     },
     id41: {
       name: "Ramarao Hota",
@@ -241,7 +262,7 @@ export const data = {
       own_unions: ["u14"],
     },
     id42: {
-      name: "Laxmi",
+      name: "Lakshmi Royyuru",
       own_unions: ["u15"],
     },
     id43: {
@@ -272,15 +293,15 @@ export const data = {
     id48: {
       name: "Sitara Gudipati",
       own_unions: [],
-      parent_unions: "u16",
+      parent_union: "u16",
     },
     id49: {
       name: "Vishnu Gudipati",
       own_unions: [],
-      parent_unions: "u16",
+      parent_union: "u16",
     },
     id50: {
-      name: "Sandeep Eyunni",
+      name: "Sandeep Eyyuni",
       own_unions: ["u17"],
     },
     id51: {
@@ -291,7 +312,7 @@ export const data = {
       name: "Ross Davis",
       birthyear: 1938,
       deathyear: 2008,
-      own_unions: [],
+      own_unions: ["u23"],
       parent_union: "u2",
     },
     id53: {
@@ -310,18 +331,19 @@ export const data = {
       own_unions: ["u20"],
       parent_union: "u19",
     },
-
     id56: {
       name: "Julie Soltis",
       own_unions: ["u20"],
     },
     id57: {
       name: "Emilee Davis",
-      own_unions: ["u20"],
+      own_unions: [],
+      parent_union: "u20",
     },
     id58: {
       name: "Josh Davis",
-      own_unions: ["u20"],
+      own_unions: [],
+      parent_union: "u20",
     },
     id59: {
       name: "Tina Davis",
@@ -329,115 +351,429 @@ export const data = {
     },
     id60: {
       name: "Hallie Davis",
-      own_unions: ["u21"],
+      own_unions: [],
+      parent_union: "u21",
     },
     id61: {
       name: "Andrew Davis",
-      own_unions: ["u21"],
+      own_unions: [],
+      parent_union: "u21",
     },
     id62: {
       name: "Jessica Davis",
-      own_unions: ["u21"],
+      own_unions: [],
+      parent_union: "u21",
     },
     id63: {
       name: "Jane Davis",
       own_unions: [],
+      parent_union: "u22",
     },
     id64: {
       name: "Kevin Davis",
       own_unions: [],
+      parent_union: "u22",
     },
-  },
-  unions: {
-    u1: {
-      partner: ["id1", "id2"], //Carmel & Reetha
-      children: ["id3", "id4"], //Ron and Jim
+    id65: {
+      name: "Dave Davis",
+      own_unions: [],
+      parent_union: "u23",
     },
-    u2: {
-      partner: ["id6", "id7"], //Wilma, Rex
-      children: ["id5", "id15", "id16", "id17", "id53", "id52"],
+    id66: {
+      name: "Mark Davis",
+      own_unions: [],
+      parent_union: "u23",
     },
-    u3: {
-      partner: ["id3", "id5"],
-      children: ["id8", "id9"], //John, Clark
+    id67: {
+      name: "V Sesharathnam",
+      own_unions: ["u24"],
     },
-    u4: {
-      partner: ["id14", "id9"], //Jennifer, Clark
-      children: ["id10", "id11", "id12"],
+    id68: {
+      name: "Suryanarayana Murthy",
+      own_unions: ["u24"],
+      parent_union: "u28",
     },
-    u5: {
-      partner: ["id8", "id22"], //John, Padma
-      children: ["id13"],
+    id69: {
+      name: "Dixit Royyuru",
+      own_unions: ["u25"],
+      parent_union: "u24",
     },
-    u6: {
-      partner: ["id15", "id18"], //Belinda, Kevin
-      children: ["id19", "id20", "id21"],
+    id70: {
+      name: "Ajay Royyuru",
+      own_unions: ["u26"],
+      parent_union: "u24",
     },
-    u7: {
-      partner: ["id14"], //Jennifer
-      children: ["id23"], //Chelsea
+    id71: {
+      name: "Vijay Royyuru",
+      own_unions: ["u27"],
+      parent_union: "u24",
     },
-    u8: {
-      partner: ["id4", "id24"], //Ron, Lois
-      children: ["id25", "id26"],
+    id72: {
+      name: "Asha Royyuru",
+      own_unions: ["u25"],
     },
-    u9: {
-      partner: ["id16", "id35"], //Patty, Alex
-      children: [],
+    id73: {
+      name: "Nikhil Royyuru",
+      own_unions: [],
+      parent_union: "u25",
     },
-    u10: {
-      partner: ["id25", "id27"], //Jodie and Chris
-      children: ["id32", "id33", "id34"],
+    id74: {
+      name: "Rohan Royyuru",
+      birthyear: 1998,
+      own_unions: [],
+      parent_union: "u25",
     },
-    u11: {
-      partner: ["id26", "id28"], //Monica and Jason
-      children: ["id29", "id30", "id31"],
+    id75: {
+      name: "Hema Royyuru",
+      own_unions: ["u27"],
     },
-    u12: {
-      partner: ["id36", "id10"], //Lauren and Kayden
-      children: [],
+    id76: {
+      name: "Harsha Kawahara",
+      own_unions: ["u29"],
+      parent_union: "u27",
     },
-    u13: {
-      partner: ["id37", "id38"],
-      children: ["id39", "id40", "id22"],
+    id77: {
+      name: "Varun Royyuru",
+      birthyear: 1998,
+      own_unions: [],
+      parent_union: "u27",
     },
-    u14: {
-      partner: ["id39", "id41"],
-      children: ["id43", "id44"],
+    id78: {
+      name: "Alan Kawahara",
+      own_unions: ["u29"],
     },
-    u15: {
-      partner: ["id40", "id42"],
-      children: ["id45", "id46"],
+    id79: {
+      name: "Aditya Royyuru",
+      own_unions: ["u30"],
+      parent_union: "u26",
     },
-    u16: {
-      partner: ["id43", "id47"],
-      children: ["id48", "id49"],
+    id80: {
+      name: "Nibedita Royyuru",
+      own_unions: ["u26"],
     },
-    u17: {
-      partner: ["id46", "id50"],
-      children: [],
+    id81: {
+      name: "Kameswari Parimi",
+      own_unions: ["u47"],
+      parent_union: "u24",
     },
-    u18: {
-      partner: ["id45", "id51"],
-      children: [],
+    id82: {
+      name: "R.L.N. Sarma *",
+      own_unions: ["u28"],
     },
-    u19: {
-      partner: ["id53"],
-      children: ["id54", "id55"],
+    id83: {
+      name: "R. Subbalakshmi",
+      own_unions: ["u28"],
     },
-    u20: {
-      partner: ["id55", "id56"],
-      children: ["id57", "id58"],
+    id84: {
+      name: "V.B.R. Sarma",
+      own_unions: ["u31"],
     },
-    u21: {
-      partner: ["id54", "id59"],
-      children: ["id60", "id61", "id62"],
+    id85: {
+      name: "V. Padmavathi",
+      own_unions: ["u31"],
     },
-    u22: {
-      partner: ["id17"],
-      children: ["id63", "id64"],
+    id86: {
+      name: "Ella Glover",
+      own_unions: ["u30"],
+    },
+    id87: {
+      name: "V Pardha",
+      own_unions: ["u32"],
+      parent_union: "u31",
+      full: "Pardhasaradhi",
+    },
+    id88: {
+      name: "Annapurna Viswanadham",
+      own_unions: ["u32"],
+    },
+    id89: {
+      name: "Suri Viswanadham",
+      own_unions: ["u34"],
+      parent_union: "u32",
+    },
+    id90: {
+      name: "Jitu Viswanadham",
+      own_unions: ["u33"],
+      parent_union: "u32",
+    },
+    id91: {
+      name: "Jitu's wife",
+      own_unions: ["u33"],
+    },
+    id92: {
+      name: "Jitu's son",
+      own_unions: [],
+      parent_union: "u33",
+    },
+    id93: {
+      name: "Suri's wife",
+      own_unions: ["u34"],
+    },
+    id94: {
+      name: "Suri's daughter",
+      own_unions: [],
+      parent_union: "u34",
+    },
+    id95: {
+      name: "VVS Sastry (Srini)",
+      own_unions: ["u35"],
+      parent_union: "u31",
+    },
+
+    id96: {
+      name: "V Bhaskar (Bhanu)",
+      own_unions: [],
+      parent_union: "u35",
+    },
+
+    id97: {
+      name: "VV Sastry (Raja)",
+      own_unions: [],
+      parent_union: "u31",
+    },
+
+    id98: {
+      name: "V Atchutaramaiah",
+      own_unions: ["u36"],
+      parent_union: "u31",
+    },
+
+    id99: {
+      name: "Padma",
+      own_unions: [],
+      parent_union: "u36",
+    },
+
+    id100: {
+      name: "Bujju",
+      own_unions: [],
+      parent_union: "u36",
+    },
+
+    id101: {
+      name: "Suddha",
+      own_unions: [],
+      parent_union: "u36",
+    },
+    id102: {
+      name: "V Prakasa Rao",
+      own_unions: ["u37"],
+      parent_union: "u31",
+    },
+
+    id103: {
+      name: "Prabha",
+      own_unions: [],
+      parent_union: "u37",
+    },
+
+    id104: {
+      name: "Krishna",
+      own_unions: [],
+      parent_union: "u37",
+    },
+    id105: {
+      name: "Dr. Sastry (Butchi)",
+      own_unions: ["u38"],
+      parent_union: "u31",
+    },
+
+    id106: {
+      name: "Padmini",
+      own_unions: [],
+      parent_union: "u38",
+    },
+
+    id107: {
+      name: "Sunny",
+      own_unions: [],
+      parent_union: "u38",
+    },
+
+    id108: {
+      name: "Sundu mavaiyya",
+      own_unions: ["u39"],
+      parent_union: "u31",
+    },
+
+    id109: {
+      name: "Bhaskar (Bachee)",
+      own_unions: [],
+      parent_union: "u39",
+    },
+
+    id110: {
+      name: "Sriram",
+      own_unions: [],
+      parent_union: "u39",
+    },
+
+    id111: {
+      name: "Ravikanta Chavali",
+      own_unions: ["u40"],
+      parent_union: "u31",
+    },
+
+    id112: {
+      name: "Neeru Palepu *",
+      own_unions: ["u41"],
+      parent_union: "u40",
+    },
+
+    id113: {
+      name: "Anjana Palepu",
+      own_unions: [],
+      parent_union: "u41",
+    },
+    id114: {
+      name: "Sneha Palepu",
+      own_unions: [],
+      parent_union: "u41",
+    },
+
+    id115: {
+      name: "Nethra Palepu",
+      own_unions: [],
+      parent_union: "u41",
+    },
+
+    id116: {
+      name: "Prasad Palepu",
+      own_unions: ["u41"],
+    },
+
+    id117: {
+      name: "Radha Pinni",
+      own_unions: ["u42"],
+      parent_union: "u31",
+    },
+
+    id118: {
+      name: "Dharma Rao",
+      own_unions: ["u42"],
+    },
+    id119: {
+      name: "Neeru Palepu (* by Ravi dodda)",
+      own_unions: [],
+      parent_union: "u42",
+    },
+    id120: {
+      name: "Durga Hari",
+      own_unions: ["u43"],
+      parent_union: "u31",
+    },
+
+    id121: {
+      name: "Anant Hari",
+      own_unions: [],
+      parent_union: "u43",
+    },
+
+    id122: {
+      name: "Vinod Hari",
+      own_unions: [],
+      parent_union: "u43",
+    },
+
+    id123: {
+      name: "Rajeshwari Chainulu",
+      own_unions: [],
+      parent_union: "u31",
+    },
+
+    id124: {
+      name: "R. Subramanium",
+      own_unions: ["u44"],
+      parent_union: "u28",
+    },
+
+    id125: {
+      name: "Chitti Babu",
+      own_unions: [],
+      parent_union: "u44",
+    },
+
+    id126: {
+      name: "Subbalakshmi",
+      own_unions: [],
+      parent_union: "u44",
+    },
+
+    id127: {
+      name: "Dabbu's Dad",
+      own_unions: ["u45"],
+      parent_union: "u28",
+    },
+
+    id128: {
+      name: "Baba",
+      own_unions: [],
+      parent_union: "u45",
+    },
+
+    id129: {
+      name: "Pandu",
+      own_unions: [],
+      parent_union: "u45",
+    },
+
+    id130: {
+      name: "Rohini (Chinnamma)",
+      own_unions: [],
+      parent_union: "u45",
+    },
+    id131: {
+      name: "Dabbu",
+      own_unions: [],
+      parent_union: "u45",
+    },
+
+    id132: {
+      name: "Venkateswari Parimi",
+      own_unions: ["u46"],
+      parent_union: "u28",
+    },
+
+    id133: {
+      name: "Umapathy",
+      own_unions: [],
+      parent_union: "u46",
+    },
+
+    id134: {
+      name: "P.L.N. Sarma",
+      own_unions: ["u47"],
+      parent_union: "u46",
+    },
+
+    id135: {
+      name: "Ammalu",
+      own_unions: ["u48"],
+      parent_union: "u28",
+    },
+
+    id136: {
+      name: "Jyothi",
+      own_unions: [],
+      parent_union: "u48",
+    },
+    id137: {
+      name: "Babu Rao",
+      own_unions: [],
+      parent_union: "u48",
+    },
+    id138: {
+      name: "Rama",
+      own_unions: [],
+      parent_union: "u48",
+    },
+
+    id139: {
+      name: "Sita Viswanadham",
+      own_unions: ["u35"],
     },
   },
 };
 
+data.unions = getUnions();
 data.links = getLinks();
