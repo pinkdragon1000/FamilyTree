@@ -141,7 +141,7 @@ export const data = {
 
     id19: {
       name: "Jared Kamann",
-      own_unions: [],
+      own_unions: ["u50"],
       parent_union: "u6",
     },
     id20: {
@@ -163,7 +163,7 @@ export const data = {
 
     id23: {
       name: "Chelsea Bly *",
-      own_unions: [],
+      own_unions: ["u49"],
       parent_union: "u7",
     },
 
@@ -238,11 +238,13 @@ export const data = {
       name: "R.L.N. Sastry",
       own_unions: ["u13"],
       parent_union: "u28",
+      deathyear: 2010,
     },
     id38: {
       name: "Sita Devi Royyuru",
       own_unions: ["u13"],
       parent_union: "u31",
+      deathyear: 1990,
     },
     id39: {
       name: "Subba Hota",
@@ -252,6 +254,7 @@ export const data = {
     },
     id40: {
       name: "Sarma Royyuru ",
+      birthyear: 1955,
       own_unions: ["u15"],
       parent_union: "u13",
       full: "Lakshminarayana",
@@ -273,6 +276,7 @@ export const data = {
     },
     id44: {
       name: "Partha Hota",
+      birthyear: 1985,
       own_unions: [],
       parent_union: "u14",
     },
@@ -501,7 +505,7 @@ export const data = {
       own_unions: ["u33"],
     },
     id92: {
-      name: "Jitu's son",
+      name: "Aditya Viswanadham",
       own_unions: [],
       parent_union: "u33",
     },
@@ -510,7 +514,7 @@ export const data = {
       own_unions: ["u34"],
     },
     id94: {
-      name: "Suri's daughter",
+      name: "Nandini Viswanadham",
       own_unions: [],
       parent_union: "u34",
     },
@@ -522,7 +526,7 @@ export const data = {
 
     id96: {
       name: "V Bhaskar (Bhanu)",
-      own_unions: [],
+      own_unions: ["u51"],
       parent_union: "u35",
     },
 
@@ -539,20 +543,20 @@ export const data = {
     },
 
     id99: {
-      name: "Padma",
-      own_unions: [],
+      name: "Padma Murthi",
+      own_unions: ["u53"],
       parent_union: "u36",
     },
 
     id100: {
       name: "Bujju",
-      own_unions: [],
+      own_unions: ["u55"],
       parent_union: "u36",
     },
 
     id101: {
-      name: "Suddha",
-      own_unions: [],
+      name: "Sudha Dhara",
+      own_unions: ["u52"],
       parent_union: "u36",
     },
     id102: {
@@ -563,13 +567,13 @@ export const data = {
 
     id103: {
       name: "Prabha",
-      own_unions: [],
+      own_unions: ["u56"],
       parent_union: "u37",
     },
 
     id104: {
-      name: "Krishna",
-      own_unions: [],
+      name: "Krishna Rao VVS",
+      own_unions: ["u57"],
       parent_union: "u37",
     },
     id105: {
@@ -580,7 +584,7 @@ export const data = {
 
     id106: {
       name: "Padmini",
-      own_unions: [],
+      own_unions: ["u58"],
       parent_union: "u38",
     },
 
@@ -598,13 +602,13 @@ export const data = {
 
     id109: {
       name: "Bhaskar (Bachee)",
-      own_unions: [],
+      own_unions: ["u59"],
       parent_union: "u39",
     },
 
     id110: {
       name: "Sriram",
-      own_unions: [],
+      own_unions: ["u60"],
       parent_union: "u39",
     },
 
@@ -665,13 +669,13 @@ export const data = {
 
     id121: {
       name: "Anant Hari",
-      own_unions: [],
+      own_unions: ["u61"],
       parent_union: "u43",
     },
 
     id122: {
       name: "Vinod Hari",
-      own_unions: [],
+      own_unions: ["u62"],
       parent_union: "u43",
     },
 
@@ -748,6 +752,7 @@ export const data = {
 
     id135: {
       name: "Ammalu",
+      deathyear: 2023,
       own_unions: ["u48"],
       parent_union: "u28",
     },
@@ -771,6 +776,152 @@ export const data = {
     id139: {
       name: "Sita Viswanadham",
       own_unions: ["u35"],
+    },
+
+    id140: {
+      name: "Steven Bly",
+      own_unions: ["u49"],
+    },
+    id141: {
+      name: "Sawyer Bly",
+      own_unions: [],
+      parent_union: "u49",
+      birthyear: 2018,
+    },
+    id142: {
+      name: "Riley Bly",
+      own_unions: [],
+      parent_union: "u49",
+      birthyear: 2019,
+    },
+    id143: {
+      name: "Oliver Johnson",
+      own_unions: [],
+      parent_union: "u12",
+    },
+
+    id144: {
+      name: "Tristan Kamann",
+      own_unions: [],
+      parent_union: "u50",
+    },
+
+    id145: {
+      name: "Quinn Kamann",
+      own_unions: [],
+      parent_union: "u50",
+    },
+
+    id146: {
+      name: "Wyatt Kamann",
+      own_unions: [],
+      parent_union: "u50",
+    },
+    id147: {
+      name: "Rhett Kamann",
+      own_unions: [],
+      parent_union: "u50",
+    },
+    id148: {
+      name: "Mira Viswanadham",
+      own_unions: [],
+      parent_union: "u51",
+    },
+    id149: {
+      name: "Monika Viswanadham",
+      own_unions: ["u51"],
+    },
+    id150: {
+      name: "Amulya Dhara",
+      own_unions: [],
+      parent_union: "u52",
+    },
+    id151: {
+      name: "Sweta",
+      own_unions: ["u54"],
+      parent_union: "u53",
+    },
+    id152: {
+      name: "Kamya",
+      own_unions: [],
+      parent_union: "u54",
+    },
+    id153: {
+      name: "Sweta's son",
+      own_unions: [],
+      parent_union: "u54",
+    },
+    id154: {
+      name: "Anandita Viswanadham",
+      own_unions: [],
+      parent_union: "u55",
+    },
+    id155: {
+      name: "Aditya Viswanatham",
+      own_unions: [],
+      parent_union: "u55",
+    },
+    id156: {
+      name: "Prabha's son",
+      own_unions: [],
+      parent_union: "u56",
+    },
+    id157: {
+      name: "Prabha's daughter",
+      own_unions: [],
+      parent_union: "u56",
+    },
+    id158: {
+      name: "Anirudh",
+      own_unions: [],
+      parent_union: "u57",
+    },
+    id159: {
+      name: "Padmini's son 1",
+      own_unions: [],
+      parent_union: "u58",
+    },
+    id160: {
+      name: "Padmini's son 2",
+      own_unions: [],
+      parent_union: "u58",
+    },
+
+    id161: {
+      name: "Bachee's daughter 1",
+      own_unions: [],
+      parent_union: "u59",
+    },
+    id162: {
+      name: "Bachee's daughter 2",
+      own_unions: [],
+      parent_union: "u59",
+    },
+
+    id163: {
+      name: "Sriram's son",
+      own_unions: [],
+      parent_union: "u60",
+    },
+    id164: {
+      name: "Sriram's daughter",
+      own_unions: [],
+      parent_union: "u60",
+    },
+    id165: {
+      name: "Anant's son",
+      own_unions: [],
+      parent_union: "u61",
+    },
+    id166: {
+      name: "Vinod's son 1",
+      own_unions: [],
+      parent_union: "u62",
+    },
+    id167: {
+      name: "Vinod's son 2",
+      own_unions: [],
+      parent_union: "u62",
     },
   },
 };
