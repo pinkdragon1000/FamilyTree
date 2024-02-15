@@ -56,6 +56,7 @@ export const data = {
       birthyear: 1942,
       own_unions: ["u3"],
       parent_union: "u1",
+      full: "James Clark",
     },
     id4: {
       name: "Ron Robinson",
@@ -66,10 +67,16 @@ export const data = {
     id5: {
       name: "Rex Davis",
       own_unions: ["u2"],
+      deathyear: 1994,
     },
     id6: {
       name: "Wilma Davis",
       own_unions: ["u2"],
+      birthyear: 1915,
+      deathyear: 2012,
+      imageLink: "/photos/WilmaDavis.jpg",
+      birthplace: "Salem, WV",
+      deathplace: "Willard, Ohio",
     },
     id7: {
       name: "Sandra Robinson",
@@ -77,18 +84,22 @@ export const data = {
       deathyear: 2006,
       own_unions: ["u3"],
       parent_union: "u2",
+      deathplace: "Salem, WV",
+      deathcause: "Cancer - Multiple Myeloma",
     },
     id8: {
       name: "John Robinson",
       birthyear: 1966,
       own_unions: ["u5"],
       parent_union: "u3",
+      imageLink: "/photos/Robinson/JohnRobinson.jpg",
     },
     id9: {
       name: "Clark Robinson",
       birthyear: 1969,
       own_unions: ["u4"],
       parent_union: "u3",
+      full: "James Clark II",
     },
     id10: {
       name: "Lauren Johnson",
@@ -113,6 +124,8 @@ export const data = {
       birthyear: 1998,
       own_unions: [],
       parent_union: "u5",
+      birthplace: "Morgantown, WV",
+      imageLink: "/photos/Robinson/SitaRobinson.jpg",
     },
     id14: {
       name: "Jennifer Robinson",
@@ -159,6 +172,7 @@ export const data = {
       birthyear: 1961,
       own_unions: ["u5"],
       parent_union: "u13",
+      imageLink: "/photos/Robinson/PadmaRobinson.jpg",
     },
 
     id23: {
@@ -226,6 +240,7 @@ export const data = {
 
     id35: {
       name: "Alex Malov",
+      deathyear: 2023,
       own_unions: ["u9"],
     },
 
@@ -239,12 +254,15 @@ export const data = {
       own_unions: ["u13"],
       parent_union: "u28",
       deathyear: 2010,
+      deathplace: "Hyderabad, India",
     },
     id38: {
       name: "Sita Devi Royyuru",
       own_unions: ["u13"],
       parent_union: "u31",
-      deathyear: 1990,
+      deathyear: 1995,
+      birthyear: 1938,
+      deathplace: "Hyderabad, India",
     },
     id39: {
       name: "Subba Hota",
@@ -253,7 +271,7 @@ export const data = {
       parent_union: "u13",
     },
     id40: {
-      name: "Sarma Royyuru ",
+      name: "Sarma Royyuru",
       birthyear: 1955,
       own_unions: ["u15"],
       parent_union: "u13",
@@ -273,6 +291,7 @@ export const data = {
       birthyear: 1982,
       own_unions: ["u16"],
       parent_union: "u14",
+      birthplace: "Morgantown, WV",
     },
     id44: {
       name: "Partha Hota",
@@ -298,11 +317,15 @@ export const data = {
       name: "Sitara Gudipati",
       own_unions: [],
       parent_union: "u16",
+      birthyear: 2012,
+      birthplace: "Cleveland, Ohio",
     },
     id49: {
       name: "Vishnu Gudipati",
       own_unions: [],
       parent_union: "u16",
+      birthyear: 2015,
+      birthplace: "Cleveland, Ohio",
     },
     id50: {
       name: "Sandeep Eyyuni",
@@ -336,7 +359,7 @@ export const data = {
       parent_union: "u19",
     },
     id56: {
-      name: "Julie Soltis",
+      name: "Julie Soltis ⟷",
       own_unions: ["u20"],
     },
     id57: {
@@ -406,11 +429,13 @@ export const data = {
       name: "Ajay Royyuru",
       own_unions: ["u26"],
       parent_union: "u24",
+      birthyear: 1964,
     },
     id71: {
       name: "Vijay Royyuru",
       own_unions: ["u27"],
       parent_union: "u24",
+      birthyear: 1964,
     },
     id72: {
       name: "Asha Royyuru",
@@ -430,11 +455,13 @@ export const data = {
     id75: {
       name: "Hema Royyuru",
       own_unions: ["u27"],
+      birthyear: 1961,
     },
     id76: {
       name: "Harsha Kawahara",
       own_unions: ["u29"],
       parent_union: "u27",
+      birthyear: 1991,
     },
     id77: {
       name: "Varun Royyuru",
@@ -445,15 +472,18 @@ export const data = {
     id78: {
       name: "Alan Kawahara",
       own_unions: ["u29"],
+      birthyear: 1991,
     },
     id79: {
       name: "Aditya Royyuru",
       own_unions: ["u30"],
       parent_union: "u26",
+      birthyear: 1993,
     },
     id80: {
       name: "Nibedita Royyuru",
       own_unions: ["u26"],
+      birthyear: 1963,
     },
     id81: {
       name: "Kameswari Parimi",
@@ -463,18 +493,23 @@ export const data = {
     id82: {
       name: "R.L.N. Sarma *",
       own_unions: ["u28"],
+      deathyear: "~",
     },
     id83: {
       name: "R. Subbalakshmi",
       own_unions: ["u28"],
+      deathyear: "~",
     },
     id84: {
       name: "V.B.R. Sarma",
       own_unions: ["u31"],
+      deathyear: "~",
     },
     id85: {
       name: "V. Padmavathi",
       own_unions: ["u31"],
+      parent_union: "u63",
+      deathyear: "~",
     },
     id86: {
       name: "Ella Glover",
@@ -522,12 +557,16 @@ export const data = {
       name: "VVS Sastry (Srini)",
       own_unions: ["u35"],
       parent_union: "u31",
+      birthyear: "1930",
+      birthplace: "Visakhapatnam, India",
     },
 
     id96: {
       name: "V Bhaskar (Bhanu)",
       own_unions: ["u51"],
       parent_union: "u35",
+      birthyear: "1966",
+      birthplace: "New Delhi, India",
     },
 
     id97: {
@@ -540,6 +579,7 @@ export const data = {
       name: "V Atchutaramaiah",
       own_unions: ["u36"],
       parent_union: "u31",
+      birthyear: "1936",
     },
 
     id99: {
@@ -563,6 +603,9 @@ export const data = {
       name: "V Prakasa Rao",
       own_unions: ["u37"],
       parent_union: "u31",
+      birthyear: "1941",
+      deathplace: "Rajahmundry, India",
+      deathyear: "2024",
     },
 
     id103: {
@@ -604,24 +647,31 @@ export const data = {
       name: "Bhaskar (Bachee)",
       own_unions: ["u59"],
       parent_union: "u39",
+      deathyear: "~",
+      deathcause: "Covid-19",
     },
 
     id110: {
       name: "Sriram",
       own_unions: ["u60"],
       parent_union: "u39",
+      deathyear: "~",
+      deathcause: "Covid-19",
     },
 
     id111: {
       name: "Ravikanta Chavali",
       own_unions: ["u40"],
       parent_union: "u31",
+      deathplace: "Chennai, India",
+      deathyear: "2024",
     },
 
     id112: {
       name: "Neeru Palepu *",
       own_unions: ["u41"],
       parent_union: "u40",
+      birthyear: "1966",
     },
 
     id113: {
@@ -647,9 +697,10 @@ export const data = {
     },
 
     id117: {
-      name: "Radha Pinni",
+      name: "Radha Yenamandra",
       own_unions: ["u42"],
       parent_union: "u31",
+      deathyear: "1968",
     },
 
     id118: {
@@ -660,6 +711,7 @@ export const data = {
       name: "Neeru Palepu (* by Ravi dodda)",
       own_unions: [],
       parent_union: "u42",
+      birthyear: "1966",
     },
     id120: {
       name: "Durga Hari",
@@ -707,6 +759,8 @@ export const data = {
       name: "Dabbu's Dad",
       own_unions: ["u45"],
       parent_union: "u28",
+      deathyear: "unknown",
+      deathcause: "disappeared",
     },
 
     id128: {
@@ -776,6 +830,8 @@ export const data = {
     id139: {
       name: "Sita Viswanadham",
       own_unions: ["u35"],
+      birthyear: "1935",
+      birthplace: "Visakhapatnam, India",
     },
 
     id140: {
@@ -798,6 +854,7 @@ export const data = {
       name: "Oliver Johnson",
       own_unions: [],
       parent_union: "u12",
+      birthyear: 2023,
     },
 
     id144: {
@@ -830,6 +887,8 @@ export const data = {
     id149: {
       name: "Monika Viswanadham",
       own_unions: ["u51"],
+      deathyear: "~",
+      deathcause: "Cancer - Breast",
     },
     id150: {
       name: "Amulya Dhara",
@@ -914,14 +973,236 @@ export const data = {
       parent_union: "u61",
     },
     id166: {
-      name: "Vinod's son 1",
+      name: "Karthik Hari",
       own_unions: [],
       parent_union: "u62",
     },
     id167: {
-      name: "Vinod's son 2",
+      name: "Shanmukha Shaurya Hari",
       own_unions: [],
       parent_union: "u62",
+      birthyear: 2014,
+    },
+    id168: {
+      name: "Sita Evani",
+      own_unions: ["u63"],
+    },
+    id169: {
+      name: "Subbayya Sastry Evani",
+      own_unions: ["u63"],
+    },
+    id170: {
+      name: "Lakshmi Narasimham Evani",
+      own_unions: ["u65"],
+      parent_union: "u63",
+      birthyear: "1904",
+      deathyear: "1976",
+    },
+    id171: {
+      name: "Subbaraya Sastry Evani",
+      own_unions: [],
+      parent_union: "u63",
+    },
+    id172: {
+      name: "Ramalingeswara Evani",
+      own_unions: [],
+      parent_union: "u63",
+    },
+    id173: {
+      name: "Annapoorna Bhagavatula",
+      own_unions: ["u64"],
+      parent_union: "u63",
+      birthyear: "1906",
+      deathyear: "1987",
+    },
+    id174: {
+      name: "Mahalakshmi Gunupudi",
+      own_unions: [],
+      parent_union: "u63",
+    },
+    id175: {
+      name: "Janaki Mithipati",
+      own_unions: [],
+      parent_union: "u63",
+    },
+    id176: {
+      name: "Saraswathi Kunapuli",
+      own_unions: [],
+      parent_union: "u63",
+    },
+    id177: {
+      name: "Kamala Malladi",
+      own_unions: [],
+      parent_union: "u63",
+    },
+    id178: {
+      name: "Subbalakshmi Gunturu",
+      own_unions: [],
+      parent_union: "u63",
+    },
+    id179: {
+      name: "Prabhavathi Vuppuluri",
+      own_unions: [],
+      parent_union: "u63",
+    },
+    id180: {
+      name: "Suryakantham Emani",
+      own_unions: [],
+      parent_union: "u63",
+    },
+    id181: {
+      name: "Subrahmaniam Bhagavatula",
+      own_unions: ["u64"],
+    },
+    id182: {
+      name: "Atchutam Evani",
+      own_unions: ["u65"],
+      birthyear: "1919",
+    },
+    id183: {
+      name: "Syamalarao Evani (Syam)",
+      own_unions: ["u74"],
+      parent_union: "u65",
+      birthyear: "1928",
+    },
+    id184: {
+      name: "Manikyamba Tenneti",
+      own_unions: [],
+      parent_union: "u65",
+    },
+    id185: {
+      name: "Subbaya Sastry Evani (Sastry)",
+      own_unions: ["u70"],
+      parent_union: "u65",
+    },
+    id186: {
+      name: "Kameswara Sarma Evani (Thambi)",
+      own_unions: ["u69"],
+      parent_union: "u65",
+    },
+    id187: {
+      name: "Kameswari Kunapuli (Papa)",
+      own_unions: ["u66"],
+      parent_union: "u65",
+    },
+    id188: {
+      name: "Saraswathi Jayanthy (Achuta)",
+      own_unions: ["u67"],
+      parent_union: "u66",
+      birthyear: "1960",
+    },
+    id189: {
+      name: "Satya Kunapuli (Babu)",
+      own_unions: ["u68"],
+      parent_union: "u66",
+    },
+    id190: {
+      name: "Karthik Jayanthy",
+      own_unions: [],
+      parent_union: "u67",
+      birthyear: "1985",
+    },
+    id191: {
+      name: "Ramamurthy J.V.",
+      own_unions: ["u67"],
+      birthyear: "1953",
+    },
+    id192: {
+      name: "Shalini Kunapuli",
+      own_unions: [],
+      parent_union: "u68",
+    },
+    id193: {
+      name: "Sangita Kunapuli",
+      own_unions: [],
+      parent_union: "u68",
+    },
+    id194: {
+      name: "Suma Kunapuli",
+      own_unions: ["u68"],
+    },
+
+    id195: {
+      name: "Ajaisimha Evani (Ajai)",
+      parent_union: "u69",
+      own_unions: [],
+    },
+    id196: {
+      name: "Lakshmi Evani",
+      own_unions: ["u69"],
+    },
+    id197: {
+      name: "Lakshmi Evani",
+      own_unions: ["u70"],
+    },
+    id198: {
+      name: "Sastry Evani",
+      parent_union: "u70",
+      own_unions: ["u73"],
+      birthplace: "Kakinada, India",
+      birthyear: "1963",
+    },
+    id199: {
+      name: "Lakshmi Dalwalla",
+      parent_union: "u70",
+      own_unions: ["u71"],
+      birthplace: "Kakinada, India",
+      birthyear: "1965",
+    },
+    id200: {
+      name: "Satyakant Evani (Purna)",
+      parent_union: "u70",
+      own_unions: ["u72"],
+      birthplace: "Bokaro Steel City, India",
+      birthyear: "1971",
+    },
+    id201: {
+      name: "Mitali Dalwalla",
+      parent_union: "u71",
+      own_unions: [],
+      birthyear: "1999",
+    },
+    id202: {
+      name: "Paresh Dalwalla",
+      own_unions: ["u71"],
+      birthyear: "1968",
+    },
+    id203: {
+      name: "Lisa Evani",
+      own_unions: ["u72"],
+    },
+    id204: {
+      name: "Jyothi Evani",
+      own_unions: ["u73"],
+    },
+    id205: {
+      name: "Anjani Evani",
+      parent_union: "u73",
+      own_unions: [],
+      birthyear: "2003",
+    },
+    id206: {
+      name: "Veeramathi Evani (Rama)",
+      own_unions: ["u74"],
+    },
+
+    id207: {
+      name: "Venkatarama Narasimham Evani (Bobby)",
+      parent_union: "u74",
+      own_unions: [],
+      birthyear: "1960",
+    },
+    id208: {
+      name: "Lakshman Evani (Lucky)",
+      parent_union: "u74",
+      own_unions: [],
+      birthyear: "1967",
+    },
+    id209: {
+      name: "Venu Gopala Sarma Evani",
+      parent_union: "u74",
+      own_unions: [],
+      birthyear: "1974",
     },
   },
 };
