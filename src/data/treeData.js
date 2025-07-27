@@ -53,7 +53,9 @@ export const data = {
     },
     id3: {
       name: "Jim Robinson",
+      birthplace: "Charleston, WV",
       birthyear: 1942,
+      deathyear: 2025,
       own_unions: ["u3"],
       parent_union: "u1",
       full: "James Clark",
@@ -296,7 +298,7 @@ export const data = {
     id44: {
       name: "Partha Hota",
       birthyear: 1985,
-      own_unions: [],
+      own_unions: ["u75"],
       parent_union: "u14",
     },
     id45: {
@@ -1203,6 +1205,22 @@ export const data = {
       parent_union: "u74",
       own_unions: [],
       birthyear: "1974",
+    },
+    id210: {
+      name: "Declan Bly",
+      parent_union: "u74",
+      own_unions: [],
+    },
+    id211: {
+      name: "Kristen Zuber (Hota)",
+      own_unions: ["u75"],
+    },
+
+    id212: {
+      name: "Wilhelmina Hota",
+      parent_union: "u75",
+      birthyear: 2025,
+      own_unions: [],
     },
   },
 };
