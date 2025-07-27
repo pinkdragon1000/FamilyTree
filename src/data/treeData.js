@@ -1208,7 +1208,7 @@ export const data = {
     },
     id210: {
       name: "Declan Bly",
-      parent_union: "u74",
+      parent_union: "u49",
       own_unions: [],
     },
     id211: {
