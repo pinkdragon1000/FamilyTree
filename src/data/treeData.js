@@ -56,6 +56,7 @@ export const data = {
       birthplace: "Charleston, WV",
       birthyear: 1942,
       deathyear: 2025,
+      deathplace: "Salem, WV",
       own_unions: ["u3"],
       parent_union: "u1",
       full: "James Clark",
@@ -298,6 +299,7 @@ export const data = {
     id44: {
       name: "Partha Hota",
       birthyear: 1985,
+      birthplace: "Morgantown, WV",
       own_unions: ["u75"],
       parent_union: "u14",
     },
@@ -1220,6 +1222,7 @@ export const data = {
       name: "Wilhelmina Hota",
       parent_union: "u75",
       birthyear: 2025,
+      birthplace: "Philadelphia, PA",
       own_unions: [],
     },
   },
