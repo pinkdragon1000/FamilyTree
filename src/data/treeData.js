@@ -368,7 +368,7 @@ export const data = {
     },
     id57: {
       name: "Emilee Davis",
-      own_unions: [],
+      own_unions: ["u76"],
       parent_union: "u20",
     },
     id58: {
@@ -1217,13 +1217,16 @@ export const data = {
       name: "Kristen Zuber (Hota)",
       own_unions: ["u75"],
     },
-
     id212: {
       name: "Wilhelmina Hota",
       parent_union: "u75",
       birthyear: 2025,
       birthplace: "Philadelphia, PA",
       own_unions: [],
+    },
+    id213: {
+      name: "Steven Schmetzer",
+      own_unions: ["u76"],
     },
   },
 };
