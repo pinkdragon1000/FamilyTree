@@ -818,16 +818,8 @@ export const data = {
     // Children of u33
     id92: {
       name: "Aditya Viswanadham",
-      own_unions: ["u78"],
       parent_union: "u33",
     },
-
-    // Union u78: Aditya & Rukmini Viswanadham
-    id216: {
-      name: "Rukmini Viswanadham",
-      own_unions: ["u78"],
-    },
-
     // Union u34: Suri & wife
     id93: {
       name: "Suri's wife",
@@ -926,8 +918,14 @@ export const data = {
     },
     id155: {
       name: "Aditya Viswanatham",
-      own_unions: [],
+      own_unions: ["u78"],
       parent_union: "u55",
+    },
+
+    // Union u78: Aditya & Rukmini Viswanadham
+    id216: {
+      name: "Rukmini Viswanadham",
+      own_unions: ["u78"],
     },
 
     // Union u37: V Prakasa Rao
