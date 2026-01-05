@@ -922,9 +922,9 @@ export const data = {
       parent_union: "u55",
     },
 
-    // Union u78: Aditya & Rukmini Viswanadham
+    // Union u78: Aditya & Rukmini Viswanatham
     id216: {
-      name: "Rukmini Viswanadham",
+      name: "Rukmini Viswanatham",
       own_unions: ["u78"],
     },
 
