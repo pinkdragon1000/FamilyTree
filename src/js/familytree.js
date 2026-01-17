@@ -1,12 +1,12 @@
 import * as d3 from "d3";
 import {
-  dagNode,
-  dagConnect,
+  graphConnect,
   sugiyama,
   layeringSimplex,
-  decrossOpt,
-  coordVert,
-} from "./d3-dag.js";
+  decrossTwoLayer,
+  coordCenter,
+} from "d3-dag";
+
 
 // extend javascript array class by a remove function
 // copied from https://stackoverflow.com/a/3955096/12267732
@@ -23,6 +23,78 @@ Array.prototype.remove = function () {
   }
   return this;
 };
+
+function add_text_label(
+  d3element,
+  text,
+  delimiter = "_",
+  css_class = undefined,
+  line_sep = 14,
+  line_offset = undefined,
+  x = 13,
+  dominant_baseline = "central"
+) {
+  // adds a multi-line text label to a d3 element
+  if (!text) return;
+  const d3text = d3element
+    .append("text")
+    .attr("class", css_class)
+    .attr("dominant-baseline", dominant_baseline);
+  const arr = text.split(delimiter);
+  if (!line_offset) {
+    line_offset = (-line_sep * (arr.length - 1)) / 2;
+  }
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] !== "") {
+      d3text
+        .append("tspan")
+        .text(arr[i])
+        .attr("dy", i == 0 ? line_offset : line_sep)
+        .attr("x", x);
+    }
+  }
+}
+
+class FTNode {
+  constructor(id, data) {
+    this.id = id;
+    this.data = data;
+    this.children = [];
+    this._children = [];
+  }
+
+  descendants() {
+    return [this];
+  }
+
+  links() {
+    return [];
+  }
+
+  copy() {
+    const copied = new this.constructor(this.id, this.data);
+    copied.children = this.children.slice();
+    copied._children = this._children.slice();
+    return copied;
+  }
+  
+  is_extendable() {
+    // A node is extendable if it has neighbors to show OR visible inserted neighbors to hide
+    const hiddenNeighbors = this.get_neighbors().filter((node) => !node.visible).length > 0;
+    const visibleInsertedNeighbors = this.get_visible_inserted_neighbors().length > 0;
+    return hiddenNeighbors || visibleInsertedNeighbors;
+  }
+
+  get_visible_neighbors() {
+    return this.get_neighbors().filter((node) => node.visible);
+  }
+
+  get_visible_inserted_neighbors() {
+    return this.get_visible_neighbors().filter((node) =>
+      this.inserted_nodes.includes(node)
+    );
+  }
+}
 
 function d3_append_multiline_text(
   d3element,
@@ -59,68 +131,72 @@ class FTDataHandler {
   constructor(data, start_node_id = data.start) {
     // check if edge list defined
     if (data.links.length > 0) {
-      // make dag from edge list
-      this.dag = dagConnect()(data.links);
-
-      // dag must be a node with id undefined. fix if necessary
-      if (this.dag.id != undefined) {
-        this.root = this.dag.copy();
-        this.root.id = undefined;
-        this.root.children = [this.dag];
-        this.dag = this.root;
+      // make dag from edge list using new API
+      const connect = graphConnect();
+      this.graph = connect(data.links);
+      
+      // Create node map for quick lookup
+      this.nodeMap = new Map();
+      for (const graphNode of this.graph.nodes()) {
+        const id = graphNode.data; // data IS the ID in new API
+        let ftNode;
+        
+        if (id in data.unions) {
+          ftNode = new Union(graphNode, data.unions[id], this);
+        } else if (id in data.persons) {
+          ftNode = new Person(graphNode, data.persons[id], this);
+        }
+        
+        if (ftNode) {
+          this.nodeMap.set(id, ftNode);
+          graphNode.ftNode = ftNode;
+          ftNode.graphNode = graphNode;
+        }
       }
-
-      // get all d3-dag nodes and convert to family tree nodes
-      this.nodes = this.dag.descendants().map((node) => {
-        if (node.id in data.unions)
-          return new Union(node, data.unions[node.id], this);
-        else if (node.id in data.persons)
-          return new Person(node, data.persons[node.id], this);
-      });
-
-      // relink children arrays: use family tree nodes instead of d3-dag nodes
-      this.nodes.forEach(
-        (n) => (n._children = n._children.map((c) => c.ftnode))
-      );
-
-      // make sure each node has an id
-      this.number_nodes = 0;
-      this.nodes.forEach((node) => {
-        node.id = node.id || this.number_nodes;
-        this.number_nodes++;
-      });
-
-      // set root node
-      this.root = this.find_node_by_id(start_node_id);
-      this.root.visible = true;
-      this.dag.children = [this.root];
+      
+      this.nodes = Array.from(this.nodeMap.values());
+      
+      // Set up parent-child relationships
+      for (const link of this.graph.links()) {
+        const source = this.nodeMap.get(link.source.data);
+        const target = this.nodeMap.get(link.target.data);
+        if (source && target) {
+          if (!source._children) source._children = [];
+          source._children.push(target);
+        }
+      }
+      
+      // Find and set root
+      this.root = this.nodeMap.get(start_node_id);
+      
+      if (!this.root && this.nodes.length > 0) {
+        this.root = this.nodes[0];
+      }
+      
+      if (this.root) {
+        this.root.visible = true;
+      }
+      
+      this.number_nodes = this.nodes.length;
     }
-    // if no edges but only nodes are defined: root = dag
+    // if no edges but only nodes are defined: create single person root
     else if (Object.values(data.persons).length > 0) {
       const root_data = data.persons[start_node_id];
-      this.root = new dagNode(start_node_id, root_data);
-      this.root = new Person(this.root, root_data, this);
+      // Create a minimal graph with just one node
+      const mockGraphNode = { data: { id: start_node_id } };
+      this.root = new Person(mockGraphNode, root_data, this);
       this.root.visible = true;
       this.number_nodes = 1;
       this.nodes = [this.root];
-
-      // dag must be a node with id undefined
-      this.dag = new dagNode(undefined, {});
-      this.dag.children = this.root;
+      
+      // Create empty graph
+      const connect = graphConnect();
+      this.graph = connect([]);
     }
   }
 
   update_roots() {
-    this.dag.children = [this.root];
-    const FT = this;
-
-    function find_roots_recursive(node) {
-      node.get_visible_inserted_neighbors().forEach((node) => {
-        if (node.is_root()) FT.dag.children.push(node);
-        find_roots_recursive(node);
-      });
-    }
-    find_roots_recursive(this.root);
+    // Update roots is not needed with new graph API
   }
 
   find_node_by_id(id) {
@@ -128,32 +204,12 @@ class FTDataHandler {
   }
 }
 
-class FTNode extends dagNode {
-  is_extendable() {
-    return this.get_neighbors().filter((node) => !node.visible).length > 0;
-  }
-
-  get_visible_neighbors() {
-    return this.get_neighbors().filter((node) => node.visible);
-  }
-
-  get_visible_inserted_neighbors() {
-    return this.get_visible_neighbors().filter((node) =>
-      this.inserted_nodes.includes(node)
-    );
-  }
-}
-
 class Union extends FTNode {
-  constructor(dagNode, data, ft_datahandler) {
-    super(dagNode.id, data);
-    // link to new object
-    dagNode.ftnode = this;
-    // define additional family tree properties
+  constructor(graphNode, data, ft_datahandler) {
+    super(graphNode.data, data);
     this.ft_datahandler = ft_datahandler;
-    this._children = dagNode.children;
+    this._children = [];
     this.children = [];
-    this._childLinkData = dagNode._childLinkData;
     this.inserted_nodes = [];
     this.inserted_links = [];
     this.visible = false;
@@ -389,15 +445,11 @@ class Union extends FTNode {
 }
 
 class Person extends FTNode {
-  constructor(dagNode, data, ft_datahandler) {
-    super(dagNode.id, data);
-    // link to new object
-    dagNode.ftnode = this;
-    // define additional family tree properties
+  constructor(graphNode, data, ft_datahandler) {
+    super(graphNode.data, data);
     this.ft_datahandler = ft_datahandler;
-    this._children = dagNode.children;
+    this._children = [];
     this.children = [];
-    this._childLinkData = dagNode._childLinkData;
     this.inserted_nodes = [];
     this.inserted_links = [];
     this.visible = false;
@@ -542,10 +594,17 @@ class Person extends FTNode {
   }
 
   click() {
-    // extend if there are uncollapsed neighbor unions
-    if (this.is_extendable()) this.show();
-    // collapse if fully extended
-    else this.hide();
+    const hiddenNeighbors = this.get_neighbors().filter((n) => !n.visible).length > 0;
+    const visibleInsertedNeighbors = this.get_visible_inserted_neighbors().length > 0;
+    
+    // If has both hidden and visible, prioritize showing hidden first
+    if (hiddenNeighbors) {
+      this.show();
+    }
+    // If only visible inserted neighbors, hide them
+    else if (visibleInsertedNeighbors) {
+      this.hide();
+    }
     // update dag roots
     this.ft_datahandler.update_roots();
   }
@@ -627,10 +686,10 @@ class FTDrawer {
 
     // initialize dag layout maker
     this.layout = sugiyama()
-      .nodeSize([120, 120])
+      .nodeSize([100, 150])
       .layering(layeringSimplex())
-      .decross(decrossOpt)
-      .coord(coordVert());
+      .decross(decrossTwoLayer())
+      .coord(coordCenter());
 
     // defaults
     this.orientation("horizontal");
@@ -642,8 +701,10 @@ class FTDrawer {
 
     // set starting position for root node
     const default_pos = this.default_root_position();
-    this.ft_datahandler.root.x0 = x0 || default_pos[0];
-    this.ft_datahandler.root.y0 = y0 || default_pos[1];
+    if (this.ft_datahandler.root) {
+      this.ft_datahandler.root.x0 = x0 || default_pos[0];
+      this.ft_datahandler.root.y0 = y0 || default_pos[1];
+    }
   }
 
   default_root_position() {
@@ -706,24 +767,58 @@ class FTDrawer {
 
   static default_tooltip_func(node) {
     if (node.is_union()) return;
-    var content =
-      `
-                <span style='margin-left: 2.5px;'><b>` +
-      node.get_name() +
-      `</b></span><br>
-                <table style="margin-top: 2.5px;">
-                        <tr><td>born</td><td>` +
-      (node.get_birth_year() || "?") +
-      ` in ` +
-      (node.data.birthplace || "?") +
-      `</td></tr>
-                        <tr><td>died</td><td>` +
-      (node.get_death_year() || "?") +
-      ` in ` +
-      (node.data.deathplace || "?") +
-      `</td></tr>
-                </table>
-                `;
+    
+    const birthYear = node.get_birth_year();
+    const deathYear = node.get_death_year();
+    const birthPlace = node.data.birthplace;
+    const deathPlace = node.data.deathplace;
+    const imageLink = node.data.imageLink;
+    const profession = node.data.profession;
+    
+    var content = ``;
+    
+    // Add photo if available
+    if (imageLink) {
+      content += `<img src="${imageLink}" alt="${node.get_name()}" style="width: 100px; height: auto; display: block; margin: 0 auto 10px auto; border-radius: 5px;"><br>`;
+    }
+    
+    content += `<span style='margin-left: 2.5px;'><b>` + node.get_name() + `</b></span>`;
+    
+    // Add profession if available
+    if (profession) {
+      content += `<br><span style='margin-left: 2.5px; font-style: italic;'>` + profession + `</span>`;
+    }
+    
+    // Only add table if there's actual info to show
+    const hasBirthInfo = birthYear || birthPlace;
+    const hasDeathInfo = deathYear || deathPlace;
+    
+    if (hasBirthInfo || hasDeathInfo) {
+      content += `<br><table style="margin-top: 2.5px;">`;
+      
+      if (hasBirthInfo) {
+        let birthText = birthYear || "";
+        if (birthYear && birthPlace) {
+          birthText += " in " + birthPlace;
+        } else if (birthPlace) {
+          birthText = birthPlace;
+        }
+        content += `<tr><td>born</td><td>` + birthText + `</td></tr>`;
+      }
+      
+      if (hasDeathInfo) {
+        let deathText = deathYear || "";
+        if (deathYear && deathPlace) {
+          deathText += " in " + deathPlace;
+        } else if (deathPlace) {
+          deathText = deathPlace;
+        }
+        content += `<tr><td>died</td><td>` + deathText + `</td></tr>`;
+      }
+      
+      content += `</table>`;
+    }
+    
     return content.replace(new RegExp("null", "g"), "?");
   }
 
@@ -764,7 +859,12 @@ class FTDrawer {
     // returns a node's css classes as a string
     if (node.is_union()) return;
     else {
-      if (node.is_extendable()) return "person extendable";
+      const hiddenNeighbors = node.get_neighbors().filter((n) => !n.visible).length > 0;
+      const visibleInsertedNeighbors = node.get_visible_inserted_neighbors().length > 0;
+      
+      // Prioritize showing expandable state
+      if (hiddenNeighbors) return "person extendable";
+      else if (visibleInsertedNeighbors) return "person collapsible";
       else return "person non-extendable";
     }
   }
@@ -794,24 +894,75 @@ class FTDrawer {
   }
 
   static default_link_path_func(s, d) {
-    function vertical_s_bend(s, d) {
-      // Creates a diagonal curve fit for vertically oriented trees
+    function vertical_gentle_curve(s, d) {
+      // Creates a gentler curve for vertically oriented trees
+      const controlOffset = Math.abs(d.y - s.y) * 0.25;
       return `M ${s.x} ${s.y}
-            C ${s.x} ${(s.y + d.y) / 2},
-            ${d.x} ${(s.y + d.y) / 2},
+            C ${s.x} ${s.y + controlOffset},
+            ${d.x} ${d.y - controlOffset},
             ${d.x} ${d.y}`;
     }
 
-    function horizontal_s_bend(s, d) {
-      // Creates a diagonal curve fit for horizontally oriented trees
+    function horizontal_gentle_curve(s, d) {
+      // Creates a gentler curve for horizontally oriented trees
+      const controlOffset = Math.abs(d.x - s.x) * 0.25;
       return `M ${s.x} ${s.y}
-            C ${(s.x + d.x) / 2} ${s.y},
-              ${(s.x + d.x) / 2} ${d.y},
+            C ${s.x + controlOffset} ${s.y},
+              ${d.x - controlOffset} ${d.y},
               ${d.x} ${d.y}`;
     }
     return this._orientation == "vertical"
-      ? vertical_s_bend(s, d)
-      : horizontal_s_bend(s, d);
+      ? vertical_gentle_curve(s, d)
+      : horizontal_gentle_curve(s, d);
+  }
+
+  static straight_link_path_func(s, d) {
+    // Straight line
+    return `M ${s.x} ${s.y} L ${d.x} ${d.y}`;
+  }
+
+  static elbow_link_path_func(s, d) {
+    function vertical_elbow(s, d) {
+      // Creates right-angle connection for vertical trees
+      return `M ${s.x} ${s.y}
+              V ${(s.y + d.y) / 2}
+              H ${d.x}
+              V ${d.y}`;
+    }
+
+    function horizontal_elbow(s, d) {
+      // Creates right-angle connection for horizontal trees
+      return `M ${s.x} ${s.y}
+              H ${(s.x + d.x) / 2}
+              V ${d.y}
+              H ${d.x}`;
+    }
+    return this._orientation == "vertical"
+      ? vertical_elbow(s, d)
+      : horizontal_elbow(s, d);
+  }
+
+  static step_link_path_func(s, d) {
+    function vertical_step(s, d) {
+      // Creates a step connection for vertical trees
+      const midY = (s.y + d.y) / 2;
+      return `M ${s.x} ${s.y}
+              V ${midY}
+              H ${d.x}
+              V ${d.y}`;
+    }
+
+    function horizontal_step(s, d) {
+      // Creates a step connection for horizontal trees  
+      const midX = (s.x + d.x) / 2;
+      return `M ${s.x} ${s.y}
+              H ${midX}
+              V ${d.y}
+              H ${d.x}`;
+    }
+    return this._orientation == "vertical"
+      ? vertical_step(s, d)
+      : horizontal_step(s, d);
   }
 
   link_path(link_path_func) {
@@ -828,12 +979,83 @@ class FTDrawer {
   }
 
   draw(source = this.ft_datahandler.root) {
-    // get visible nodes and links
-    const nodes = this.ft_datahandler.dag.descendants(),
-      links = this.ft_datahandler.dag.links();
-
-    // assign new x and y positions to all nodes
-    this.layout(this.ft_datahandler.dag);
+    // Guard against undefined root
+    if (!this.ft_datahandler.root) {
+      console.warn("Cannot draw: no root node available");
+      return;
+    }
+    
+    // Disable tooltips during transition
+    this._tooltips_enabled = false;
+    
+    let nodes, links;
+    
+    // If we have a graph, run layout on it
+    if (this.ft_datahandler.graph) {
+      // Get visible nodes first
+      nodes = this.ft_datahandler.nodes.filter(n => n.visible);
+      
+      // Create a subgraph with only visible nodes
+      const visibleIds = new Set(nodes.map(n => n.id));
+      const visibleLinks = [];
+      
+      for (const link of this.ft_datahandler.graph.links()) {
+        const sourceId = link.source.data;
+        const targetId = link.target.data;
+        if (visibleIds.has(sourceId) && visibleIds.has(targetId)) {
+          visibleLinks.push([sourceId, targetId]);
+        }
+      }
+      
+      // Create and layout subgraph with only visible nodes
+      if (visibleLinks.length > 0) {
+        const connect = graphConnect();
+        const visibleGraph = connect(visibleLinks);
+        this.layout(visibleGraph);
+        
+        // Copy coordinates from subgraph to FT nodes
+        for (const graphNode of visibleGraph.nodes()) {
+          const ftNode = this.ft_datahandler.nodeMap.get(graphNode.data);
+          if (ftNode) {
+            ftNode.x = graphNode.x;
+            ftNode.y = graphNode.y;
+            // Initialize x0, y0 for first render
+            if (ftNode.x0 === undefined) {
+              ftNode.x0 = source ? source.x : ftNode.x;
+              ftNode.y0 = source ? source.y : ftNode.y;
+            }
+          }
+        }
+      } else if (nodes.length === 1) {
+        // Single visible node
+        nodes[0].x = 0;
+        nodes[0].y = 0;
+        if (nodes[0].x0 === undefined) {
+          nodes[0].x0 = 0;
+          nodes[0].y0 = 0;
+        }
+      }
+      
+      // Get links between visible nodes  
+      links = [];
+      for (const link of this.ft_datahandler.graph.links()) {
+        const sourceFT = link.source.ftNode;
+        const targetFT = link.target.ftNode;
+        if (sourceFT && targetFT && sourceFT.visible && targetFT.visible) {
+          links.push({ source: sourceFT, target: targetFT, data: link.data });
+        }
+      }
+    } else {
+      // Single node case - no graph
+      nodes = [this.ft_datahandler.root];
+      links = [];
+      this.ft_datahandler.root.x = 0;
+      this.ft_datahandler.root.y = 0;
+      if (this.ft_datahandler.root.x0 === undefined) {
+        this.ft_datahandler.root.x0 = 0;
+        this.ft_datahandler.root.y0 = 0;
+      }
+    }
 
     // switch x and y coordinates if orientation = "horizontal"
     if (this._orientation == "horizontal") {
@@ -859,29 +1081,36 @@ class FTDrawer {
         "transform",
         (_) => "translate(" + source.x0 + "," + source.y0 + ")"
       )
-      .on("click", (_, node) => {
-        node.click();
-        this.draw(node);
-      })
       .attr("visible", true);
 
     // add tooltip
     if (this.show_tooltips) {
       const tooltip_div = this._tooltip_div,
-        tooltip_func = this._tooltip_func;
+        tooltip_func = this._tooltip_func,
+        drawer = this;
       nodeEnter
         .on("mouseover", function (event, d) {
-          tooltip_div.transition().duration(200).style("opacity", undefined);
+          if (!drawer._tooltips_enabled) return;
           tooltip_div.html(tooltip_func(d));
           let height = tooltip_div.node().getBoundingClientRect().height;
           tooltip_div
             .style("left", event.pageX + 10 + "px")
             .style("top", event.pageY - height / 2 + "px");
+          tooltip_div.transition().duration(200).style("opacity", undefined);
         })
         .on("mouseout", function (d) {
           tooltip_div.transition().duration(500).style("opacity", 0);
         });
     }
+
+    // add click handler (after tooltip to ensure tooltip hides on click)
+    nodeEnter.on("click", (_, node) => {
+      if (this.show_tooltips) {
+        this._tooltip_div.style("opacity", 0).html("");
+      }
+      node.click();
+      this.draw(node);
+    });
 
     // add a circle for each node
     nodeEnter
@@ -991,6 +1220,12 @@ class FTDrawer {
       d.x0 = d.x;
       d.y0 = d.y;
     });
+    
+    // Re-enable tooltips after transition completes
+    const drawer = this;
+    setTimeout(() => {
+      drawer._tooltips_enabled = true;
+    }, this.transition_duration());
   }
 
   clear() {

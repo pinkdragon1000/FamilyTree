@@ -9,8 +9,6 @@ function App() {
 
     const svgEl = d3.select("svg");
 
-    console.log(svgEl.empty());
-
     if (svgEl.empty()) {
       const svg = d3
         .select("body")
@@ -32,14 +30,39 @@ function App() {
         <img className="spacer" src={TreeLogo} alt="tree logo" />
         Family Tree
       </div>
-      <div>
-        <p>A * denotes an individual was adopted or not biologically related</p>
-        <p>
-          A ~ by a death year means the person has passed away but year is
-          unknown
-        </p>
-
-        <p>A ⟷ means that a person divorced out of the family</p>
+      <div className="legend">
+        <div className="legend-title">Legend</div>
+        <div className="legend-section">
+          <div className="legend-subtitle">Node Colors:</div>
+          <div className="legend-items">
+            <div className="legend-item">
+              <svg width="20" height="20">
+                <circle cx="10" cy="10" r="8" className="legend-node extendable" />
+              </svg>
+              <span>Can expand (has hidden relatives)</span>
+            </div>
+            <div className="legend-item">
+              <svg width="20" height="20">
+                <circle cx="10" cy="10" r="8" className="legend-node collapsible" />
+              </svg>
+              <span>Can collapse (click to hide relatives)</span>
+            </div>
+            <div className="legend-item">
+              <svg width="20" height="20">
+                <circle cx="10" cy="10" r="8" className="legend-node non-extendable" />
+              </svg>
+              <span>No children/relatives</span>
+            </div>
+          </div>
+        </div>
+        <div className="legend-section">
+          <div className="legend-subtitle">Symbols:</div>
+          <div className="legend-notes">
+            <p><strong>*</strong> Adopted or not biologically related</p>
+            <p><strong>~</strong> Passed away, year unknown</p>
+            <p><strong>⟷</strong> Divorced out of the family</p>
+          </div>
+        </div>
       </div>
       <div>{drawFamilyTree()}</div>
     </>

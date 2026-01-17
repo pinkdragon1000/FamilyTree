@@ -49,12 +49,14 @@ export const data = {
       birthyear: 1917,
       deathyear: 1998,
       own_unions: ["u1"],
+      profession: "Store Owner of Ben Franklin - Ripley, WV stores"
     },
     id2: {
       name: "Retha Robinson",
       birthyear: 1921,
       deathyear: 2000,
       own_unions: ["u1"],
+      profession: "Store Owner of Ben Franklin - Ripley, WV stores"
     },
     // Children of u1
     id3: {
@@ -65,11 +67,14 @@ export const data = {
       deathplace: "Bridgeport, WV",
       own_unions: ["u3"],
       parent_union: "u1",
+      imageLink: "/photos/Robinson/JimRobinson.jpg",
       full: "James Clark",
+      profession: "Store Owner of Ben Franklin - Salem & Grantsville, WV stores"
     },
     id4: {
       name: "Ron Robinson",
       birthyear: 1947,
+      imageLink: "/photos/Robinson/RonRobinson.jpg",
       own_unions: ["u8"],
       parent_union: "u1",
     },
@@ -97,7 +102,8 @@ export const data = {
       own_unions: ["u3"],
       parent_union: "u2",
       deathplace: "Salem, WV",
-      deathcause: "Cancer - Multiple Myeloma",
+      imageLink: "/photos/Robinson/SandraRobinson.jpg",
+      profession: "Store Owner of Ben Franklin - Salem & Grantsville, WV stores"
     },
     id15: {
       name: "Belinda Kamann",
@@ -134,6 +140,7 @@ export const data = {
       birthyear: 1966,
       own_unions: ["u5"],
       parent_union: "u3",
+      profession: "Device Software Engineer",
       imageLink: "/photos/Robinson/JohnRobinson.jpg",
     },
     id9: {
@@ -142,6 +149,7 @@ export const data = {
       own_unions: ["u4"],
       parent_union: "u3",
       full: "James Clark II",
+      imageLink: "/photos/Robinson/Clark&JenniferRobinson.jpg",
     },
 
     // Union u4: Clark & Jennifer Robinson
@@ -149,6 +157,7 @@ export const data = {
       name: "Jennifer Robinson",
       birthyear: 1970,
       own_unions: ["u7", "u4"],
+      imageLink: "/photos/Robinson/Clark&JenniferRobinson.jpg",
     },
     // Children of u4
     id10: {
@@ -185,6 +194,7 @@ export const data = {
       parent_union: "u5",
       birthplace: "Morgantown, WV",
       imageLink: "/photos/Robinson/SitaRobinson.jpg",
+      profession: "Software Engineer"
     },
 
     // Union u6: Belinda & Kevin Kamann
@@ -588,6 +598,7 @@ export const data = {
       birthyear: 1958,
       own_unions: ["u14"],
       parent_union: "u13",
+      imageLink: "/photos/Hota/Subba&RamaraoHota.jpg"
     },
     id22: {
       name: "Padma Robinson",
@@ -595,6 +606,7 @@ export const data = {
       own_unions: ["u5"],
       parent_union: "u13",
       imageLink: "/photos/Robinson/PadmaRobinson.jpg",
+      profession: "Director, Advanced Analytics"
     },
 
     // Union u14: Subba & Ramarao Hota
@@ -602,6 +614,7 @@ export const data = {
       name: "Ramarao Hota",
       birthyear: 1951,
       own_unions: ["u14"],
+      imageLink: "/photos/Hota/Subba&RamaraoHota.jpg"
     },
     // Children of u14
     id43: {
@@ -609,14 +622,17 @@ export const data = {
       birthyear: 1982,
       own_unions: ["u16"],
       parent_union: "u14",
+      imageLink: "/photos/Gudipati/Pallavi&Family.jpg",
       birthplace: "Morgantown, WV",
     },
     id44: {
       name: "Partha Hota",
       birthyear: 1985,
       birthplace: "Morgantown, WV",
+      imageLink: "/photos/Hota/ParthaHota.jpg",
       own_unions: ["u75"],
       parent_union: "u14",
+      profession: "Radiologist"
     },
 
     // Union u15: Sarma & Lakshmi Royyuru
@@ -640,6 +656,7 @@ export const data = {
     id47: {
       name: "Ravi Gudipati",
       own_unions: ["u16"],
+      imageLink: "/photos/Gudipati/Pallavi&Family.jpg",
     },
     // Children of u16
     id48: {
@@ -648,6 +665,7 @@ export const data = {
       parent_union: "u16",
       birthyear: 2012,
       birthplace: "Cleveland, Ohio",
+      imageLink: "/photos/Gudipati/Pallavi&Family.jpg",
     },
     id49: {
       name: "Vishnu Gudipati",
@@ -655,6 +673,7 @@ export const data = {
       parent_union: "u16",
       birthyear: 2015,
       birthplace: "Cleveland, Ohio",
+      imageLink: "/photos/Gudipati/Pallavi&Family.jpg",
     },
 
     // Union u17: Shruti & Sandeep
@@ -681,6 +700,7 @@ export const data = {
     id211: {
       name: "Kristen Zuber (Hota)",
       own_unions: ["u75"],
+      imageLink: "/photos/Hota/KristenZuber.jpg",
     },
     // Children of u75
     id212: {
@@ -818,6 +838,7 @@ export const data = {
     // Children of u33
     id92: {
       name: "Aditya Viswanadham",
+      own_unions: [],
       parent_union: "u33",
     },
     // Union u34: Suri & wife
@@ -870,7 +891,7 @@ export const data = {
       parent_union: "u36",
     },
     id100: {
-      name: "Bujju",
+      name: "Bujju Viswanatham",
       own_unions: ["u55"],
       parent_union: "u36",
     },
@@ -912,7 +933,7 @@ export const data = {
     // Union u55: Bujju
     // Children of u55
     id154: {
-      name: "Anandita Viswanadham",
+      name: "Anandita Viswanatham",
       own_unions: [],
       parent_union: "u55",
     },
