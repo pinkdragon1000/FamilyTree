@@ -320,6 +320,8 @@ class Union extends FTNode {
     if (!this.children.includes(child)) {
       console.warn("Child node not in this's children array.");
     }
+    // Recursively hide child's downstream connections
+    child.hide();
     child.visible = false;
     this._children.push(child);
     this.children.remove(child);
@@ -347,6 +349,19 @@ class Union extends FTNode {
     // hide neighboring parents, if inserted by this node
     this.get_visible_inserted_parents().forEach((parent) => {
       this.hide_parent(parent);
+    });
+    
+    // Also hide visible parents that only have this union as visible connection
+    this.get_visible_parents().forEach((parent) => {
+      if (!this.inserted_nodes.includes(parent)) {
+        // Check if this parent has any other visible connections
+        const otherVisibleConnections = parent.get_neighbors().filter(
+          n => n !== this && n.visible
+        );
+        if (otherVisibleConnections.length === 0) {
+          parent.visible = false;
+        }
+      }
     });
 
     // hide only edge (not node) if not inserted by this node

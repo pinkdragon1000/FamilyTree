@@ -1,3 +1,5 @@
+import { image } from "d3";
+
 const getUnions = () => {
   const unions = {};
 
@@ -165,18 +167,21 @@ export const data = {
       birthyear: 1997,
       own_unions: ["u12"],
       parent_union: "u4",
+      imageLink: "/photos/Johnson/Lauren&KaydenJohnson.jpg"
     },
     id11: {
       name: "Elijah Robinson",
       birthyear: 2002,
       own_unions: [],
       parent_union: "u4",
+      imageLink: "/photos/Robinson/ElijahRobinson.jpg",
     },
     id12: {
       name: "Hannah Robinson",
       birthyear: 2005,
       own_unions: ["u77"],
       parent_union: "u4",
+      imageLink: "/photos/Robinson/HannahRobinson.jpg",
     },
 
     // Union u77: Hannah & Nick Anderson
@@ -257,6 +262,7 @@ export const data = {
     id36: {
       name: "Kayden Johnson",
       own_unions: ["u12"],
+      imageLink: "/photos/Johnson/Lauren&KaydenJohnson.jpg"
     },
     // Children of u12
     id143: {
@@ -264,6 +270,7 @@ export const data = {
       own_unions: [],
       parent_union: "u12",
       birthyear: 2023,
+      imageLink: "/photos/Johnson/OliverJohnson.jpg"
     },
 
 
@@ -324,6 +331,7 @@ export const data = {
       name: "Maddie Hager",
       own_unions: [],
       parent_union: "u11",
+      imageLink: "/photos/Hager/MaddieHager.jpg",
     },
     id30: {
       name: "Marley Hager *",
