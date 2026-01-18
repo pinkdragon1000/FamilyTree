@@ -1,12 +1,11 @@
 ### Family Tree
+Interactive family tree visualization app built with React and D3.js.
 
 Running the app locally
 
 ```
 npm i
-npm run start
+npm run dev
 ```
 
 [View the App](https://smrfamilytree.web.app/)
-
-Inspired by: https://github.com/BenPortner/js_family_tree
