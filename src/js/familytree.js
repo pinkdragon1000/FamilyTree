@@ -101,17 +101,28 @@ function d3_append_multiline_text(
   text,
   delimiter = "_",
   css_class = undefined,
-  line_sep = 14,
+  line_sep = null,
   line_offset = undefined,
   x = 13,
   dominant_baseline = "central"
 ) {
   // adds a multi-line text label to a d3 element
   if (!text) return;
+
+  // Calculate line separation dynamically based on font size
+  if (line_sep === null) {
+    const fontSize = parseInt(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--node-label-font-size')
+    ) || 12;
+    line_sep = fontSize * 1.4; // Typical line-height ratio
+  }
+
   const d3text = d3element
     .append("text")
     .attr("class", css_class)
-    .attr("dominant-baseline", dominant_baseline);
+    .attr("dominant-baseline", dominant_baseline)
+    .style("pointer-events", "none");
   const arr = text.split(delimiter);
   if (!line_offset) {
     line_offset = (-line_sep * (arr.length - 1)) / 2;
@@ -177,6 +188,23 @@ class FTDataHandler {
         this.root.visible = true;
       }
       
+      // Make the 8 grandparent nodes visible at start (collapsed - no unions/lines)
+      const initialNodes = [
+        "id1", "id2",     // Carmel, Retha (Jim Robinson's parents)
+        "id5", "id6",     // Rex Davis, Wilma Davis (Sandra Robinson's parents)
+        "id82", "id83",   // R.L.N. Sarma, R. Subbalakshmi (R.L.N. Sastry's parents)
+        "id84", "id85"    // V.B.R. Sarma, V. Padmavathi (Sita Devi Royyuru's parents)
+      ];
+      initialNodes.forEach(id => {
+        const node = this.nodeMap.get(id);
+        if (node) {
+          node.visible = true;
+        }
+      });
+
+      // Store initial node IDs for special layout handling (disconnected nodes)
+      this.initialNodeIds = initialNodes;
+
       this.number_nodes = this.nodes.length;
     }
     // if no edges but only nodes are defined: create single person root
@@ -352,8 +380,10 @@ class Union extends FTNode {
     });
     
     // Also hide visible parents that only have this union as visible connection
+    // But never hide initial nodes (the 4 grandparents)
+    const initialNodeIds = this.ft_datahandler.initialNodeIds || [];
     this.get_visible_parents().forEach((parent) => {
-      if (!this.inserted_nodes.includes(parent)) {
+      if (!this.inserted_nodes.includes(parent) && !initialNodeIds.includes(parent.id)) {
         // Check if this parent has any other visible connections
         const otherVisibleConnections = parent.get_neighbors().filter(
           n => n !== this && n.visible
@@ -691,13 +721,29 @@ class FTDrawer {
       .on("zoom", (event) => this.g.attr("transform", event.transform));
     this.svg.call(this.zoom);
 
+    // Flag to track first draw for centering
+    this._isFirstDraw = true;
+
     // initialize tooltips
     this._tooltip_div = d3
       .select("body")
       .append("div")
       .attr("class", "tooltip")
       .style("opacity", 0);
+    this._hideTimeout = null;
     this.tooltip(FTDrawer.default_tooltip_func);
+
+    // Add tooltip hover handlers for interactive tooltips
+    // Using mouseenter/mouseleave instead of mouseover/mouseout to avoid
+    // events bubbling from child elements (images, text, etc.)
+    const drawerRef = this;
+    this._tooltip_div
+      .on("mouseenter", () => {
+        clearTimeout(drawerRef._hideTimeout);
+      })
+      .on("mouseleave", () => {
+        drawerRef._tooltip_div.transition().duration(200).style("opacity", 0);
+      });
 
     // initialize dag layout maker
     this.layout = sugiyama()
@@ -739,7 +785,7 @@ class FTDrawer {
     // getter/setter for separation of nodes in x and y direction (see d3-dag documentation)
     if (!value) return this.layout.nodeSize();
     else {
-      this.layout.nodeSize(value);
+      this.layout = this.layout.nodeSize(value);
       return this;
     }
   }
@@ -789,6 +835,7 @@ class FTDrawer {
     const deathPlace = node.data.deathplace;
     const imageLink = node.data.imageLink;
     const profession = node.data.profession;
+    const nickname = node.data.nickname;
     
     var content = ``;
     
@@ -798,6 +845,11 @@ class FTDrawer {
     }
     
     content += `<span style='margin-left: 2.5px;'><b>` + node.get_name() + `</b></span>`;
+    
+    // Add nickname if available
+    if (nickname) {
+      content += `<br><span style='margin-left: 2.5px; color: #666;'>"${nickname}"</span>`;
+    }
     
     // Add profession if available
     if (profession) {
@@ -1024,22 +1076,73 @@ class FTDrawer {
       
       // Create and layout subgraph with only visible nodes
       if (visibleLinks.length > 0) {
+        // Find which nodes are connected (part of visible links)
+        const connectedIds = new Set();
+        for (const [srcId, tgtId] of visibleLinks) {
+          connectedIds.add(srcId);
+          connectedIds.add(tgtId);
+        }
+
+        // Separate connected nodes from disconnected initial nodes
+        const initialNodeIds = this.ft_datahandler.initialNodeIds || [];
+        const disconnectedInitialNodes = nodes.filter(
+          n => initialNodeIds.includes(n.id) && !connectedIds.has(n.id)
+        );
+
         const connect = graphConnect();
         const visibleGraph = connect(visibleLinks);
         this.layout(visibleGraph);
-        
-        // Copy coordinates from subgraph to FT nodes
+
+        // Find the y offset needed to bring connected initial nodes to y=0
+        let yOffset = 0;
+        for (const graphNode of visibleGraph.nodes()) {
+          if (initialNodeIds.includes(graphNode.data)) {
+            // This is an initial node that's connected - we want it at y=0
+            yOffset = graphNode.y;
+            break;
+          }
+        }
+
+        // Copy coordinates from subgraph to FT nodes, shifting y so initial nodes are at y=0
         for (const graphNode of visibleGraph.nodes()) {
           const ftNode = this.ft_datahandler.nodeMap.get(graphNode.data);
           if (ftNode) {
             ftNode.x = graphNode.x;
-            ftNode.y = graphNode.y;
+            ftNode.y = graphNode.y - yOffset; // Shift so initial nodes are at y=0
             // Initialize x0, y0 for first render
             if (ftNode.x0 === undefined) {
               ftNode.x0 = source ? source.x : ftNode.x;
               ftNode.y0 = source ? source.y : ftNode.y;
             }
           }
+        }
+
+        // Position disconnected initial nodes in a row at y=0
+        if (disconnectedInitialNodes.length > 0) {
+          const nodeSpacing = this.layout.nodeSize()[0];
+
+          // Find the x range of the connected graph
+          let minConnectedX = Infinity, maxConnectedX = -Infinity;
+          for (const graphNode of visibleGraph.nodes()) {
+            if (graphNode.x < minConnectedX) minConnectedX = graphNode.x;
+            if (graphNode.x > maxConnectedX) maxConnectedX = graphNode.x;
+          }
+
+          // Sort disconnected nodes by their original order in initialNodeIds
+          disconnectedInitialNodes.sort((a, b) => {
+            return initialNodeIds.indexOf(a.id) - initialNodeIds.indexOf(b.id);
+          });
+
+          // Position disconnected nodes to the right of the connected graph
+          const startX = maxConnectedX + nodeSpacing;
+          disconnectedInitialNodes.forEach((node, i) => {
+            node.x = startX + i * nodeSpacing;
+            node.y = 0;
+            if (node.x0 === undefined) {
+              node.x0 = source ? source.x : node.x;
+              node.y0 = source ? source.y : node.y;
+            }
+          });
         }
       } else if (nodes.length === 1) {
         // Single visible node
@@ -1049,6 +1152,20 @@ class FTDrawer {
           nodes[0].x0 = 0;
           nodes[0].y0 = 0;
         }
+      } else if (nodes.length > 1 && visibleLinks.length === 0) {
+        // Multiple disconnected nodes - lay them out in a row
+        const nodeSpacing = this.layout.nodeSize()[0];
+        const totalWidth = (nodes.length - 1) * nodeSpacing;
+        const startX = -totalWidth / 2;
+
+        nodes.forEach((node, i) => {
+          node.x = startX + i * nodeSpacing;
+          node.y = 0;
+          if (node.x0 === undefined) {
+            node.x0 = source ? source.x : node.x;
+            node.y0 = source ? source.y : node.y;
+          }
+        });
       }
       
       // Get links between visible nodes  
@@ -1106,6 +1223,7 @@ class FTDrawer {
       nodeEnter
         .on("mouseover", function (event, d) {
           if (!drawer._tooltips_enabled) return;
+          clearTimeout(drawer._hideTimeout);
           tooltip_div.html(tooltip_func(d));
           let height = tooltip_div.node().getBoundingClientRect().height;
           tooltip_div
@@ -1114,7 +1232,9 @@ class FTDrawer {
           tooltip_div.transition().duration(200).style("opacity", undefined);
         })
         .on("mouseout", function (d) {
-          tooltip_div.transition().duration(500).style("opacity", 0);
+          drawer._hideTimeout = setTimeout(() => {
+            tooltip_div.transition().duration(200).style("opacity", 0);
+          }, 150);
         });
     }
 
@@ -1218,24 +1338,79 @@ class FTDrawer {
       })
       .remove();
 
-    // expanding a big subgraph moves the entire dag out of the screen
-    // to prevent this, cancel any transformations in y-direction
-    this.svg
-      .transition()
-      .duration(this.transition_duration())
-      .call(
-        this.zoom.transform,
-        d3
-          .zoomTransform(this.g.node())
-          .translate(-(source.x - source.x0), -(source.y - source.y0))
-      );
-
     // store current node positions for next transition
     nodes.forEach(function (d) {
       d.x0 = d.x;
       d.y0 = d.y;
     });
-    
+
+    // Center view on visible nodes
+    if (nodes.length > 0) {
+      // Calculate bounding box of all visible nodes (with padding for node labels)
+      const padding = 180; // Extra space for node labels and margins
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      nodes.forEach(n => {
+        if (n.x < minX) minX = n.x;
+        if (n.x > maxX) maxX = n.x;
+        if (n.y < minY) minY = n.y;
+        if (n.y > maxY) maxY = n.y;
+      });
+
+      // Add padding
+      minX -= padding;
+      maxX += padding;
+      minY -= padding;
+      maxY += padding;
+
+      // Calculate dimensions
+      const nodesWidth = maxX - minX;
+      const nodesHeight = maxY - minY;
+      const nodesCenterX = (minX + maxX) / 2;
+      const nodesCenterY = (minY + maxY) / 2;
+
+      // Get actual viewport dimensions from SVG element
+      const svgNode = this.svg.node();
+      const svgRect = svgNode.getBoundingClientRect();
+      const navbarHeight = 64; // Height of navbar
+      const viewportWidth = svgRect.width;
+      const viewportHeight = svgRect.height - navbarHeight;
+      const viewportCenterX = viewportWidth / 2;
+      const viewportCenterY = navbarHeight + viewportHeight / 2;
+
+      // On first draw, auto-scale to fit all nodes
+      // On subsequent draws, maintain current zoom level but center on nodes
+      if (this._isFirstDraw) {
+        this._isFirstDraw = false;
+
+        // Calculate scale to fit all nodes (with a max scale of 1 to avoid zooming in too much)
+        const scaleX = viewportWidth / nodesWidth;
+        const scaleY = viewportHeight / nodesHeight;
+        const scale = Math.min(scaleX, scaleY, 1);
+
+        // Calculate translation to center the scaled nodes
+        const translateX = viewportCenterX - nodesCenterX * scale;
+        const translateY = viewportCenterY - nodesCenterY * scale;
+
+        this.svg.call(this.zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(scale));
+      } else {
+        // Get current zoom scale
+        const currentTransform = d3.zoomTransform(this.svg.node());
+        const currentScale = currentTransform.k;
+
+        // Calculate translation to center nodes at current scale
+        const translateX = viewportCenterX - nodesCenterX * currentScale;
+        const translateY = viewportCenterY - nodesCenterY * currentScale;
+
+        this.svg
+          .transition()
+          .duration(this.transition_duration())
+          .call(
+            this.zoom.transform,
+            d3.zoomIdentity.translate(translateX, translateY).scale(currentScale)
+          );
+      }
+    }
+
     // Re-enable tooltips after transition completes
     const drawer = this;
     setTimeout(() => {

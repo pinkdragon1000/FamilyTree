@@ -130,7 +130,8 @@ export const data = {
       parent_union: "u2",
     },
     id53: {
-      name: "Rex (Sonny) Davis",
+      name: "Rex Davis",
+      nickname: "Sonny",
       own_unions: ["u19"],
       parent_union: "u2",
     },
@@ -532,14 +533,16 @@ export const data = {
       full: "Pardhasaradhi",
     },
     id95: {
-      name: "VVS Sastry (Srini)",
+      name: "VVS Sastry",
+      nickname: "Srini",
       own_unions: ["u35"],
       parent_union: "u31",
       birthyear: "1930",
       birthplace: "Visakhapatnam, India",
     },
     id97: {
-      name: "VV Sastry (Raja)",
+      name: "VV Sastry",
+      nickname: "Raja",
       own_unions: [],
       parent_union: "u31",
     },
@@ -558,12 +561,13 @@ export const data = {
       deathyear: "2024",
     },
     id105: {
-      name: "Dr. Sastry (Butchi)",
+      name: "Dr. Sastry",
+      nickname: "Butchi",
       own_unions: ["u38"],
       parent_union: "u31",
     },
     id108: {
-      name: "Sundu mavaiyya",
+      name: "V Sundaram",
       own_unions: ["u39"],
       parent_union: "u31",
     },
@@ -595,11 +599,12 @@ export const data = {
     // Union u13: R.L.N. Sastry & Sita Devi Royyuru
     // Children of u13
     id40: {
-      name: "Sarma Royyuru",
+      name: "Lakshminarayana Royyuru",
       birthyear: 1955,
       own_unions: ["u15"],
       parent_union: "u13",
-      full: "Lakshminarayana",
+      nickname: "Sarma",
+      imageLink: "/photos/Royyuru/SarmaRoyyuru.jpg",
     },
     id39: {
       name: "Subba Hota",
@@ -706,7 +711,7 @@ export const data = {
 
     // Union u75: Partha & Kristen Hota
     id211: {
-      name: "Kristen Zuber (Hota)",
+      name: "Kristen Hota",
       own_unions: ["u75"],
       imageLink: "/photos/Hota/KristenZuber.jpg",
     },
@@ -870,11 +875,13 @@ export const data = {
     },
     // Children of u35
     id96: {
-      name: "V Bhaskar (Bhanu)",
+      name: "V Bhaskar",
+      nickname: "Bhanu",
       own_unions: ["u51"],
       parent_union: "u35",
       birthyear: "1966",
       birthplace: "New Delhi, India",
+      imageLink: "/photos/BhanuViswanadham.jpg",
     },
 
     // Union u51: V Bhaskar & Monika
@@ -882,13 +889,14 @@ export const data = {
       name: "Monika Viswanadham",
       own_unions: ["u51"],
       deathyear: "~",
-      deathcause: "Cancer - Breast",
+      imageLink: "/photos/MonikaViswanadham.jpg",
     },
     // Children of u51
     id148: {
       name: "Mira Viswanadham",
       own_unions: [],
       parent_union: "u51",
+      imageLink: "/photos/MiraViswanadham.jpg",
     },
 
     // Union u36: V Atchutaramaiah
@@ -938,7 +946,11 @@ export const data = {
       parent_union: "u54",
     },
 
-    // Union u55: Bujju
+    // Union u55: Bujju & Suchitra Viswanatham
+    id217: {
+      name: "Suchitra Viswanatham",
+      own_unions: ["u55"],
+    },
     // Children of u55
     id154: {
       name: "Anandita Viswanatham",
@@ -1020,7 +1032,8 @@ export const data = {
     // Union u39: Sundu mavaiyya
     // Children of u39
     id109: {
-      name: "Bhaskar (Bachee)",
+      name: "Bhaskar",
+      nickname: "Bachee",
       own_unions: ["u59"],
       parent_union: "u39",
       deathyear: "~",
@@ -1165,7 +1178,8 @@ export const data = {
       parent_union: "u45",
     },
     id130: {
-      name: "Rohini (Chinnamma)",
+      name: "Rohini",
+      nickname: "Chinnamma",
       own_unions: [],
       parent_union: "u45",
     },
@@ -1307,7 +1321,8 @@ export const data = {
     },
     // Children of u65
     id183: {
-      name: "Syamalarao Evani (Syam)",
+      name: "Syamalarao Evani",
+      nickname: "Syam",
       own_unions: ["u74"],
       parent_union: "u65",
       birthyear: "1928",
@@ -1318,17 +1333,20 @@ export const data = {
       parent_union: "u65",
     },
     id185: {
-      name: "Subbaya Sastry Evani (Sastry)",
+      name: "Subbaya Sastry Evani",
+      nickname: "Sastry",
       own_unions: ["u70"],
       parent_union: "u65",
     },
     id186: {
-      name: "Kameswara Sarma Evani (Thambi)",
+      name: "Kameswara Sarma Evani",
+      nickname: "Thambi",
       own_unions: ["u69"],
       parent_union: "u65",
     },
     id187: {
-      name: "Kameswari Kunapuli (Papa)",
+      name: "Kameswari Kunapuli",
+      nickname: "Papa",
       own_unions: ["u66"],
       parent_union: "u65",
     },
@@ -1336,15 +1354,19 @@ export const data = {
     // Union u66: Kameswari Kunapuli
     // Children of u66
     id188: {
-      name: "Saraswathi Jayanthy (Achuta)",
+      name: "Saraswathi Jayanthy",
+      nickname: "Achuta",
       own_unions: ["u67"],
       parent_union: "u66",
       birthyear: "1960",
+      imageLink: "/photos/Achuta&Ramamurthy.jpg"
     },
     id189: {
-      name: "Satya Kunapuli (Babu)",
+      name: "Satya Kunapuli",
+      nickname: "Babu",
       own_unions: ["u68"],
       parent_union: "u66",
+      imageLink: "/photos/Kunapuli/SatyaKunapuli.jpg",
     },
 
     // Union u67: Saraswathi & Ramamurthy Jayanthy
@@ -1352,13 +1374,16 @@ export const data = {
       name: "Ramamurthy J.V.",
       own_unions: ["u67"],
       birthyear: "1953",
+      imageLink: "/photos/Achuta&Ramamurthy.jpg"
     },
     // Children of u67
     id190: {
-      name: "Karthik Jayanthy",
+      name: "Surya Jayanthy",
       own_unions: [],
       parent_union: "u67",
       birthyear: "1985",
+      nickname: "Karthik",
+      imageLink: "/photos/KarthikJayanthy.jpg"
     },
 
     // Union u68: Satya & Suma Kunapuli
@@ -1371,11 +1396,13 @@ export const data = {
       name: "Shalini Kunapuli",
       own_unions: [],
       parent_union: "u68",
+      imageLink: "/photos/Kunapuli/ShaliniKunapuli.jpg",
     },
     id193: {
       name: "Sangita Kunapuli",
       own_unions: [],
       parent_union: "u68",
+      imageLink: "/photos/Kunapuli/SangitaKunapuli.jpg",
     },
 
     // Union u69: Kameswara Sarma & Lakshmi Evani
@@ -1385,7 +1412,8 @@ export const data = {
     },
     // Children of u69
     id195: {
-      name: "Ajaisimha Evani (Ajai)",
+      name: "Ajaisimha Evani",
+      nickname: "Ajai",
       parent_union: "u69",
       own_unions: [],
     },
@@ -1411,7 +1439,8 @@ export const data = {
       birthyear: "1965",
     },
     id200: {
-      name: "Satyakant Evani (Purna)",
+      name: "Satyakant Evani",
+      nickname: "Purna",
       parent_union: "u70",
       own_unions: ["u72"],
       birthplace: "Bokaro Steel City, India",
@@ -1453,18 +1482,21 @@ export const data = {
 
     // Union u74: Syamalarao & Veeramathi Evani
     id206: {
-      name: "Veeramathi Evani (Rama)",
+      name: "Veeramathi Evani",
+      nickname: "Rama",
       own_unions: ["u74"],
     },
     // Children of u74
     id207: {
-      name: "Venkatarama Narasimham Evani (Bobby)",
+      name: "Venkatarama Narasimham Evani",
+      nickname: "Bobby",
       parent_union: "u74",
       own_unions: [],
       birthyear: "1960",
     },
     id208: {
-      name: "Lakshman Evani (Lucky)",
+      name: "Lakshman Evani",
+      nickname: "Lucky",
       parent_union: "u74",
       own_unions: [],
       birthyear: "1967",
