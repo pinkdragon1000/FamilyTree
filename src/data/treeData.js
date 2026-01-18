@@ -475,6 +475,7 @@ export const data = {
       parent_union: "u28",
       deathyear: 2010,
       deathplace: "Hyderabad, India",
+      imageLink: "/photos/Royyuru/RLNSastry.jpg",
     },
     id68: {
       name: "Suryanarayana Murthy",
@@ -525,6 +526,7 @@ export const data = {
       deathyear: 1995,
       birthyear: 1938,
       deathplace: "Hyderabad, India",
+      imageLink: "/photos/Royyuru/SitaRoyyuru.jpg",
     },
     id87: {
       name: "V Pardha",
@@ -577,6 +579,7 @@ export const data = {
       parent_union: "u31",
       deathplace: "Chennai, India",
       deathyear: "2024",
+      imageLink: "/photos/Chavali/RavikantaChavali.jpg",
     },
     id117: {
       name: "Radha Yenamandra",
@@ -611,7 +614,7 @@ export const data = {
       birthyear: 1958,
       own_unions: ["u14"],
       parent_union: "u13",
-      imageLink: "/photos/Hota/Subba&RamaraoHota.jpg"
+      imageLink: "/photos/Hota/SubbaHota.jpg"
     },
     id22: {
       name: "Padma Robinson",
@@ -627,7 +630,7 @@ export const data = {
       name: "Ramarao Hota",
       birthyear: 1951,
       own_unions: ["u14"],
-      imageLink: "/photos/Hota/Subba&RamaraoHota.jpg"
+      imageLink: "/photos/Hota/RamaraoHota.jpg"
     },
     // Children of u14
     id43: {
@@ -884,12 +887,12 @@ export const data = {
       imageLink: "/photos/BhanuViswanadham.jpg",
     },
 
-    // Union u51: V Bhaskar & Monika
+    // Union u51: V Bhaskar & Monica
     id149: {
-      name: "Monika Viswanadham",
+      name: "Monica Viswanadham",
       own_unions: ["u51"],
-      deathyear: "~",
-      imageLink: "/photos/MonikaViswanadham.jpg",
+      deathyear: "2019",
+      imageLink: "/photos/MonicaViswanadham.jpg",
     },
     // Children of u51
     id148: {
@@ -1080,6 +1083,7 @@ export const data = {
       own_unions: ["u41"],
       parent_union: "u40",
       birthyear: "1966",
+      imageLink: "/photos/Palepu/NeeruPalepu.jpg",
     },
 
     // Union u41: Neeru & Prasad Palepu
@@ -1092,16 +1096,19 @@ export const data = {
       name: "Anjana Palepu",
       own_unions: [],
       parent_union: "u41",
+      imageLink: "/photos/Palepu/AnjanaPalepu.jpg",
     },
     id114: {
       name: "Sneha Palepu",
       own_unions: [],
       parent_union: "u41",
+      imageLink: "/photos/Palepu/SnehaPalepu.jpg",
     },
     id115: {
       name: "Nethra Palepu",
       own_unions: [],
       parent_union: "u41",
+      imageLink: "/photos/Palepu/NethraPalepu.jpg",
     },
 
     // Union u42: Radha & Dharma Rao
@@ -1195,24 +1202,6 @@ export const data = {
       name: "Umapathy",
       own_unions: [],
       parent_union: "u46",
-    },
-
-    // Union u48: Ammalu
-    // Children of u48
-    id136: {
-      name: "Jyothi",
-      own_unions: [],
-      parent_union: "u48",
-    },
-    id137: {
-      name: "Babu Rao",
-      own_unions: [],
-      parent_union: "u48",
-    },
-    id138: {
-      name: "Rama",
-      own_unions: [],
-      parent_union: "u48",
     },
 
     // Union u48: Ammalu
