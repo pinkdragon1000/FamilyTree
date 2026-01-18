@@ -133,8 +133,8 @@ function App() {
         <img className="spacer" src={TreeLogo} alt="tree logo" />
         Family Tree
       </div>
-      <div className={`legend ${isLegendCollapsed ? 'collapsed' : ''}`}>
-        <div className="legend-title" onClick={() => setIsLegendCollapsed(!isLegendCollapsed)}>
+      <div className={`legend panel-card ${isLegendCollapsed ? 'collapsed' : ''}`}>
+        <div className="panel-title" onClick={() => setIsLegendCollapsed(!isLegendCollapsed)}>
           <span>{isLegendCollapsed ? '+' : '−'}</span> Legend
         </div>
         {!isLegendCollapsed && (
@@ -173,8 +173,8 @@ function App() {
           </>
         )}
       </div>
-      <div className={`text-size-card ${isTextSizeCollapsed ? 'collapsed' : ''}`}>
-        <div className="card-title" onClick={() => setIsTextSizeCollapsed(!isTextSizeCollapsed)}>
+      <div className={`text-size-card panel-card ${isTextSizeCollapsed ? 'collapsed' : ''}`}>
+        <div className="panel-title" onClick={() => setIsTextSizeCollapsed(!isTextSizeCollapsed)}>
           <span>{isTextSizeCollapsed ? '+' : '−'}</span> Text Size
         </div>
         {!isTextSizeCollapsed && (

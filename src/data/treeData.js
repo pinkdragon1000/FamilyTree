@@ -51,14 +51,16 @@ export const data = {
       birthyear: 1917,
       deathyear: 1998,
       own_unions: ["u1"],
-      profession: "Store Owner of Ben Franklin - Ripley, WV stores"
+      profession: "Store Owner of Ben Franklin - Ripley, WV stores",
+      imageLink: "/photos/Robinson/CarmelRobinson.jpg"
     },
     id2: {
       name: "Retha Robinson",
       birthyear: 1921,
       deathyear: 2000,
       own_unions: ["u1"],
-      profession: "Store Owner of Ben Franklin - Ripley, WV stores"
+      profession: "Store Owner of Ben Franklin - Ripley, WV stores",
+      imageLink: "/photos/Robinson/RethaRobinson.jpg"
     },
     // Children of u1
     id3: {
@@ -92,7 +94,7 @@ export const data = {
       own_unions: ["u2"],
       birthyear: 1915,
       deathyear: 2012,
-      imageLink: "/photos/WilmaDavis.jpg",
+      imageLink: "/photos/Davis/WilmaDavis.jpg",
       birthplace: "Salem, WV",
       deathplace: "Willard, Ohio",
     },
@@ -111,16 +113,19 @@ export const data = {
       name: "Belinda Kamann",
       own_unions: ["u6"],
       parent_union: "u2",
+      imageLink: "/photos/Kamann/BelindaKamann.jpg",
     },
     id16: {
       name: "Patty Malov",
       own_unions: ["u9"],
       parent_union: "u2",
+      imageLink: "/photos/Davis/PattyMalov.jpg",
     },
     id17: {
       name: "Rebecca Davis",
       own_unions: ["u22"],
       parent_union: "u2",
+      imageLink: "/photos/Davis/RebeccaDavis.jpg",
     },
     id52: {
       name: "Ross Davis",
@@ -134,6 +139,7 @@ export const data = {
       nickname: "Sonny",
       own_unions: ["u19"],
       parent_union: "u2",
+      imageLink: "/photos/Davis/SonnyDavis.jpg",
     },
 
     // Union u3: Jim & Sandra Robinson
@@ -207,6 +213,7 @@ export const data = {
     id18: {
       name: "Kevin Kamann *",
       own_unions: ["u6"],
+      imageLink: "/photos/Kamann/KevinKamann.jpg",
     },
     // Children of u6
     id19: {
@@ -291,6 +298,7 @@ export const data = {
       name: "Monica Hager",
       own_unions: ["u11"],
       parent_union: "u8",
+      imageLink: "/photos/Hager/MonicaHager.jpg",
     },
 
     // Union u9: Patty & Alex Malov
@@ -333,6 +341,7 @@ export const data = {
       own_unions: [],
       parent_union: "u11",
       imageLink: "/photos/Hager/MaddieHager.jpg",
+      birthyear: 2003
     },
     id30: {
       name: "Marley Hager *",
@@ -350,34 +359,40 @@ export const data = {
       name: "Brian Davis",
       own_unions: ["u21"],
       parent_union: "u19",
+      imageLink: "/photos/Davis/BrianDavis.jpg",
     },
     id55: {
-      name: "Steven Davis",
+      name: "Stephen Davis",
       own_unions: ["u20"],
       parent_union: "u19",
+      birthyear: "1971",
+      imageLink: "/photos/Davis/StephenDavis.jpg",
     },
 
-    // Union u20: Steven & Julie Davis
+    // Union u20: Stephen & Julie Davis
     id56: {
       name: "Julie Soltis ⟷",
       own_unions: ["u20"],
     },
     // Children of u20
     id57: {
-      name: "Emilee Davis",
+      name: "Emilee Schmetzer",
       own_unions: ["u76"],
       parent_union: "u20",
+      imageLink: "/photos/Emilee&StevenSchmetzer.jpg",
     },
     id58: {
       name: "Josh Davis",
       own_unions: [],
       parent_union: "u20",
+      imageLink: "/photos/Davis/JoshDavis.jpg",
     },
 
-    // Union u76: Emilee Davis & Steven Schmetzer
+    // Union u76: Emilee & Steven Schmetzer
     id213: {
       name: "Steven Schmetzer",
       own_unions: ["u76"],
+      imageLink: "/photos/Emilee&StevenSchmetzer.jpg",
     },
 
     // Union u21: Brian & Tina Davis
@@ -390,16 +405,19 @@ export const data = {
       name: "Hallie Davis",
       own_unions: [],
       parent_union: "u21",
+      imageLink: "/photos/Davis/HallieDavis.jpg",
     },
     id61: {
       name: "Andrew Davis",
       own_unions: [],
       parent_union: "u21",
+      imageLink: "/photos/Davis/AndrewDavis.jpg",
     },
     id62: {
       name: "Jessica Davis",
       own_unions: [],
       parent_union: "u21",
+      imageLink: "/photos/Davis/JessDavis.jpg",
     },
 
     // Union u22: Rebecca Davis
@@ -413,6 +431,12 @@ export const data = {
       name: "Kevin Davis",
       own_unions: [],
       parent_union: "u22",
+    },
+    id218: {
+      name: "Chris Davis",
+      own_unions: [],
+      parent_union: "u22",
+      imageLink: "/photos/Davis/ChrisDavis.jpg",
     },
 
     // Union u23: Ross Davis
@@ -1230,6 +1254,7 @@ export const data = {
     id168: {
       name: "Sita Evani",
       own_unions: ["u63"],
+      imageLink: "/photos/Evani/SitaEvani.jpg",
     },
     id169: {
       name: "Subbayya Sastry Evani",
@@ -1252,6 +1277,7 @@ export const data = {
       name: "Ramalingeswara Evani",
       own_unions: [],
       parent_union: "u63",
+      imageLink: "/photos/Evani/RamalingeswaraEvani.jpg"
     },
     id173: {
       name: "Annapoorna Bhagavatula",
@@ -1284,6 +1310,7 @@ export const data = {
       name: "Subbalakshmi Gunturu",
       own_unions: [],
       parent_union: "u63",
+      imageLink: "/photos/SubbalakshmiGunturu.jpg"
     },
     id179: {
       name: "Prabhavathi Vuppuluri",

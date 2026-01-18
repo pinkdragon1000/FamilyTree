@@ -19,42 +19,37 @@ body {
   overflow: hidden;
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 
 .navbar {
   font-family: "Send Flowers", cursive;
   width: 100vw;
-  height: 3rem;
+  height: 4rem;
   background-color: var(--primary-pink);
   box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
   display: flex;
   justify-content: center;
+  align-items: center;
   color: white;
-  padding-top: 1rem;
   font-size: 2rem;
 }
 
-.legend {
-  position: absolute;
-  top: 70px;
-  left: 20px;
+/* Shared card styles for legend and text-size panels */
+.panel-card {
   background: var(--background-white);
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 8px var(--shadow-light);
   z-index: 1000;
-  font-size: 13px;
-  max-width: 350px;
   transition: all 0.3s ease;
 }
 
-.legend.collapsed {
+.panel-card.collapsed {
   max-width: fit-content;
   padding: 10px 15px;
 }
 
-.legend-title {
+.panel-title {
   font-weight: bold;
   margin-bottom: 12px;
   color: var(--primary-pink);
@@ -66,20 +61,28 @@ body {
   gap: 5px;
 }
 
-.legend.collapsed .legend-title {
+.panel-card.collapsed .panel-title {
   margin-bottom: 0;
 }
 
-.legend-title:hover {
+.panel-title:hover {
   opacity: 0.7;
 }
 
-.legend-title span {
+.panel-title span {
   font-size: 18px;
   font-weight: bold;
-  display: inline-block;
   width: 20px;
   text-align: center;
+}
+
+/* Legend specific */
+.legend {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  font-size: 13px;
+  max-width: 350px;
 }
 
 .legend-section {
@@ -130,19 +133,57 @@ body {
   fill: var(--background-white);
 }
 
+/* Text size card specific */
+.text-size-card {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.font-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.font-controls button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: var(--background-white);
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--shadow-light);
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.font-controls button:hover {
+  background-color: #f0f0f0;
+}
+
+.font-controls button:active {
+  transform: scale(0.95);
+}
+
+/* Tree nodes */
 .person {
   stroke: var(--primary-cyan);
   stroke-width: 3px;
 }
 
+.extendable,
+.collapsible {
+  cursor: pointer;
+}
+
 .extendable {
   fill: var(--primary-cyan);
-  cursor: pointer;
 }
 
 .collapsible {
   fill: var(--primary-pink);
-  cursor: pointer;
 }
 
 .non-extendable {
@@ -171,82 +212,10 @@ body {
 }
 
 .spacer {
-  padding-right: 0.5rem;
-  padding-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  height: 2rem;
 }
 
 svg {
   cursor: grab;
-}
-
-.text-size-card {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--background-white);
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px var(--shadow-light);
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-.text-size-card.collapsed {
-  max-width: fit-content;
-  padding: 10px 15px;
-}
-
-.card-title {
-  font-weight: bold;
-  margin-bottom: 12px;
-  color: var(--primary-pink);
-  font-size: 16px;
-  cursor: pointer;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.text-size-card.collapsed .card-title {
-  margin-bottom: 0;
-}
-
-.card-title:hover {
-  opacity: 0.7;
-}
-
-.card-title span {
-  font-size: 18px;
-  font-weight: bold;
-  display: inline-block;
-  width: 20px;
-  text-align: center;
-}
-
-.font-controls {
-  display: flex;
-  gap: 8px;
-}
-
-.font-controls button {
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 8px;
-  background: var(--background-white);
-  color: var(--text-dark);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px var(--shadow-light);
-  transition: background-color 0.2s, transform 0.1s;
-}
-
-.font-controls button:hover {
-  background-color: #f0f0f0;
-}
-
-.font-controls button:active {
-  transform: scale(0.95);
 }
