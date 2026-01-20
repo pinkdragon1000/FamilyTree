@@ -5,6 +5,7 @@ function ExpandablePersonCard({
   person,
   getChildrenForPerson,
   hasChildren,
+  getSpousesForPerson,
   isExpanded,
   toggleNode,
   depth = 0,
@@ -16,11 +17,18 @@ function ExpandablePersonCard({
   const expanded = isExpanded(person.id);
   const familyData = expanded ? getChildrenForPerson(person.id) : [];
 
+  // Get spouses regardless of whether there are children
+  const spouses = getSpousesForPerson ? getSpousesForPerson(person.id) : [];
+  const firstSpouse = spouses.length > 0 ? spouses[0] : null;
+
+  // Expandable if has children OR has a spouse
+  const isExpandable = personHasChildren || firstSpouse;
+
   return (
     <div className="expandable-person" style={{ marginLeft: depth > 0 ? '20px' : 0 }}>
       <div
-        className={`expandable-person-card ${personHasChildren ? 'has-children' : ''}`}
-        onClick={personHasChildren ? () => toggleNode(person.id) : undefined}
+        className={`expandable-person-card ${isExpandable ? 'has-children' : ''}`}
+        onClick={isExpandable ? () => toggleNode(person.id) : undefined}
       >
         <div className="expandable-person-content">
           <PersonMini
@@ -30,12 +38,12 @@ function ExpandablePersonCard({
             navigateUp={navigateUp}
           />
 
-          {/* Show first spouse inline if exists */}
-          {familyData.length > 0 && familyData[0].spouse && (
+          {/* Show first spouse only when expanded */}
+          {expanded && firstSpouse && (
             <>
               <span className="spouse-connector">&</span>
               <PersonMini
-                person={familyData[0].spouse}
+                person={firstSpouse}
                 onJumpToTree={onJumpToTree}
                 getParentCoupleForPerson={getParentCoupleForPerson}
                 navigateUp={navigateUp}
@@ -45,7 +53,7 @@ function ExpandablePersonCard({
           )}
         </div>
 
-        {personHasChildren && (
+        {isExpandable && (
           <span className={`expand-arrow ${expanded ? 'expanded' : ''}`}>
             {expanded ? '▼' : '▶'}
           </span>
@@ -77,6 +85,7 @@ function ExpandablePersonCard({
                   person={child}
                   getChildrenForPerson={getChildrenForPerson}
                   hasChildren={hasChildren}
+                  getSpousesForPerson={getSpousesForPerson}
                   isExpanded={isExpanded}
                   toggleNode={toggleNode}
                   depth={depth + 1}
@@ -101,6 +110,7 @@ function ExpandablePersonCard({
                     person={child}
                     getChildrenForPerson={getChildrenForPerson}
                     hasChildren={hasChildren}
+                    getSpousesForPerson={getSpousesForPerson}
                     isExpanded={isExpanded}
                     toggleNode={toggleNode}
                     depth={depth + 1}

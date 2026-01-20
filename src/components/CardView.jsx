@@ -13,6 +13,7 @@ function CardView({ data, navStack, setNavStack, onJumpToTree, searchTargetId, o
     isExpanded,
     getChildrenForPerson,
     hasChildren,
+    getSpousesForPerson,
     navigateUp,
     getParentCoupleForPerson,
     navigateToPersonInCards
@@ -99,6 +100,7 @@ function CardView({ data, navStack, setNavStack, onJumpToTree, searchTargetId, o
                         person={child}
                         getChildrenForPerson={getChildrenForPerson}
                         hasChildren={hasChildren}
+                        getSpousesForPerson={getSpousesForPerson}
                         isExpanded={isExpanded}
                         toggleNode={toggleNode}
                         depth={0}

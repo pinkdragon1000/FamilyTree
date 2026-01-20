@@ -524,6 +524,7 @@ export const data = {
       name: "Suryanarayana Murthy",
       own_unions: ["u24"],
       parent_union: "u28",
+      imageLink: "/photos/Royyuru/SuryanarayanaMurthy.jpg",
     },
     id124: {
       name: "R. Subramanium",
@@ -783,6 +784,7 @@ export const data = {
     id67: {
       name: "V Sesharathnam",
       own_unions: ["u24"],
+      imageLink: "/photos/Royyuru/Sesharathnam.jpg",
     },
     // Children of u24
     id69: {
@@ -837,6 +839,7 @@ export const data = {
       name: "Nibedita Royyuru",
       own_unions: ["u26"],
       birthyear: 1963,
+      imageLink: "/photos/Royyuru/NibeditaRoyyuru.jpg",
     },
     // Children of u26
     id79: {
@@ -866,7 +869,7 @@ export const data = {
       own_unions: ["u29"],
       parent_union: "u27",
       birthyear: 1991,
-      imageLink: "/photos/Kawahara/Harsha&AlanKawahara.jpg",
+      imageLink: "/photos/Kawahara/HarshaKawahara.jpg",
     },
     id77: {
       name: "Varun Royyuru",
@@ -881,7 +884,7 @@ export const data = {
       name: "Alan Kawahara",
       own_unions: ["u29"],
       birthyear: 1991,
-      imageLink: "/photos/Kawahara/Harsha&AlanKawahara.jpg",
+      imageLink: "/photos/Kawahara/AlanKawahara.jpg",
     },
 
 

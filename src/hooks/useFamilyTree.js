@@ -291,6 +291,24 @@ export function useFamilyTree(data, navStack, setNavStack) {
     return targetId; // Return for scrolling
   }, [persons, unions, findPathToInitialCouple, setNavStack]);
 
+  // Get spouse(s) for a person (regardless of whether they have children)
+  const getSpousesForPerson = useCallback((personId) => {
+    const person = persons[personId];
+    if (!person || !person.own_unions) return [];
+
+    const spouses = [];
+    for (const unionId of person.own_unions) {
+      const union = unions[unionId];
+      if (!union) continue;
+
+      const spouseId = (union.partner || []).find(id => id !== personId);
+      if (spouseId && persons[spouseId]) {
+        spouses.push({ id: spouseId, ...persons[spouseId] });
+      }
+    }
+    return spouses;
+  }, [persons, unions]);
+
   // Get parent couple info for a single person
   const getParentCoupleForPerson = useCallback((personId) => {
     const person = persons[personId];
@@ -318,6 +336,7 @@ export function useFamilyTree(data, navStack, setNavStack) {
     isExpanded,
     getChildrenForPerson,
     hasChildren,
+    getSpousesForPerson,
     collapseAll,
     getParentCoupleForPerson,
     navigateToPersonInCards,
