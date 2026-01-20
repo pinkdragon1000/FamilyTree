@@ -1045,13 +1045,16 @@ class FTDrawer {
     return link.id || link.source.id + "_" + link.target.id;
   }
 
-  draw(source = this.ft_datahandler.root) {
+  draw(source = this.ft_datahandler.root, centerOn = null) {
     // Guard against undefined root
     if (!this.ft_datahandler.root) {
       console.warn("Cannot draw: no root node available");
       return;
     }
-    
+
+    // Store centerOn node for use in centering logic
+    this._centerOnNode = centerOn;
+
     // Disable tooltips during transition
     this._tooltips_enabled = false;
     
@@ -1344,30 +1347,8 @@ class FTDrawer {
       d.y0 = d.y;
     });
 
-    // Center view on visible nodes
+    // Center view on visible nodes (or specific node if _centerOnNode is set)
     if (nodes.length > 0) {
-      // Calculate bounding box of all visible nodes (with padding for node labels)
-      const padding = 180; // Extra space for node labels and margins
-      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-      nodes.forEach(n => {
-        if (n.x < minX) minX = n.x;
-        if (n.x > maxX) maxX = n.x;
-        if (n.y < minY) minY = n.y;
-        if (n.y > maxY) maxY = n.y;
-      });
-
-      // Add padding
-      minX -= padding;
-      maxX += padding;
-      minY -= padding;
-      maxY += padding;
-
-      // Calculate dimensions
-      const nodesWidth = maxX - minX;
-      const nodesHeight = maxY - minY;
-      const nodesCenterX = (minX + maxX) / 2;
-      const nodesCenterY = (minY + maxY) / 2;
-
       // Get actual viewport dimensions from SVG element
       const svgNode = this.svg.node();
       const svgRect = svgNode.getBoundingClientRect();
@@ -1377,29 +1358,22 @@ class FTDrawer {
       const viewportCenterX = viewportWidth / 2;
       const viewportCenterY = navbarHeight + viewportHeight / 2;
 
-      // On first draw, auto-scale to fit all nodes
-      // On subsequent draws, maintain current zoom level but center on nodes
-      if (this._isFirstDraw) {
-        this._isFirstDraw = false;
+      // If centering on a specific node, use that node's position
+      if (this._centerOnNode && this._centerOnNode.x !== undefined) {
+        const targetX = this._centerOnNode.x;
+        const targetY = this._centerOnNode.y;
 
-        // Calculate scale to fit all nodes (with a max scale of 1 to avoid zooming in too much)
-        const scaleX = viewportWidth / nodesWidth;
-        const scaleY = viewportHeight / nodesHeight;
-        const scale = Math.min(scaleX, scaleY, 1);
-
-        // Calculate translation to center the scaled nodes
-        const translateX = viewportCenterX - nodesCenterX * scale;
-        const translateY = viewportCenterY - nodesCenterY * scale;
-
-        this.svg.call(this.zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(scale));
-      } else {
-        // Get current zoom scale
+        // Get current zoom scale (or use default)
         const currentTransform = d3.zoomTransform(this.svg.node());
-        const currentScale = currentTransform.k;
+        const currentScale = this._isFirstDraw ? 1 : currentTransform.k;
 
-        // Calculate translation to center nodes at current scale
-        const translateX = viewportCenterX - nodesCenterX * currentScale;
-        const translateY = viewportCenterY - nodesCenterY * currentScale;
+        if (this._isFirstDraw) {
+          this._isFirstDraw = false;
+        }
+
+        // Calculate translation to center on the target node
+        const translateX = viewportCenterX - targetX * currentScale;
+        const translateY = viewportCenterY - targetY * currentScale;
 
         this.svg
           .transition()
@@ -1408,6 +1382,64 @@ class FTDrawer {
             this.zoom.transform,
             d3.zoomIdentity.translate(translateX, translateY).scale(currentScale)
           );
+
+        // Clear the centerOn node
+        this._centerOnNode = null;
+      } else {
+        // Calculate bounding box of all visible nodes (with padding for node labels)
+        const padding = 180; // Extra space for node labels and margins
+        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+        nodes.forEach(n => {
+          if (n.x < minX) minX = n.x;
+          if (n.x > maxX) maxX = n.x;
+          if (n.y < minY) minY = n.y;
+          if (n.y > maxY) maxY = n.y;
+        });
+
+        // Add padding
+        minX -= padding;
+        maxX += padding;
+        minY -= padding;
+        maxY += padding;
+
+        // Calculate dimensions
+        const nodesWidth = maxX - minX;
+        const nodesHeight = maxY - minY;
+        const nodesCenterX = (minX + maxX) / 2;
+        const nodesCenterY = (minY + maxY) / 2;
+
+        // On first draw, auto-scale to fit all nodes
+        // On subsequent draws, maintain current zoom level but center on nodes
+        if (this._isFirstDraw) {
+          this._isFirstDraw = false;
+
+          // Calculate scale to fit all nodes (with a max scale of 1 to avoid zooming in too much)
+          const scaleX = viewportWidth / nodesWidth;
+          const scaleY = viewportHeight / nodesHeight;
+          const scale = Math.min(scaleX, scaleY, 1);
+
+          // Calculate translation to center the scaled nodes
+          const translateX = viewportCenterX - nodesCenterX * scale;
+          const translateY = viewportCenterY - nodesCenterY * scale;
+
+          this.svg.call(this.zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(scale));
+        } else {
+          // Get current zoom scale
+          const currentTransform = d3.zoomTransform(this.svg.node());
+          const currentScale = currentTransform.k;
+
+          // Calculate translation to center nodes at current scale
+          const translateX = viewportCenterX - nodesCenterX * currentScale;
+          const translateY = viewportCenterY - nodesCenterY * currentScale;
+
+          this.svg
+            .transition()
+            .duration(this.transition_duration())
+            .call(
+              this.zoom.transform,
+              d3.zoomIdentity.translate(translateX, translateY).scale(currentScale)
+            );
+        }
       }
     }
 
@@ -1420,6 +1452,94 @@ class FTDrawer {
 
   clear() {
     this.g.selectAll("*").remove();
+  }
+
+  /**
+   * Center the view on a specific node
+   */
+  centerOnNode(node) {
+    if (!node || node.x === undefined || node.y === undefined) return;
+
+    const svgNode = this.svg.node();
+    const svgRect = svgNode.getBoundingClientRect();
+    const navbarHeight = 64;
+    const viewportWidth = svgRect.width;
+    const viewportHeight = svgRect.height - navbarHeight;
+    const viewportCenterX = viewportWidth / 2;
+    const viewportCenterY = navbarHeight + viewportHeight / 2;
+
+    // Get current zoom scale
+    const currentTransform = d3.zoomTransform(this.svg.node());
+    const currentScale = currentTransform.k;
+
+    // Calculate translation to center on the specific node
+    const translateX = viewportCenterX - node.x * currentScale;
+    const translateY = viewportCenterY - node.y * currentScale;
+
+    this.svg
+      .transition()
+      .duration(this.transition_duration())
+      .call(
+        this.zoom.transform,
+        d3.zoomIdentity.translate(translateX, translateY).scale(currentScale)
+      );
+  }
+
+  /**
+   * Center the view on all visible nodes (fit to view)
+   */
+  centerView() {
+    const nodes = this.ft_datahandler.nodes.filter(n => n.visible);
+    if (nodes.length === 0) return;
+
+    const svgNode = this.svg.node();
+    const svgRect = svgNode.getBoundingClientRect();
+    const navbarHeight = 64;
+    const viewportWidth = svgRect.width;
+    const viewportHeight = svgRect.height - navbarHeight;
+    const viewportCenterX = viewportWidth / 2;
+    const viewportCenterY = navbarHeight + viewportHeight / 2;
+
+    // Calculate bounding box of all visible nodes
+    const padding = 180;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    nodes.forEach(n => {
+      if (n.x !== undefined && n.y !== undefined) {
+        if (n.x < minX) minX = n.x;
+        if (n.x > maxX) maxX = n.x;
+        if (n.y < minY) minY = n.y;
+        if (n.y > maxY) maxY = n.y;
+      }
+    });
+
+    // Add padding
+    minX -= padding;
+    maxX += padding;
+    minY -= padding;
+    maxY += padding;
+
+    // Calculate dimensions
+    const nodesWidth = maxX - minX;
+    const nodesHeight = maxY - minY;
+    const nodesCenterX = (minX + maxX) / 2;
+    const nodesCenterY = (minY + maxY) / 2;
+
+    // Calculate scale to fit all nodes (with a max scale of 1)
+    const scaleX = viewportWidth / nodesWidth;
+    const scaleY = viewportHeight / nodesHeight;
+    const scale = Math.min(scaleX, scaleY, 1);
+
+    // Calculate translation to center the scaled nodes
+    const translateX = viewportCenterX - nodesCenterX * scale;
+    const translateY = viewportCenterY - nodesCenterY * scale;
+
+    this.svg
+      .transition()
+      .duration(this.transition_duration())
+      .call(
+        this.zoom.transform,
+        d3.zoomIdentity.translate(translateX, translateY).scale(scale)
+      );
   }
 }
 
@@ -1446,5 +1566,163 @@ export default class FamilyTree extends FTDrawer {
     this.root.y0 = y0;
     this.clear();
     this.draw();
+  }
+
+  /**
+   * Reset the tree to initial state (only the 4 founding couples visible)
+   */
+  resetTree() {
+    const initialNodeIds = this.ft_datahandler.initialNodeIds || [];
+
+    // Hide all nodes first
+    for (const node of this.ft_datahandler.nodes) {
+      if (node.visible && !initialNodeIds.includes(node.id)) {
+        node.visible = false;
+      }
+      // Reset children arrays
+      node._children = node._children.concat(node.children);
+      node.children = [];
+      node.inserted_nodes = [];
+      node.inserted_links = [];
+    }
+
+    // Make sure initial nodes are visible
+    for (const id of initialNodeIds) {
+      const node = this.ft_datahandler.find_node_by_id(id);
+      if (node) {
+        node.visible = true;
+      }
+    }
+  }
+
+  /**
+   * Navigate to and center on a specific person node by ID
+   * Expands the tree to make the target visible if needed
+   */
+  navigateToNode(nodeId) {
+    // Reset tree to initial state first
+    this.resetTree();
+
+    const targetNode = this.ft_datahandler.find_node_by_id(nodeId);
+    if (!targetNode || targetNode.is_union()) {
+      console.warn(`Cannot navigate to node: ${nodeId}`);
+      return;
+    }
+
+    // Check if target is one of the initial nodes (already visible after reset)
+    const initialNodeIds = this.ft_datahandler.initialNodeIds || [];
+    if (initialNodeIds.includes(nodeId)) {
+      this.draw(targetNode, targetNode);
+      return;
+    }
+
+    // Build path of person nodes from visible ancestor down to target
+    const path = this._buildPathToTarget(targetNode);
+    if (!path || path.length === 0) {
+      console.warn(`No path found to node: ${nodeId}`);
+      return;
+    }
+
+    // Expand along the path - click each person to reveal their connections
+    for (const personNode of path) {
+      if (personNode.visible) {
+        // Show all hidden neighbors (unions) for this person
+        const hiddenNeighbors = personNode.get_neighbors().filter(n => !n.visible);
+        if (hiddenNeighbors.length > 0) {
+          personNode.show();
+        }
+      }
+    }
+
+    // If target is still not visible (e.g., spouse case), find and expand through their partner
+    if (!targetNode.visible && targetNode.data.own_unions) {
+      for (const unionId of targetNode.data.own_unions) {
+        const union = this.ft_datahandler.find_node_by_id(unionId);
+        if (!union) continue;
+
+        const partners = union.get_parents();
+        for (const partner of partners) {
+          if (partner.id !== targetNode.id && partner.visible) {
+            // Partner is visible, expand them to show target
+            partner.show();
+            break;
+          }
+        }
+        if (targetNode.visible) break;
+      }
+    }
+
+    // Redraw the tree and center on the target node
+    this.draw(targetNode, targetNode);
+  }
+
+  /**
+   * Build path of person nodes from nearest visible ancestor down to target
+   */
+  _buildPathToTarget(targetNode) {
+    // First, build the ancestry chain from target up to a visible node
+    const ancestryChain = [];
+    let current = targetNode;
+    const visited = new Set();
+
+    while (current && !visited.has(current.id)) {
+      visited.add(current.id);
+
+      if (!current.is_union()) {
+        ancestryChain.unshift(current);
+
+        if (current.visible) {
+          // Found visible ancestor - return path from here down
+          return ancestryChain;
+        }
+
+        // Go up to parent union, then to parents
+        if (current.data.parent_union) {
+          const parentUnion = this.ft_datahandler.find_node_by_id(current.data.parent_union);
+          if (parentUnion) {
+            const parents = parentUnion.get_parents();
+            // Try to find a visible parent first
+            const visibleParent = parents.find(p => p.visible);
+            if (visibleParent) {
+              ancestryChain.unshift(visibleParent);
+              return ancestryChain;
+            }
+            // Otherwise continue with first parent
+            current = parents[0];
+          } else {
+            break;
+          }
+        } else if (current.data.own_unions && current.data.own_unions.length > 0) {
+          // No parent_union - this is likely a spouse who married in
+          // Try to find path through their spouse
+          for (const unionId of current.data.own_unions) {
+            const union = this.ft_datahandler.find_node_by_id(unionId);
+            if (!union) continue;
+
+            const partners = union.get_parents();
+            for (const partner of partners) {
+              if (partner.id === current.id || visited.has(partner.id)) continue;
+
+              // Try to find a path from this partner
+              const partnerPath = this._buildPathToTarget(partner);
+              if (partnerPath && partnerPath.length > 0 && partnerPath[0].visible) {
+                // Found a valid path through the spouse
+                // Return the path to spouse, spouse will reveal target when expanded
+                return partnerPath;
+              }
+            }
+          }
+          break;
+        } else {
+          break;
+        }
+      } else {
+        // Skip unions - go to their parents
+        const parents = current.get_parents();
+        current = parents[0];
+      }
+    }
+
+    return ancestryChain;
   }
 }

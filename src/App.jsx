@@ -2,6 +2,11 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import * as d3 from "d3";
 import { data } from "./data/treeData.js";
 import FamilyTree from "./js/familytree.js";
+import CardView from "./components/CardView.jsx";
+import Legend from "./components/Legend.jsx";
+import TextSizeControls from "./components/TextSizeControls.jsx";
+import SearchBar from "./components/SearchBar.jsx";
+import { INITIAL_COUPLES } from "./hooks/useFamilyTree.js";
 import TreeLogo from "./tree.svg";
 
 const DEFAULT_FONT_SIZE = 14;
@@ -9,6 +14,7 @@ const MIN_FONT_SIZE = 8;
 const MAX_FONT_SIZE = 24;
 const FONT_SIZE_STEP = 2;
 const STORAGE_KEY = "familyTreeFontSize";
+const VIEW_MODE_STORAGE_KEY = "familyTreeViewMode";
 
 // Calculate base width from longest name in data
 const getLongestNameLength = () => {
@@ -39,8 +45,34 @@ function App() {
     return saved ? parseInt(saved, 10) : DEFAULT_FONT_SIZE;
   });
 
-  const [isLegendCollapsed, setIsLegendCollapsed] = useState(false);
-  const [isTextSizeCollapsed, setIsTextSizeCollapsed] = useState(false);
+  const [viewMode, setViewMode] = useState(() => {
+    const saved = localStorage.getItem(VIEW_MODE_STORAGE_KEY);
+    if (saved) {
+      return saved;
+    }
+    // Default to card view on smaller screens
+    return window.innerWidth <= 600 ? 'card' : 'tree';
+  });
+
+  // Card view navigation stack
+  const [cardNavStack, setCardNavStack] = useState([{ couples: INITIAL_COUPLES }]);
+  const canGoBackInCards = cardNavStack.length > 1;
+
+  // Search target for card view navigation
+  const [cardSearchTarget, setCardSearchTarget] = useState(null);
+
+  // Get the name of the descendant we'd navigate back to
+  const getBackLabel = useCallback(() => {
+    if (cardNavStack.length <= 1) return 'Descendants';
+    const currentView = cardNavStack[cardNavStack.length - 1];
+    // Get childName from the first couple that has one
+    const childName = currentView.couples?.find(c => c.childName)?.childName;
+    return childName || 'Descendants';
+  }, [cardNavStack]);
+
+  const navigateBackInCards = useCallback(() => {
+    setCardNavStack(prev => prev.length > 1 ? prev.slice(0, -1) : prev);
+  }, []);
 
   const familyTreeRef = useRef(null);
   const isInitializedRef = useRef(false);
@@ -107,6 +139,52 @@ function App() {
     setFontSize(DEFAULT_FONT_SIZE);
   }, []);
 
+  const toggleViewMode = useCallback(() => {
+    setViewMode((prev) => {
+      const newMode = prev === 'tree' ? 'card' : 'tree';
+      localStorage.setItem(VIEW_MODE_STORAGE_KEY, newMode);
+      return newMode;
+    });
+  }, []);
+
+  // Jump to a specific person in tree view
+  const jumpToTreePerson = useCallback((personId) => {
+    setViewMode('tree');
+    localStorage.setItem(VIEW_MODE_STORAGE_KEY, 'tree');
+    // Wait for view mode to switch and SVG to be visible, then navigate
+    setTimeout(() => {
+      if (familyTreeRef.current) {
+        familyTreeRef.current.navigateToNode(personId);
+      }
+    }, 100);
+  }, []);
+
+  // Handle search selection based on current view mode
+  const handleSearchSelect = useCallback((personId) => {
+    if (viewMode === 'card') {
+      // Navigate within card view
+      setCardSearchTarget(personId);
+    } else {
+      // Jump to tree view
+      jumpToTreePerson(personId);
+    }
+  }, [viewMode, jumpToTreePerson]);
+
+  // Control SVG visibility based on view mode
+  useEffect(() => {
+    const svg = d3.select('body > svg');
+    if (!svg.empty()) {
+      svg.style('display', viewMode === 'tree' ? 'block' : 'none');
+      // Center the tree view when switching to it
+      if (viewMode === 'tree' && familyTreeRef.current) {
+        // Small delay to ensure SVG is visible before centering
+        setTimeout(() => {
+          familyTreeRef.current.centerView();
+        }, 50);
+      }
+    }
+  }, [viewMode]);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -130,67 +208,51 @@ function App() {
   return (
     <>
       <div className="navbar">
-        <img className="spacer" src={TreeLogo} alt="tree logo" />
-        Family Tree
-      </div>
-      <div className={`legend panel-card ${isLegendCollapsed ? 'collapsed' : ''}`}>
-        <div className="panel-title" onClick={() => setIsLegendCollapsed(!isLegendCollapsed)}>
-          <span>{isLegendCollapsed ? '+' : '−'}</span> Legend
+        <SearchBar data={data} onSelectPerson={handleSearchSelect} />
+        <div className="navbar-title">
+          <img className="spacer" src={TreeLogo} alt="tree logo" />
+          Family Tree
         </div>
-        {!isLegendCollapsed && (
-          <>
-            <div className="legend-section">
-              <div className="legend-subtitle">Node Colors:</div>
-              <div className="legend-items">
-                <div className="legend-item">
-                  <svg width="20" height="20">
-                    <circle cx="10" cy="10" r="8" className="legend-node extendable" />
-                  </svg>
-                  <span>Can expand (has hidden relatives)</span>
-                </div>
-                <div className="legend-item">
-                  <svg width="20" height="20">
-                    <circle cx="10" cy="10" r="8" className="legend-node collapsible" />
-                  </svg>
-                  <span>Can collapse (click to hide relatives)</span>
-                </div>
-                <div className="legend-item">
-                  <svg width="20" height="20">
-                    <circle cx="10" cy="10" r="8" className="legend-node non-extendable" />
-                  </svg>
-                  <span>No children/relatives</span>
-                </div>
-              </div>
-            </div>
-            <div className="legend-section">
-              <div className="legend-subtitle">Symbols:</div>
-              <div className="legend-notes">
-                <p><strong>*</strong> Adopted or not biologically related</p>
-                <p><strong>~</strong> Passed away, year unknown</p>
-                <p><strong>⟷</strong> Divorced out of the family</p>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-      <div className={`text-size-card panel-card ${isTextSizeCollapsed ? 'collapsed' : ''}`}>
-        <div className="panel-title" onClick={() => setIsTextSizeCollapsed(!isTextSizeCollapsed)}>
-          <span>{isTextSizeCollapsed ? '+' : '−'}</span> Text Size
+        <div className="navbar-buttons">
+          {viewMode === 'card' && canGoBackInCards && (
+            <button className="view-toggle" onClick={navigateBackInCards}>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              {getBackLabel()}
+            </button>
+          )}
+          <Legend showNodeColors={viewMode === 'tree'} />
+          <button className="view-toggle" onClick={toggleViewMode}>
+            {viewMode === 'tree' ? (
+              <>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="3" y="14" width="7" height="7" rx="1" />
+                  <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+                Cards
+              </>
+            ) : (
+              <>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L12 8M12 8L8 5M12 8L16 5M4 10H20M4 10V20C4 21 5 22 6 22H18C19 22 20 21 20 20V10M8 14H8.01M12 14H12.01M16 14H16.01M8 18H8.01M12 18H12.01M16 18H16.01" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Tree
+              </>
+            )}
+          </button>
         </div>
-        {!isTextSizeCollapsed && (
-          <div className="font-controls">
-            <button onClick={decreaseFontSize} title="Decrease font size (-)">
-              A-
-            </button>
-            <button onClick={resetFontSize} title="Reset font size (0)">
-              A
-            </button>
-            <button onClick={increaseFontSize} title="Increase font size (+)">
-              A+
-            </button>
-          </div>
-        )}
       </div>
+      {viewMode === 'card' && <CardView data={data} navStack={cardNavStack} setNavStack={setCardNavStack} onJumpToTree={jumpToTreePerson} searchTargetId={cardSearchTarget} onSearchTargetHandled={() => setCardSearchTarget(null)} />}
+      {viewMode === 'tree' && (
+        <TextSizeControls
+          onIncrease={increaseFontSize}
+          onDecrease={decreaseFontSize}
+          onReset={resetFontSize}
+        />
+      )}
     </>
   );
 }

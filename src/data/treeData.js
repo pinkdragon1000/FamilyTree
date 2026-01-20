@@ -44,7 +44,7 @@ export const data = {
     // ========================================
     // ROBINSON-DAVIS FAMILY BRANCH
     // ========================================
-    
+
     // Union u1: Carmel & Retha Robinson
     id1: {
       name: "Carmel Robinson",
@@ -131,8 +131,11 @@ export const data = {
       name: "Ross Davis",
       birthyear: 1938,
       deathyear: 2008,
+      birthplace: "Long Run, WV",
+      deathplace: "Davisville, WV",
       own_unions: ["u23"],
       parent_union: "u2",
+      profession: "Worked at Corning Glass"
     },
     id53: {
       name: "Rex Davis",
@@ -140,6 +143,7 @@ export const data = {
       own_unions: ["u19"],
       parent_union: "u2",
       imageLink: "/photos/Davis/SonnyDavis.jpg",
+      profession: "Teacher"
     },
 
     // Union u3: Jim & Sandra Robinson
@@ -235,9 +239,10 @@ export const data = {
     // Union u7: Jennifer's first marriage
     // Children of u7
     id23: {
-      name: "Chelsea Bly *",
+      name: "Chelsea Bly ½",
       own_unions: ["u49"],
       parent_union: "u7",
+      imageLink: "/photos/Bly/ChelseaBly.jpg",
     },
 
 
@@ -252,17 +257,21 @@ export const data = {
       own_unions: [],
       parent_union: "u49",
       birthyear: 2018,
+      imageLink: "/photos/Bly/SawyerBly.jpg",
     },
     id142: {
       name: "Riley Bly",
       own_unions: [],
       parent_union: "u49",
       birthyear: 2019,
+      imageLink: "/photos/Bly/RileyBly.jpg",
     },
     id210: {
       name: "Declan Bly",
       parent_union: "u49",
       own_unions: [],
+      birthyear: 2024,
+      imageLink: "/photos/Bly/DeclanBly.jpg",
     },
 
 
@@ -286,6 +295,7 @@ export const data = {
     id24: {
       name: "Lois Kincaid ⟷",
       own_unions: ["u8"],
+      imageLink: "/photos/LoisKincaid.jpg"
     },
     // Children of u8
     id25: {
@@ -293,6 +303,7 @@ export const data = {
       birthyear: 1976,
       own_unions: ["u10"],
       parent_union: "u8",
+      imageLink: "/photos/Gardill/JodieGardill.jpg"
     },
     id26: {
       name: "Monica Hager",
@@ -312,28 +323,33 @@ export const data = {
     id27: {
       name: "Chris Gardill",
       own_unions: ["u10"],
+      imageLink: "/photos/Gardill/ChrisGardill.jpg"
     },
     // Children of u10
     id32: {
       name: "Kaleb Gardill",
       own_unions: [],
       parent_union: "u10",
+      imageLink: "/photos/Gardill/KalebGardill.jpg"
     },
     id33: {
       name: "Brenna Gardill",
       own_unions: [],
       parent_union: "u10",
+      imageLink: "/photos/Gardill/BrennaGardill.jpg"
     },
     id34: {
       name: "Darcie Gardill",
       own_unions: [],
       parent_union: "u10",
+      imageLink: "/photos/Gardill/DarcieGardill.jpg"
     },
 
     // Union u11: Monica & Jason Hager
     id28: {
       name: "Jason Hager",
       own_unions: ["u11"],
+      imageLink: "/photos/Hager/JasonHager.jpg"
     },
     // Children of u11
     id29: {
@@ -347,11 +363,13 @@ export const data = {
       name: "Marley Hager *",
       own_unions: [],
       parent_union: "u11",
+      imageLink: "/photos/Hager/MarleyHager.jpg",
     },
     id31: {
       name: "Meghan Hager *",
       own_unions: [],
       parent_union: "u11",
+      imageLink: "/photos/Hager/MeghanHager.jpg"
     },
     // Union u19: Rex (Sonny) Davis
     // Children of u19
@@ -360,6 +378,7 @@ export const data = {
       own_unions: ["u21"],
       parent_union: "u19",
       imageLink: "/photos/Davis/BrianDavis.jpg",
+      profession: "Teacher"
     },
     id55: {
       name: "Stephen Davis",
@@ -535,6 +554,7 @@ export const data = {
       name: "V.B.R. Sarma",
       own_unions: ["u31"],
       deathyear: "~",
+      profession: "Accountant"
     },
     id85: {
       name: "V. Padmavathi",
@@ -553,10 +573,10 @@ export const data = {
       imageLink: "/photos/Royyuru/SitaRoyyuru.jpg",
     },
     id87: {
-      name: "V Pardha",
+      name: "V Pardhasaradhi",
+      nickname: "Pardha",
       own_unions: ["u32"],
       parent_union: "u31",
-      full: "Pardhasaradhi",
     },
     id95: {
       name: "VVS Sastry",
@@ -585,6 +605,7 @@ export const data = {
       birthyear: "1941",
       deathplace: "Rajahmundry, India",
       deathyear: "2024",
+      imageLink: '/photos/Prakasa.jpg'
     },
     id105: {
       name: "Dr. Sastry",
@@ -615,7 +636,9 @@ export const data = {
       name: "Durga Hari",
       own_unions: ["u43"],
       parent_union: "u31",
+      birthyear: "1947",
       deathyear: "2025",
+      imageLink: "/photos/Hari/DurgaHari.jpg"
     },
     id123: {
       name: "Rajeshwari Chainulu",
@@ -662,7 +685,7 @@ export const data = {
       birthyear: 1982,
       own_unions: ["u16"],
       parent_union: "u14",
-      imageLink: "/photos/Gudipati/Pallavi&Family.jpg",
+      imageLink: "/photos/Gudipati/PallaviGudipati.jpg",
       birthplace: "Morgantown, WV",
     },
     id44: {
@@ -679,24 +702,27 @@ export const data = {
     id42: {
       name: "Lakshmi Royyuru",
       own_unions: ["u15"],
+      imageLink: "/photos/Royyuru/LakshmiRoyyuru.jpg",
     },
     // Children of u15
     id45: {
       name: "Avinash Royyuru",
       own_unions: ["u18"],
       parent_union: "u15",
+      imageLink: "/photos/Royyuru/AvinashRoyyuru.jpg",
     },
     id46: {
       name: "Shruti Royyuru",
       own_unions: ["u17"],
       parent_union: "u15",
+      imageLink: "/photos/Royyuru/TaraRoyyuru.jpg"
     },
 
     // Union u16: Pallavi & Ravi Gudipati
     id47: {
       name: "Ravi Gudipati",
       own_unions: ["u16"],
-      imageLink: "/photos/Gudipati/Pallavi&Family.jpg",
+      imageLink: "/photos/Gudipati/RaviGudipati.jpg",
     },
     // Children of u16
     id48: {
@@ -705,7 +731,7 @@ export const data = {
       parent_union: "u16",
       birthyear: 2012,
       birthplace: "Cleveland, Ohio",
-      imageLink: "/photos/Gudipati/Pallavi&Family.jpg",
+      imageLink: "/photos/Gudipati/SitaraGudipati.jpg",
     },
     id49: {
       name: "Vishnu Gudipati",
@@ -713,13 +739,14 @@ export const data = {
       parent_union: "u16",
       birthyear: 2015,
       birthplace: "Cleveland, Ohio",
-      imageLink: "/photos/Gudipati/Pallavi&Family.jpg",
+      imageLink: "/photos/Gudipati/VishnuGudipati.jpg",
     },
 
     // Union u17: Shruti & Sandeep
     id50: {
       name: "Sandeep Eyyuni",
       own_unions: ["u17"],
+      imageLink: "/photos/Eyyuni/SandeepEyyuni.jpg",
     },
     // Children of u17
     id215: {
@@ -749,6 +776,7 @@ export const data = {
       birthyear: 2025,
       birthplace: "Philadelphia, PA",
       own_unions: [],
+      imageLink: "/photos/Hota/WillaHota.jpg"
     },
 
     // Union u24: Suryanarayana Murthy & V Sesharathnam
@@ -761,18 +789,21 @@ export const data = {
       name: "Dixit Royyuru",
       own_unions: ["u25"],
       parent_union: "u24",
+      imageLink: "/photos/Royyuru/DixitRoyyuru.jpg",
     },
     id70: {
       name: "Ajay Royyuru",
       own_unions: ["u26"],
       parent_union: "u24",
       birthyear: 1964,
+      imageLink: "/photos/Royyuru/AjayRoyyuru.jpg",
     },
     id71: {
       name: "Vijay Royyuru",
       own_unions: ["u27"],
       parent_union: "u24",
       birthyear: 1964,
+      imageLink: "/photos/Royyuru/VijayRoyyuru.jpg",
     },
     id81: {
       name: "Kameswari Parimi",
@@ -784,18 +815,21 @@ export const data = {
     id72: {
       name: "Asha Royyuru",
       own_unions: ["u25"],
+      imageLink: "/photos/Royyuru/AshaRoyyuru.jpg",
     },
     // Children of u25
     id73: {
-      name: "Nikhil Royyuru",
+      name: "Nikhil Dixit",
       own_unions: [],
       parent_union: "u25",
+      imageLink: "/photos/Royyuru/NikhilRoyyuru.jpg",
     },
     id74: {
-      name: "Rohan Royyuru",
+      name: "Rohan Dixit",
       birthyear: 1998,
       own_unions: [],
       parent_union: "u25",
+      imageLink: "/photos/Royyuru/RohanRoyyuru.jpg",
     },
 
     // Union u26: Ajay & Nibedita Royyuru
@@ -810,6 +844,7 @@ export const data = {
       own_unions: ["u30"],
       parent_union: "u26",
       birthyear: 1993,
+      imageLink: "/photos/Royyuru/AdityaRoyyuru.jpg",
     },
 
     // Union u30: Aditya & Ella
@@ -823,6 +858,7 @@ export const data = {
       name: "Hema Royyuru",
       own_unions: ["u27"],
       birthyear: 1961,
+      imageLink: "/photos/Royyuru/HemaRoyyuru.jpg",
     },
     // Children of u27
     id76: {
@@ -830,12 +866,14 @@ export const data = {
       own_unions: ["u29"],
       parent_union: "u27",
       birthyear: 1991,
+      imageLink: "/photos/Kawahara/Harsha&AlanKawahara.jpg",
     },
     id77: {
       name: "Varun Royyuru",
       birthyear: 1998,
       own_unions: [],
       parent_union: "u27",
+      imageLink: "/photos/Royyuru/VarunRoyyuru.jpg",
     },
 
     // Union u29: Harsha & Alan Kawahara
@@ -843,6 +881,7 @@ export const data = {
       name: "Alan Kawahara",
       own_unions: ["u29"],
       birthyear: 1991,
+      imageLink: "/photos/Kawahara/Harsha&AlanKawahara.jpg",
     },
 
 
@@ -860,14 +899,17 @@ export const data = {
     },
     // Children of u32
     id89: {
-      name: "Suri Viswanadham",
+      name: "Surendra Viswanadham",
+      nickname: "Suri",
       own_unions: ["u34"],
       parent_union: "u32",
+      imageLink: "/photos/SuriViswanadham.jpg"
     },
     id90: {
       name: "Jitu Viswanadham",
       own_unions: ["u33"],
       parent_union: "u32",
+      imageLink: "/photos/JituViswanadham.jpg"
     },
 
     // Union u33: Jitu & wife
@@ -880,6 +922,7 @@ export const data = {
       name: "Aditya Viswanadham",
       own_unions: [],
       parent_union: "u33",
+      imageLink: "/photos/AdityaViswanadham.jpg"
     },
     // Union u34: Suri & wife
     id93: {
@@ -891,6 +934,7 @@ export const data = {
       name: "Nandini Viswanadham",
       own_unions: [],
       parent_union: "u34",
+
     },
 
     // Union u35: VVS Sastry & Sita Viswanadham
@@ -899,6 +943,7 @@ export const data = {
       own_unions: ["u35"],
       birthyear: "1935",
       birthplace: "Visakhapatnam, India",
+      imageLink: "/photos/SitaViswanadham.jpg",
     },
     // Children of u35
     id96: {
@@ -934,22 +979,27 @@ export const data = {
       parent_union: "u36",
     },
     id100: {
-      name: "Bujju Viswanatham",
+      name: "Bhaskar Viswanatham",
+      nickname: "Bujju",
       own_unions: ["u55"],
       parent_union: "u36",
+      profession: "Chartered Accountant/Tax Consultant",
+      imageLink: "/photos/BujjuViswanatham.jpg"
     },
     id101: {
       name: "Sudha Dhara",
       own_unions: ["u52"],
       parent_union: "u36",
+      imageLink: "/photos/Dhara/SudhaDhara.jpg"
     },
 
     // Union u52: Sudha Dhara
     // Children of u52
     id150: {
-      name: "Amulya Dhara",
+      name: "Amulya Dhara *",
       own_unions: [],
       parent_union: "u52",
+      imageLink: "/photos/Dhara/AmulyaDhara.jpg"
     },
 
     // Union u53: Padma Murthi
@@ -983,11 +1033,14 @@ export const data = {
       name: "Anandita Viswanatham",
       own_unions: [],
       parent_union: "u55",
+      profession: "Doctor",
+      imageLink: "/photos/AnanditaViswanatham.jpg"
     },
     id155: {
       name: "Aditya Viswanatham",
       own_unions: ["u78"],
       parent_union: "u55",
+      birthyear: "1999",
     },
 
     // Union u78: Aditya & Rukmini Viswanatham
@@ -1007,8 +1060,8 @@ export const data = {
       name: "Krishna Rao VVS",
       own_unions: ["u57"],
       parent_union: "u37",
+      imageLink: "/photos/KrishnaRaoVVS.jpg"
     },
-
     // Union u56: Prabha
     // Children of u56
     id156: {
@@ -1033,9 +1086,10 @@ export const data = {
     // Union u38: Dr. Sastry (Butchi)
     // Children of u38
     id106: {
-      name: "Padmini",
+      name: "Padmini Shanmugam",
       own_unions: ["u58"],
       parent_union: "u38",
+      imageLink: "/photos/PadminiShanmugam.jpg"
     },
     id107: {
       name: "Sunny",
@@ -1065,6 +1119,7 @@ export const data = {
       parent_union: "u39",
       deathyear: "~",
       deathcause: "Covid-19",
+      imageLink: "/photos/BacheeViswanadham.jpg"
     },
     id110: {
       name: "Sriram",
@@ -1072,6 +1127,7 @@ export const data = {
       parent_union: "u39",
       deathyear: "~",
       deathcause: "Covid-19",
+      imageLink: "/photos/SriramViswanadham.jpg"
     },
 
     // Union u59: Bhaskar (Bachee)
@@ -1093,11 +1149,13 @@ export const data = {
       name: "Sriram's son",
       own_unions: [],
       parent_union: "u60",
+      imageLink: "/photos/Sriram'sSon.jpg"
     },
     id164: {
       name: "Sriram's daughter",
       own_unions: [],
       parent_union: "u60",
+      imageLink: "/photos/Sriram'sDaughter.jpg"
     },
 
     // Union u40: Ravikanta Chavali
@@ -1159,6 +1217,7 @@ export const data = {
       name: "Vinod Hari",
       own_unions: ["u62"],
       parent_union: "u43",
+      imageLink: '/photos/Hari/VinodHari.jpg'
     },
 
     // Union u61: Anant Hari
@@ -1174,12 +1233,14 @@ export const data = {
     id166: {
       name: "Karthik Hari",
       own_unions: [],
+      imageLink: '/photos/Hari/KarthikHari.jpg',
       parent_union: "u62",
     },
     id167: {
       name: "Shanmukha Shaurya Hari",
       own_unions: [],
       parent_union: "u62",
+      imageLink: '/photos/Hari/ShanmukhaHari.jpg',
       birthyear: 2014,
     },
 
@@ -1365,6 +1426,11 @@ export const data = {
       nickname: "Papa",
       own_unions: ["u66"],
       parent_union: "u65",
+      imageLink: '/photos/Kunapuli/KameswariKunapuli.jpg'
+    },
+    id219: {
+      name: "Kameswari's Husband",
+      own_unions: ["u66"],
     },
 
     // Union u66: Kameswari Kunapuli
@@ -1406,6 +1472,7 @@ export const data = {
     id194: {
       name: "Suma Kunapuli",
       own_unions: ["u68"],
+      imageLink: "/photos/Kunapuli/SumaKunapuli.jpg"
     },
     // Children of u68
     id192: {
