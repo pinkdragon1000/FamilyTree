@@ -532,9 +532,12 @@ svg {
 
 @media (max-width: 600px) {
   .card-view {
-    position: static;
-    min-height: calc(100vh - 100px);
+    position: fixed;
+    top: 100px;
+    bottom: 0;
+    height: auto;
     padding: 10px;
+    overscroll-behavior: contain;
   }
 }
 
