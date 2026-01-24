@@ -6,7 +6,7 @@ import {
   decrossTwoLayer,
   coordCenter,
 } from "d3-dag";
-import { INITIAL_COUPLES } from "../data/buildTreeData.js";
+import { INITIAL_COUPLES, ALL_FOUNDING_COUPLES } from "../data/buildTreeData.js";
 
 
 // extend javascript array class by a remove function
@@ -189,7 +189,8 @@ class FTDataHandler {
         this.root.visible = true;
       }
       
-      // Make the founding couple nodes visible at start (collapsed - no unions/lines)
+      // Make the 4 main founding couple nodes visible at start (collapsed - no unions/lines)
+      // Evani is not shown initially but can be revealed via navigation
       const initialNodes = INITIAL_COUPLES.flatMap(couple => couple.ids);
       initialNodes.forEach(id => {
         const node = this.nodeMap.get(id);
@@ -1613,21 +1614,56 @@ export default class FamilyTree extends FTDrawer {
     }
 
     // Build path of person nodes from visible ancestor down to target
-    const path = this._buildPathToTarget(targetNode);
+    let path = this._buildPathToTarget(targetNode);
+
+    // If no path found, check if target belongs to a secondary family (like Evani)
+    // and make those founders visible first
+    if (!path || path.length === 0 || !path[0]?.visible) {
+      const secondaryFamily = this._findSecondaryFamilyForNode(targetNode);
+      if (secondaryFamily) {
+        // Make the secondary family founders visible
+        for (const founderId of secondaryFamily.ids) {
+          const founderNode = this.ft_datahandler.find_node_by_id(founderId);
+          if (founderNode) {
+            founderNode.visible = true;
+          }
+        }
+        // Try building path again
+        path = this._buildPathToTarget(targetNode);
+      }
+    }
+
     if (!path || path.length === 0) {
       console.warn(`No path found to node: ${nodeId}`);
       return;
     }
 
-    // Expand along the path - click each person to reveal their connections
-    for (const personNode of path) {
-      if (personNode.visible) {
-        // Show all hidden neighbors (unions) for this person
-        const hiddenNeighbors = personNode.get_neighbors().filter(n => !n.visible);
-        if (hiddenNeighbors.length > 0) {
-          personNode.show();
+    // Expand the tree properly using show() methods to maintain inserted_nodes tracking
+    // This ensures nodes can be collapsed later
+    for (let i = 0; i < path.length; i++) {
+      const personNode = path[i];
+
+      // The first node in path should already be visible (it's the visible ancestor)
+      // For subsequent nodes, expand from their parent
+      if (i > 0) {
+        const prevPerson = path[i - 1];
+        // Find the union connecting previous person to this one
+        for (const unionId of prevPerson.data.own_unions || []) {
+          const union = this.ft_datahandler.find_node_by_id(unionId);
+          if (!union) continue;
+
+          // Check if this union leads to the current person
+          const children = union.get_children();
+          if (children.some(c => c.id === personNode.id)) {
+            // Expand the previous person to show this union (properly tracked)
+            prevPerson.show();
+            break;
+          }
         }
       }
+
+      // Always call show() on each path node to expand their connections
+      personNode.show();
     }
 
     // If target is still not visible (e.g., spouse case), find and expand through their partner
@@ -1655,11 +1691,10 @@ export default class FamilyTree extends FTDrawer {
   /**
    * Build path of person nodes from nearest visible ancestor down to target
    */
-  _buildPathToTarget(targetNode) {
+  _buildPathToTarget(targetNode, visited = new Set()) {
     // First, build the ancestry chain from target up to a visible node
     const ancestryChain = [];
     let current = targetNode;
-    const visited = new Set();
 
     while (current && !visited.has(current.id)) {
       visited.add(current.id);
@@ -1699,8 +1734,8 @@ export default class FamilyTree extends FTDrawer {
             for (const partner of partners) {
               if (partner.id === current.id || visited.has(partner.id)) continue;
 
-              // Try to find a path from this partner
-              const partnerPath = this._buildPathToTarget(partner);
+              // Try to find a path from this partner (pass visited set to prevent infinite recursion)
+              const partnerPath = this._buildPathToTarget(partner, visited);
               if (partnerPath && partnerPath.length > 0 && partnerPath[0].visible) {
                 // Found a valid path through the spouse
                 // Return the path to spouse, spouse will reveal target when expanded
@@ -1720,5 +1755,45 @@ export default class FamilyTree extends FTDrawer {
     }
 
     return ancestryChain;
+  }
+
+  /**
+   * Find if a node belongs to a secondary founding family (not in INITIAL_COUPLES)
+   * Returns the family object if found, null otherwise
+   */
+  _findSecondaryFamilyForNode(targetNode) {
+    const initialIds = new Set(INITIAL_COUPLES.flatMap(c => c.ids));
+    const allFoundingIds = new Set(ALL_FOUNDING_COUPLES.flatMap(c => c.ids));
+
+    // BFS up through parent unions to find a founding family
+    const visited = new Set();
+    const queue = [targetNode];
+
+    while (queue.length > 0) {
+      const current = queue.shift();
+      if (!current || visited.has(current.id)) continue;
+      visited.add(current.id);
+
+      // Check if this is a founding person
+      if (allFoundingIds.has(current.id) && !initialIds.has(current.id)) {
+        // Found a secondary family founder
+        return ALL_FOUNDING_COUPLES.find(c => c.ids.includes(current.id));
+      }
+
+      // Go up through parent union
+      if (current.data?.parent_union) {
+        const parentUnion = this.ft_datahandler.find_node_by_id(current.data.parent_union);
+        if (parentUnion) {
+          const parents = parentUnion.get_parents();
+          for (const parent of parents) {
+            if (!visited.has(parent.id)) {
+              queue.push(parent);
+            }
+          }
+        }
+      }
+    }
+
+    return null;
   }
 }

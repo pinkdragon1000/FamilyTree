@@ -14,6 +14,8 @@
  * - <-> = Divorced out of the family
  */
 
+import { image } from "d3";
+
 export const familyData = {
   // ============================================================
   // ROBINSON FAMILY
@@ -71,6 +73,7 @@ export const familyData = {
             spouse: {
               name: "Jennifer Robinson",
               birthyear: 1970,
+              profession: "Psychologist",
               imageLink: "/photos/Robinson/Clark&JenniferRobinson.jpg",
               priorChildren: [
                 {
@@ -89,6 +92,7 @@ export const familyData = {
               {
                 name: "Lauren Johnson",
                 birthyear: 1997,
+                profession: "Radiologist Technician",
                 imageLink: "/photos/Johnson/Lauren&KaydenJohnson.jpg",
                 spouse: { name: "Kayden Johnson", imageLink: "/photos/Johnson/Lauren&KaydenJohnson.jpg" },
                 children: [
@@ -291,7 +295,7 @@ export const familyData = {
               {
                 name: "Avinash Royyuru",
                 imageLink: "/photos/Royyuru/AvinashRoyyuru.jpg",
-                spouse: { name: "Akanksha Mehta ⟷" }
+                spouse: { name: "Akanksha Mehta ⟷", imageLink: "/photos/AkankshaMehta.jpg" },
               },
               {
                 name: "Shruti Royyuru",
@@ -352,8 +356,8 @@ export const familyData = {
             imageLink: "/photos/Royyuru/DixitRoyyuru.jpg",
             spouse: { name: "Asha Royyuru", imageLink: "/photos/Royyuru/AshaRoyyuru.jpg" },
             children: [
-              { name: "Nikhil Dixit", imageLink: "/photos/Royyuru/NikhilRoyyuru.jpg" },
-              { name: "Rohan Dixit", birthyear: 1998, imageLink: "/photos/Royyuru/RohanRoyyuru.jpg" }
+              { name: "Nikhil Dixit", imageLink: "/photos/Royyuru/NikhilRoyyuru.jpg", profession: "Finance (FP&A)" },
+              { name: "Rohan Dixit", birthyear: 1998, imageLink: "/photos/Royyuru/RohanRoyyuru.jpg", profession: "CEO at MyWork" }
             ]
           },
           {
@@ -456,6 +460,7 @@ export const familyData = {
       {
         name: "V Pardhasaradhi",
         nickname: "Pardha",
+        imageLink: "/photos/PardhasaradhiViswanadham.jpg",
         spouse: { name: "Annapurna Viswanadham" },
         children: [
           {
@@ -507,9 +512,12 @@ export const familyData = {
         children: [
           {
             name: "Padma Murthi",
+            imageLink: "/photos/Murthi/PadmaMurthi.jpg",
+            spouse: { name: "B.P.S. Murthi", profession: "Marketing Professor", imageLink: "/photos/Murthi/BPSMurthi.jpg" },
             children: [
               {
                 name: "Sweta",
+                imageLink: "/photos/Sweta.jpg",
                 children: [
                   { name: "Kamya" },
                   { name: "Sweta's son" }
@@ -527,6 +535,8 @@ export const familyData = {
               { name: "Anandita Viswanatham", profession: "Doctor", imageLink: "/photos/AnanditaViswanatham.jpg" },
               {
                 name: "Aditya Viswanatham",
+                profession: "Software Engineer",
+                imageLink: "/photos/AdityaViswanatham.jpg",
                 birthyear: 1999,
                 spouse: { name: "Rukmini Viswanatham" }
               }
@@ -567,6 +577,7 @@ export const familyData = {
       {
         name: "Dr. Sastry",
         nickname: "Butchi",
+        imageLink: "/photos/Butchi.jpg",
         children: [
           {
             name: "Padmini Shanmugam",
@@ -585,17 +596,17 @@ export const familyData = {
           {
             name: "Bhaskar",
             nickname: "Bachee",
-            deathyear: "~",
+            deathyear: "2020",
             deathcause: "Covid-19",
             imageLink: "/photos/BacheeViswanadham.jpg",
             children: [
-              { name: "Bachee's daughter 1" },
-              { name: "Bachee's daughter 2" }
+              { name: "Bachee's daughter 1", imageLink: "/photos/BacheeDaughter1.jpg" },
+              { name: "Bachee's daughter 2", imageLink: "/photos/BacheeDaughter2.jpg" }
             ]
           },
           {
             name: "Sriram",
-            deathyear: "~",
+            deathyear: "2020",
             deathcause: "Covid-19",
             imageLink: "/photos/SriramViswanadham.jpg",
             children: [
@@ -640,6 +651,7 @@ export const familyData = {
         children: [
           {
             name: "Anant Hari",
+            imageLink: "/photos/Hari/AnantHari.jpg",
             children: [
               { name: "Anant's son" }
             ]
@@ -647,6 +659,7 @@ export const familyData = {
           {
             name: "Vinod Hari",
             imageLink: "/photos/Hari/VinodHari.jpg",
+            profession: "Banking & Financial Services",
             children: [
               { name: "Karthik Hari", imageLink: "/photos/Hari/KarthikHari.jpg" },
               { name: "Shanmukha Shaurya Hari", birthyear: 2014, imageLink: "/photos/Hari/ShanmukhaHari.jpg" }
@@ -681,7 +694,11 @@ export const familyData = {
           {
             name: "Syamalarao Evani",
             nickname: "Syam",
+            imageLink: "/photos/Evani/SyamalaraoEvani.jpg",
+            birthplace: "Srikakulam, Andhra Pradesh, India",
+            profession: "Research Scientist (Dow Chemical)",
             birthyear: 1928,
+            deathyear: 2011,
             spouse: { name: "Veeramathi Evani", nickname: "Rama" },
             children: [
               { name: "Venkatarama Narasimham Evani", nickname: "Bobby", birthyear: 1960 },
@@ -701,7 +718,7 @@ export const familyData = {
                 birthplace: "Kakinada, India",
                 spouse: { name: "Jyothi Evani" },
                 children: [
-                  { name: "Anjani Evani", birthyear: 2003 }
+                  { name: "Anjali Evani", birthyear: 2003 }
                 ]
               },
               {

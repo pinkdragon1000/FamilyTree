@@ -9,8 +9,8 @@ import SearchBar from "./components/SearchBar.jsx";
 import TreeLogo from "./tree.svg";
 
 const DEFAULT_FONT_SIZE = 14;
-const MIN_FONT_SIZE = 8;
-const MAX_FONT_SIZE = 24;
+const MIN_FONT_SIZE = 10;
+const MAX_FONT_SIZE = 36;
 const FONT_SIZE_STEP = 2;
 const STORAGE_KEY = "familyTreeFontSize";
 const VIEW_MODE_STORAGE_KEY = "familyTreeViewMode";
@@ -156,18 +156,24 @@ function App() {
         familyTreeRef.current.navigateToNode(personId);
       }
     }, 100);
+    // Also expand card view to this person so both views stay in sync
+    setCardSearchTarget(personId);
   }, []);
 
-  // Handle search selection based on current view mode
+  // Handle search selection - always sync both views
   const handleSearchSelect = useCallback((personId) => {
+    // Always expand card view to the person
+    setCardSearchTarget(personId);
+
     if (viewMode === 'card') {
-      // Navigate within card view
-      setCardSearchTarget(personId);
+      // Stay in card view, card will handle the navigation
     } else {
-      // Jump to tree view
-      jumpToTreePerson(personId);
+      // Navigate in tree view
+      if (familyTreeRef.current) {
+        familyTreeRef.current.navigateToNode(personId);
+      }
     }
-  }, [viewMode, jumpToTreePerson]);
+  }, [viewMode]);
 
   // Control SVG visibility based on view mode
   useEffect(() => {
@@ -250,6 +256,9 @@ function App() {
           onIncrease={increaseFontSize}
           onDecrease={decreaseFontSize}
           onReset={resetFontSize}
+          fontSize={fontSize}
+          minSize={MIN_FONT_SIZE}
+          maxSize={MAX_FONT_SIZE}
         />
       )}
     </>

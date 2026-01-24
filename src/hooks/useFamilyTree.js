@@ -266,31 +266,59 @@ export function useFamilyTree(data, navStack, setNavStack) {
 
   // Navigate to a specific person in card view
   const navigateToPersonInCards = useCallback((targetId) => {
-    // Reset to initial view
-    setNavStack([{ couples: INITIAL_COUPLES }]);
-
     // Find path to target
     const result = findPathToInitialCouple(targetId);
     if (!result) return null;
 
-    const { familyId, path } = result;
+    const { familyId, path, family } = result;
 
-    // Expand all nodes along the path (including the family)
-    const nodesToExpand = new Set([familyId, ...path]);
+    // Check if this is a main family or secondary family (like Evani)
+    const isMainFamily = family.isMainFamily;
 
-    // Also add the target if it has children (so it appears expanded)
-    const targetPerson = persons[targetId];
-    if (targetPerson?.own_unions?.length > 0) {
-      for (const unionId of targetPerson.own_unions) {
-        const union = unions[unionId];
-        if (union?.children?.length > 0) {
-          nodesToExpand.add(targetId);
-          break;
+    if (isMainFamily) {
+      // Reset to initial view showing all 4 main families
+      setNavStack([{ couples: INITIAL_COUPLES }]);
+
+      // Expand all nodes along the path (including the family)
+      const nodesToExpand = new Set([familyId, ...path]);
+
+      // Also add the target if it has children (so it appears expanded)
+      const targetPerson = persons[targetId];
+      if (targetPerson?.own_unions?.length > 0) {
+        for (const unionId of targetPerson.own_unions) {
+          const union = unions[unionId];
+          if (union?.children?.length > 0) {
+            nodesToExpand.add(targetId);
+            break;
+          }
         }
       }
-    }
 
-    setExpandedNodes(nodesToExpand);
+      setExpandedNodes(nodesToExpand);
+    } else {
+      // Secondary family (like Evani) - navigate to that family's page
+      setNavStack([
+        { couples: INITIAL_COUPLES },
+        { couples: [{ ids: family.ids, name: family.name }] }
+      ]);
+
+      // Expand nodes along the path within this family
+      const nodesToExpand = new Set([familyId, ...path]);
+
+      // Also add the target if it has children
+      const targetPerson = persons[targetId];
+      if (targetPerson?.own_unions?.length > 0) {
+        for (const unionId of targetPerson.own_unions) {
+          const union = unions[unionId];
+          if (union?.children?.length > 0) {
+            nodesToExpand.add(targetId);
+            break;
+          }
+        }
+      }
+
+      setExpandedNodes(nodesToExpand);
+    }
 
     return targetId; // Return for scrolling
   }, [persons, unions, findPathToInitialCouple, setNavStack]);
