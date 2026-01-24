@@ -209,10 +209,14 @@ export const familyData = {
         name: "Rebecca Davis",
         birthyear: 1936,
         imageLink: "/photos/Davis/RebeccaDavis.jpg",
+        "spouse": { name: "Bud Davis"},
         children: [
+          { name: "Petie Davis" },
+          { name: "Greg Davis" },
+          { name: "Rodney Davis" },
           { name: "Jane Davis" },
           { name: "Kevin Davis" },
-          { name: "Chris Davis", imageLink: "/photos/Davis/ChrisDavis.jpg" }
+          { name: "Chris Davis", imageLink: "/photos/Davis/ChrisDavis.jpg" },          
         ]
       },
       {
