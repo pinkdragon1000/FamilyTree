@@ -6,6 +6,7 @@ import {
   decrossTwoLayer,
   coordCenter,
 } from "d3-dag";
+import { INITIAL_COUPLES } from "../data/buildTreeData.js";
 
 
 // extend javascript array class by a remove function
@@ -188,13 +189,8 @@ class FTDataHandler {
         this.root.visible = true;
       }
       
-      // Make the 8 grandparent nodes visible at start (collapsed - no unions/lines)
-      const initialNodes = [
-        "id1", "id2",     // Carmel, Retha (Jim Robinson's parents)
-        "id5", "id6",     // Rex Davis, Wilma Davis (Sandra Robinson's parents)
-        "id82", "id83",   // R.L.N. Sarma, R. Subbalakshmi (R.L.N. Sastry's parents)
-        "id84", "id85"    // V.B.R. Sarma, V. Padmavathi (Sita Devi Royyuru's parents)
-      ];
+      // Make the founding couple nodes visible at start (collapsed - no unions/lines)
+      const initialNodes = INITIAL_COUPLES.flatMap(couple => couple.ids);
       initialNodes.forEach(id => {
         const node = this.nodeMap.get(id);
         if (node) {

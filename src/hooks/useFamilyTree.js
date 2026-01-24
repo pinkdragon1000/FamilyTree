@@ -1,12 +1,5 @@
 import { useMemo, useState, useCallback } from 'react';
-
-// The 4 founding couples (same as tree view initial nodes)
-export const INITIAL_COUPLES = [
-  { ids: ['id1', 'id2'], name: 'Robinson' },      // Carmel & Retha Robinson
-  { ids: ['id5', 'id6'], name: 'Davis' },         // Rex & Wilma Davis
-  { ids: ['id82', 'id83'], name: 'Royyuru' },     // R.L.N. Sarma & R. Subbalakshmi
-  { ids: ['id84', 'id85'], name: 'Viswanadham' }, // V.B.R. Sarma & V. Padmavathi
-];
+import { INITIAL_COUPLES } from '../data/buildTreeData.js';
 
 /**
  * Custom hook to manage expandable family tree for card view.
