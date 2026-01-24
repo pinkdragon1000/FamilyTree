@@ -100,6 +100,10 @@ function processCouple(familyName, person1, person2, parentPath = "") {
   const id1 = processPerson(familyName, person1, null, parentPath);
   if (id1) {
     persons[id1].own_unions.push(unionId);
+    // Check if this person came from another family (for ancestor navigation)
+    if (person1.fromFamily?.ref) {
+      pendingRefs.push({ personId: id1, ref: person1.fromFamily.ref, type: "parentage" });
+    }
   }
 
   // Process second person (may be inline or a reference)
@@ -112,6 +116,10 @@ function processCouple(familyName, person1, person2, parentPath = "") {
       id2 = processPerson(familyName, person2, null, parentPath);
       if (id2) {
         persons[id2].own_unions.push(unionId);
+        // Check if this person came from another family (for ancestor navigation)
+        if (person2.fromFamily?.ref) {
+          pendingRefs.push({ personId: id2, ref: person2.fromFamily.ref, type: "parentage" });
+        }
       }
     }
   }
@@ -192,11 +200,15 @@ function processFamily(familyName, family) {
   const [founder1, founder2] = family.founders;
   const { unionId, id1, id2 } = processCouple(familyName, founder1, founder2);
 
-  // Track founding couple (only for main 4 families shown in card view)
-  if (["Robinson", "Davis", "Royyuru", "Viswanadham"].includes(familyName)) {
+  // Track founding couple
+  const mainFamilies = ["Robinson", "Davis", "Royyuru", "Viswanadham"];
+  const allFamilies = [...mainFamilies, "Evani"]; // Evani reachable via "View Ancestors"
+
+  if (allFamilies.includes(familyName)) {
     foundingCouples.push({
       ids: [id1, id2].filter(Boolean),
-      name: familyName
+      name: familyName,
+      isMainFamily: mainFamilies.includes(familyName) // false for Evani
     });
   }
 
@@ -207,38 +219,57 @@ function processFamily(familyName, family) {
 }
 
 /**
+ * Find a person ID by reference path
+ */
+function findPersonByRef(ref) {
+  const parts = ref.split(".");
+  const familyName = parts[0];
+  const personName = parts[parts.length - 1];
+
+  // Try full path
+  let targetId = personNameToId[ref];
+
+  // Try family + person name
+  if (!targetId) {
+    targetId = personNameToId[`${familyName}.${personName}`];
+  }
+
+  // Try with intermediate path
+  if (!targetId && parts.length > 2) {
+    const intermediatePath = parts.slice(1, -1).join(".");
+    targetId = personNameToId[`${familyName}.${intermediatePath}.${personName}`];
+  }
+
+  return targetId;
+}
+
+/**
  * Resolve cross-family references
  */
 function resolveRefs() {
-  for (const { unionId, ref, type } of pendingRefs) {
-    // Parse the reference: "FamilyName.path.to.PersonName"
-    const parts = ref.split(".");
-    const familyName = parts[0];
-    const personName = parts[parts.length - 1];
+  for (const pending of pendingRefs) {
+    const { ref, type } = pending;
+    const targetId = findPersonByRef(ref);
 
-    // Try different key combinations
-    let targetId = null;
-
-    // Try full path
-    targetId = personNameToId[ref];
-
-    // Try family + person name
-    if (!targetId) {
-      targetId = personNameToId[`${familyName}.${personName}`];
+    if (!targetId || !persons[targetId]) {
+      console.warn(`Could not resolve reference: ${ref}`);
+      continue;
     }
 
-    // Try with intermediate path
-    if (!targetId && parts.length > 2) {
-      const intermediatePath = parts.slice(1, -1).join(".");
-      targetId = personNameToId[`${familyName}.${intermediatePath}.${personName}`];
-    }
-
-    if (targetId && persons[targetId]) {
+    if (type === "spouse") {
+      // Add to union as spouse
+      const { unionId } = pending;
       if (!persons[targetId].own_unions.includes(unionId)) {
         persons[targetId].own_unions.push(unionId);
       }
-    } else {
-      console.warn(`Could not resolve reference: ${ref}`);
+    } else if (type === "parentage") {
+      // Set parent_union - find the union where targetId is a parent
+      const { personId } = pending;
+      const targetPerson = persons[targetId];
+      if (targetPerson?.own_unions?.length > 0) {
+        // Use the first union of the target as the parent union
+        persons[personId].parent_union = targetPerson.own_unions[0];
+      }
     }
   }
 }
@@ -325,8 +356,11 @@ export function buildTreeData() {
 // Export the built data
 export const data = buildTreeData();
 
-// Export founding couples for card view
-export const INITIAL_COUPLES = data.foundingCouples;
+// Export main founding couples for card view (4 families)
+export const INITIAL_COUPLES = data.foundingCouples.filter(c => c.isMainFamily);
+
+// Export all founding couples including Evani (for ancestor navigation)
+export const ALL_FOUNDING_COUPLES = data.foundingCouples;
 
 // For debugging - export the lookup map
 export const debugLookup = () => ({ ...personNameToId });

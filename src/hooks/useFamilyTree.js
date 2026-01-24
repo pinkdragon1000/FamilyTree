@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback } from 'react';
-import { INITIAL_COUPLES } from '../data/buildTreeData.js';
+import { INITIAL_COUPLES, ALL_FOUNDING_COUPLES } from '../data/buildTreeData.js';
 
 /**
  * Custom hook to manage expandable family tree for card view.
@@ -42,12 +42,12 @@ export function useFamilyTree(data, navStack, setNavStack) {
     });
   }, [currentView, persons, unions]);
 
-  // Find ancestry path from a person to one of the initial couples
-  // Returns { familyId, path } where path is array of person IDs to expand
+  // Find ancestry path from a person to one of the founding couples (including Evani)
+  // Returns { familyId, path, family } where path is array of person IDs to expand
   const findPathToInitialCouple = useCallback((targetId) => {
-    const initialPersonIds = new Set(INITIAL_COUPLES.flatMap(c => c.ids));
+    const allFoundingPersonIds = new Set(ALL_FOUNDING_COUPLES.flatMap(c => c.ids));
 
-    // BFS up through parent unions (and spouse connections) to find path to initial couple
+    // BFS up through parent unions (and spouse connections) to find path to founding couple
     const visited = new Set();
     const queue = [{ id: targetId, path: [], isSpouse: false }];
 
@@ -56,11 +56,11 @@ export function useFamilyTree(data, navStack, setNavStack) {
       if (visited.has(id)) continue;
       visited.add(id);
 
-      // Check if this person is one of the initial persons
-      if (initialPersonIds.has(id)) {
+      // Check if this person is one of the founding persons
+      if (allFoundingPersonIds.has(id)) {
         // Find which family this belongs to
-        const family = INITIAL_COUPLES.find(c => c.ids.includes(id));
-        return { familyId: family.ids.join('-'), path, targetIsSpouse: isSpouse };
+        const family = ALL_FOUNDING_COUPLES.find(c => c.ids.includes(id));
+        return { familyId: family.ids.join('-'), path, targetIsSpouse: isSpouse, family };
       }
 
       const person = persons[id];
@@ -120,37 +120,48 @@ export function useFamilyTree(data, navStack, setNavStack) {
 
     if (result) {
       // Descendant is reachable from one of the founding families
-      const { familyId: foundFamilyId, path } = result;
+      const { familyId: foundFamilyId, path, family } = result;
 
-      // Reset to initial view first
-      setNavStack([{ couples: INITIAL_COUPLES }]);
+      // Check if this is a main family (shown on home page) or secondary (like Evani)
+      const isMainFamily = family.isMainFamily;
 
-      // Expand the family and all nodes along the path
-      const nodesToExpand = new Set([foundFamilyId, ...path]);
-      setExpandedNodes(nodesToExpand);
+      if (isMainFamily) {
+        // Reset to initial view first
+        setNavStack([{ couples: INITIAL_COUPLES }]);
 
-      // Scroll to the parents and highlight both after DOM updates
-      setTimeout(() => {
-        const parentElements = parentCouple.ids
-          .map(id => document.querySelector(`[data-person-id="${id}"]`))
-          .filter(el => el);
+        // Expand the family and all nodes along the path
+        const nodesToExpand = new Set([foundFamilyId, ...path]);
+        setExpandedNodes(nodesToExpand);
 
-        if (parentElements.length > 0) {
-          // Scroll to the first parent
-          parentElements[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Scroll to the parents and highlight both after DOM updates
+        setTimeout(() => {
+          const parentElements = parentCouple.ids
+            .map(id => document.querySelector(`[data-person-id="${id}"]`))
+            .filter(el => el);
 
-          // Highlight both parents
-          parentElements.forEach(el => {
-            el.classList.add('search-highlight');
-          });
+          if (parentElements.length > 0) {
+            // Scroll to the first parent
+            parentElements[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-          setTimeout(() => {
+            // Highlight both parents
             parentElements.forEach(el => {
-              el.classList.remove('search-highlight');
+              el.classList.add('search-highlight');
             });
-          }, 2000);
-        }
-      }, 150);
+
+            setTimeout(() => {
+              parentElements.forEach(el => {
+                el.classList.remove('search-highlight');
+              });
+            }, 2000);
+          }
+        }, 150);
+      } else {
+        // Secondary family (like Evani) - navigate to new screen
+        setExpandedNodes(new Set());
+        setNavStack(prev => [...prev, {
+          couples: [{ ids: family.ids, name: family.name }]
+        }]);
+      }
     } else {
       // Parent not reachable from founding families - navigate to new screen
       setExpandedNodes(new Set());
