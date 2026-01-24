@@ -6,11 +6,13 @@
  * - `spouse: { ref: "FamilyName.path.to.person" }` = from another founding family
  * - Children are nested arrays
  * - IDs and unions are computed automatically
+ * - `gender: "M"` or `gender: "F"` for gender symbols (♂/♀)
  *
  * Symbols in names:
  * - * = Adopted or not biologically related
  * - 1/2 = From another marriage
  * - ~ = Passed away, year unknown
+ * - ○ = Stillborn
  * - <-> = Divorced out of the family
  */
 
@@ -24,33 +26,38 @@ export const familyData = {
     founders: [
       {
         name: "Carmel Robinson",
+        gender: "M",
         birthyear: 1918,
         deathyear: 1998,
         profession: "Store Owner of Ben Franklin - Ripley, WV stores",
-        imageLink: "/photos/Robinson/CarmelRobinson.jpg"
+        imageLink: "/photos/Robinson/CarmelRobinson.jpg",
       },
       {
         name: "Retha Robinson",
+        gender: "F",
         birthyear: 1921,
         deathyear: 2000,
         profession: "Store Owner of Ben Franklin - Ripley, WV stores",
-        imageLink: "/photos/Robinson/RethaRobinson.jpg"
-      }
+        imageLink: "/photos/Robinson/RethaRobinson.jpg",
+      },
     ],
     children: [
       {
         name: "Jim Robinson",
+        gender: "M",
         full: "James Clark",
         birthyear: 1942,
         deathyear: 2025,
         birthplace: "Charleston, WV",
         deathplace: "Bridgeport, WV",
-        profession: "Store Owner of Ben Franklin - Salem & Grantsville, WV stores",
+        profession:
+          "Store Owner of Ben Franklin - Salem & Grantsville, WV stores",
         imageLink: "/photos/Robinson/JimRobinson.jpg",
         spouse: { ref: "Davis.Sandra Robinson" },
         children: [
           {
             name: "John Robinson",
+            gender: "M",
             birthyear: 1966,
             profession: "Device Software Engineer",
             imageLink: "/photos/Robinson/JohnRobinson.jpg",
@@ -58,98 +65,179 @@ export const familyData = {
             children: [
               {
                 name: "Sita Robinson",
+                gender: "F",
                 birthyear: 1998,
                 birthplace: "Morgantown, WV",
                 profession: "Software Engineer",
-                imageLink: "/photos/Robinson/SitaRobinson.jpg"
-              }
-            ]
+                imageLink: "/photos/Robinson/SitaRobinson.jpg",
+              },
+            ],
           },
           {
             name: "Clark Robinson",
+            gender: "M",
             full: "James Clark II",
             birthyear: 1969,
             imageLink: "/photos/Robinson/Clark&JenniferRobinson.jpg",
             spouse: {
               name: "Jennifer Robinson",
+              gender: "F",
               birthyear: 1970,
               profession: "Psychologist",
               imageLink: "/photos/Robinson/Clark&JenniferRobinson.jpg",
               priorChildren: [
                 {
                   name: "Chelsea Bly ½",
+                  gender: "F",
                   imageLink: "/photos/Bly/ChelseaBly.jpg",
-                  spouse: { name: "Steven Bly" },
+                  spouse: { name: "Steven Bly", gender: "M" },
                   children: [
-                    { name: "Sawyer Bly", birthyear: 2018, imageLink: "/photos/Bly/SawyerBly.jpg" },
-                    { name: "Riley Bly", birthyear: 2019, imageLink: "/photos/Bly/RileyBly.jpg" },
-                    { name: "Declan Bly", birthyear: 2024, imageLink: "/photos/Bly/DeclanBly.jpg" }
-                  ]
-                }
-              ]
+                    {
+                      name: "Sawyer Bly",
+                      gender: "M",
+                      birthyear: 2018,
+                      imageLink: "/photos/Bly/SawyerBly.jpg",
+                    },
+                    {
+                      name: "Riley Bly",
+                      gender: "M",
+                      birthyear: 2019,
+                      imageLink: "/photos/Bly/RileyBly.jpg",
+                    },
+                    {
+                      name: "Declan Bly",
+                      gender: "M",
+                      birthyear: 2024,
+                      imageLink: "/photos/Bly/DeclanBly.jpg",
+                    },
+                  ],
+                },
+              ],
             },
             children: [
               {
                 name: "Lauren Johnson",
+                gender: "F",
                 birthyear: 1997,
                 profession: "Radiologist Technician",
                 imageLink: "/photos/Johnson/Lauren&KaydenJohnson.jpg",
-                spouse: { name: "Kayden Johnson", imageLink: "/photos/Johnson/Lauren&KaydenJohnson.jpg" },
+                spouse: {
+                  name: "Kayden Johnson",
+                  gender: "M",
+                  imageLink: "/photos/Johnson/Lauren&KaydenJohnson.jpg",
+                },
                 children: [
-                  { name: "Oliver Johnson", birthyear: 2023, imageLink: "/photos/Johnson/OliverJohnson.jpg" },
-                  { name: "Theo Johnson", birthyear: 2025, imageLink: "/photos/Johnson/TheoJohnson.jpg" }
-                ]
+                  {
+                    name: "Oliver Johnson",
+                    gender: "M",
+                    birthyear: 2023,
+                    imageLink: "/photos/Johnson/OliverJohnson.jpg",
+                  },
+                  {
+                    name: "Theo Johnson",
+                    gender: "M",
+                    birthyear: 2025,
+                    imageLink: "/photos/Johnson/TheoJohnson.jpg",
+                  },
+                ],
               },
               {
                 name: "Elijah Robinson",
+                gender: "M",
                 birthyear: 2002,
-                imageLink: "/photos/Robinson/ElijahRobinson.jpg"
+                imageLink: "/photos/Robinson/ElijahRobinson.jpg",
               },
               {
                 name: "Hannah Robinson",
+                gender: "F",
                 birthyear: 2005,
                 imageLink: "/photos/Robinson/HannahRobinson.jpg",
-                spouse: { name: "Nick Anderson", imageLink: "/photos/Robinson/HannahRobinson.jpg" }
-              }
-            ]
-          }
-        ]
+                spouse: {
+                  name: "Nick Anderson",
+                  gender: "M",
+                  imageLink: "/photos/Robinson/HannahRobinson.jpg",
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         name: "Ron Robinson",
+        gender: "M",
         birthyear: 1947,
         imageLink: "/photos/Robinson/RonRobinson.jpg",
-        spouse: { name: "Lois Kincaid ⟷", imageLink: "/photos/LoisKincaid.jpg" },
+        spouse: {
+          name: "Lois Kincaid ⟷",
+          gender: "F",
+          imageLink: "/photos/LoisKincaid.jpg",
+        },
         children: [
           {
             name: "Jodie Gardill",
+            gender: "F",
             birthyear: 1976,
             imageLink: "/photos/Gardill/JodieGardill.jpg",
-            spouse: { name: "Chris Gardill", imageLink: "/photos/Gardill/ChrisGardill.jpg" },
+            spouse: {
+              name: "Chris Gardill",
+              gender: "M",
+              imageLink: "/photos/Gardill/ChrisGardill.jpg",
+            },
             children: [
-              { name: "Kaleb Gardill", imageLink: "/photos/Gardill/KalebGardill.jpg" },
-              { name: "Brenna Gardill", imageLink: "/photos/Gardill/BrennaGardill.jpg" },
-              { name: "Darcie Gardill", imageLink: "/photos/Gardill/DarcieGardill.jpg" }
-            ]
+              {
+                name: "Kaleb Gardill",
+                gender: "M",
+                imageLink: "/photos/Gardill/KalebGardill.jpg",
+              },
+              {
+                name: "Brenna Gardill",
+                gender: "F",
+                imageLink: "/photos/Gardill/BrennaGardill.jpg",
+              },
+              {
+                name: "Darcie Gardill",
+                gender: "F",
+                imageLink: "/photos/Gardill/DarcieGardill.jpg",
+              },
+            ],
           },
           {
             name: "Monica Hager",
+            gender: "F",
             imageLink: "/photos/Hager/MonicaHager.jpg",
-            spouse: { name: "Jason Hager", imageLink: "/photos/Hager/JasonHager.jpg" },
+            spouse: {
+              name: "Jason Hager",
+              gender: "M",
+              imageLink: "/photos/Hager/JasonHager.jpg",
+            },
             children: [
-              { name: "Maddie Hager", birthyear: 2003, imageLink: "/photos/Hager/MaddieHager.jpg" },
-              { name: "Marley Hager *", imageLink: "/photos/Hager/MarleyHager.jpg" },
-              { name: "Meghan Hager *", imageLink: "/photos/Hager/MeghanHager.jpg" }
-            ]
-          }
-        ]
+              {
+                name: "Maddie Hager",
+                gender: "F",
+                birthyear: 2003,
+                imageLink: "/photos/Hager/MaddieHager.jpg",
+              },
+              {
+                name: "Marley Hager *",
+                gender: "F",
+                imageLink: "/photos/Hager/MarleyHager.jpg",
+              },
+              {
+                name: "Meghan Hager *",
+                gender: "F",
+                imageLink: "/photos/Hager/MeghanHager.jpg",
+              },
+            ],
+          },
+        ],
       },
       {
-        name: "Karma Jane",
+        name: "Karma Jane ○",
+        gender: "F",
         birthyear: 1952,
-        deathyear: 1952
-      }
-    ]
+        deathyear: 1952,
+      },
+    ],
   },
 
   // ============================================================
@@ -159,112 +247,175 @@ export const familyData = {
     founders: [
       {
         name: "Rex Davis",
+        gender: "M",
         birthyear: 1909,
-        deathyear: 1994
+        deathyear: 1994,
       },
       {
         name: "Wilma Davis",
+        gender: "F",
         birthyear: 1915,
         deathyear: 2012,
         birthplace: "Salem, WV",
         deathplace: "Willard, Ohio",
-        imageLink: "/photos/Davis/WilmaDavis.jpg"
-      }
+        imageLink: "/photos/Davis/WilmaDavis.jpg",
+      },
     ],
     children: [
-      {
-        name: "Sandra Robinson",
-        birthyear: 1944,
-        deathyear: 2006,
-        deathplace: "Salem, WV",
-        profession: "Store Owner of Ben Franklin - Salem & Grantsville, WV stores",
-        imageLink: "/photos/Robinson/SandraRobinson.jpg"
-        // Married Jim Robinson - children listed under Robinson tree
-      },
-      {
-        name: "Belinda Kamann",
-        imageLink: "/photos/Kamann/BelindaKamann.jpg",
-        spouse: { name: "Kevin Kamann *", imageLink: "/photos/Kamann/KevinKamann.jpg" },
-        children: [
-          {
-            name: "Jared Kamann",
-            imageLink: "/photos/Kamann/JaredKamann.jpg",
-            children: [
-              { name: "Tristan Kamann", imageLink: "/photos/Kamann/TristanKamann.jpg" },
-              { name: "Quinn Kamann", imageLink: "/photos/Kamann/QuinnKamann.jpg" },
-              { name: "Wyatt Kamann", imageLink: "/photos/Kamann/WyattKamann.jpg" },
-              { name: "Rhett Kamann", imageLink: "/photos/Kamann/RhettKamann.jpg" }
-            ]
-          },
-          { name: "Kurt Kamann", imageLink: "/photos/Kamann/KurtKamann.jpg" },
-          { name: "Gabe Kamann" }
-        ]
-      },
-      {
-        name: "Patty Malov",
-        imageLink: "/photos/Malov/PattyMalov.jpg",
-        spouse: { name: "Alex Malov", birthyear: 1952, deathyear: 2023, imageLink: "/photos/Malov/AlexMalov.jpg" }
-      },
-      {
+            {
         name: "Rebecca Davis",
+        gender: "F",
         birthyear: 1936,
         imageLink: "/photos/Davis/RebeccaDavis.jpg",
-        spouse: { name: "Bud Davis"},
+        spouse: { name: "Bud Davis", gender: "M" },
         children: [
-          { name: "Petie Davis" },
-          { name: "Greg Davis" },
-          { name: "Rodney Davis" },
-          { name: "Jane Davis" },
-          { name: "Kevin Davis" },
-          { name: "Chris Davis", imageLink: "/photos/Davis/ChrisDavis.jpg" },          
-        ]
+          { name: "Petie Davis ○", gender: "M" },
+          { name: "Greg Davis", gender: "M" },
+          { name: "Rodney Davis", gender: "M" },
+          {
+            name: "Jane Davis",
+            gender: "F",
+            imageLink: "/photos/Davis/JaneDavis.jpg",
+            birthyear: 1970,
+          },
+          { name: "Kevin Davis", gender: "M" },
+          { name: "Chris Davis", gender: "M", imageLink: "/photos/Davis/ChrisDavis.jpg" },
+        ],
       },
-      {
+            {
         name: "Ross Davis",
+        gender: "M",
         birthyear: 1938,
         deathyear: 2008,
         birthplace: "Long Run, WV",
         deathplace: "Davisville, WV",
         profession: "Worked at Corning Glass",
         children: [
-          { name: "Dave Davis" },
-          { name: "Mark Davis" }
-        ]
+          { name: "Dave Davis", gender: "M", imageLink: "/photos/Davis/DaveDavis.jpg" },
+          { name: "Mark Davis", gender: "M" },
+        ],
       },
-      {
+            {
         name: "Rex Davis",
+        gender: "M",
         nickname: "Sonny",
         profession: "Teacher",
         imageLink: "/photos/Davis/SonnyDavis.jpg",
         children: [
           {
             name: "Brian Davis",
+            gender: "M",
             profession: "Teacher",
             imageLink: "/photos/Davis/BrianDavis.jpg",
-            spouse: { name: "Tina Davis" },
+            spouse: { name: "Tina Davis", gender: "F" },
             children: [
-              { name: "Hallie Davis", imageLink: "/photos/Davis/HallieDavis.jpg" },
-              { name: "Andrew Davis", imageLink: "/photos/Davis/AndrewDavis.jpg" },
-              { name: "Jessica Davis", imageLink: "/photos/Davis/JessDavis.jpg" }
-            ]
+              {
+                name: "Hallie Davis",
+                gender: "F",
+                imageLink: "/photos/Davis/HallieDavis.jpg",
+              },
+              {
+                name: "Andrew Davis",
+                gender: "M",
+                imageLink: "/photos/Davis/AndrewDavis.jpg",
+              },
+              {
+                name: "Jessica Davis",
+                gender: "F",
+                imageLink: "/photos/Davis/JessDavis.jpg",
+              },
+            ],
           },
           {
             name: "Stephen Davis",
+            gender: "M",
             birthyear: 1971,
             imageLink: "/photos/Davis/StephenDavis.jpg",
-            spouse: { name: "Julie Soltis ⟷" },
+            spouse: { name: "Julie Soltis ⟷", gender: "F" },
             children: [
               {
                 name: "Emilee Schmetzer",
+                gender: "F",
                 imageLink: "/photos/Emilee&StevenSchmetzer.jpg",
-                spouse: { name: "Steven Schmetzer", imageLink: "/photos/Emilee&StevenSchmetzer.jpg" }
+                spouse: {
+                  name: "Steven Schmetzer",
+                  gender: "M",
+                  imageLink: "/photos/Emilee&StevenSchmetzer.jpg",
+                },
               },
-              { name: "Josh Davis", imageLink: "/photos/Davis/JoshDavis.jpg" }
-            ]
-          }
-        ]
-      }
-    ]
+              { name: "Josh Davis", gender: "M", imageLink: "/photos/Davis/JoshDavis.jpg" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Sandra Robinson",
+        gender: "F",
+        birthyear: 1944,
+        deathyear: 2006,
+        deathplace: "Salem, WV",
+        profession:
+          "Store Owner of Ben Franklin - Salem & Grantsville, WV stores",
+        imageLink: "/photos/Robinson/SandraRobinson.jpg",
+        // Married Jim Robinson - children listed under Robinson tree
+      },
+
+      {
+        name: "Patty Malov",
+        gender: "F",
+        imageLink: "/photos/Malov/PattyMalov.jpg",
+        spouse: {
+          name: "Alex Malov",
+          gender: "M",
+          birthyear: 1952,
+          deathyear: 2023,
+          imageLink: "/photos/Malov/AlexMalov.jpg",
+        },
+      },
+
+
+        {
+        name: "Belinda Kamann",
+        gender: "F",
+        imageLink: "/photos/Kamann/BelindaKamann.jpg",
+        spouse: {
+          name: "Kevin Kamann *",
+          gender: "M",
+          imageLink: "/photos/Kamann/KevinKamann.jpg",
+        },
+        children: [
+          {
+            name: "Jared Kamann",
+            gender: "M",
+            imageLink: "/photos/Kamann/JaredKamann.jpg",
+            children: [
+              {
+                name: "Tristan Kamann",
+                gender: "M",
+                imageLink: "/photos/Kamann/TristanKamann.jpg",
+              },
+              {
+                name: "Quinn Kamann",
+                gender: "F",
+                imageLink: "/photos/Kamann/QuinnKamann.jpg",
+              },
+              {
+                name: "Wyatt Kamann",
+                gender: "M",
+                imageLink: "/photos/Kamann/WyattKamann.jpg",
+              },
+              {
+                name: "Rhett Kamann",
+                gender: "M",
+                imageLink: "/photos/Kamann/RhettKamann.jpg",
+              },
+            ],
+          },
+          { name: "Kurt Kamann", gender: "M", imageLink: "/photos/Kamann/KurtKamann.jpg" },
+          { name: "Gabe Kamann", gender: "M" },
+        ],
+      },
+    ],
   },
 
   // ============================================================
@@ -274,16 +425,141 @@ export const familyData = {
     founders: [
       {
         name: "R.L.N. Sarma *",
-        deathyear: "~"
+        gender: "M",
+        deathyear: "~",
       },
       {
         name: "R. Subbalakshmi",
-        deathyear: "~"
-      }
+        gender: "F",
+        deathyear: "~",
+      },
     ],
     children: [
       {
+        name: "Venkateswari Parimi",
+        gender: "F",
+        children: [{ name: "Umapathy", gender: "M" }, { name: "P.L.N. Sarma", gender: "M" }],
+      },
+      {
+        name: "Dabbu's Dad",
+        gender: "M",
+        deathyear: "unknown",
+        deathcause: "disappeared",
+        children: [
+          { name: "Pandu", gender: "F" },
+          { name: "Baba", gender: "M" },
+          { name: "Rohini", gender: "F", nickname: "Chinnamma" },
+          { name: "Dabbu", gender: "M" },
+        ],
+      },
+      {
+        name: "R. Subramanium",
+        gender: "M",
+        children: [
+          { name: "Subbalakshmi", gender: "F" },
+          { name: "Nawab", gender: "M" },
+          { name: "Chitti Babu", gender: "M" },
+        ],
+      },
+      {
+        name: "Suryanarayana Murthy",
+        gender: "M",
+        imageLink: "/photos/Royyuru/SuryanarayanaMurthy.jpg",
+        spouse: {
+          name: "V Sesharathnam",
+          gender: "F",
+          imageLink: "/photos/Royyuru/Sesharathnam.jpg",
+        },
+        children: [
+          {
+            name: "Kameswari Parimi",
+            gender: "F",
+            spouse: { ref: "Royyuru.Venkateswari Parimi.P.L.N. Sarma" },
+          },
+          {
+            name: "Dixit Royyuru",
+            gender: "M",
+            imageLink: "/photos/Royyuru/DixitRoyyuru.jpg",
+            spouse: {
+              name: "Asha Royyuru",
+              gender: "F",
+              imageLink: "/photos/Royyuru/AshaRoyyuru.jpg",
+            },
+            children: [
+              {
+                name: "Nikhil Dixit",
+                gender: "M",
+                imageLink: "/photos/Royyuru/NikhilRoyyuru.jpg",
+                profession: "Finance (FP&A)",
+              },
+              {
+                name: "Rohan Dixit",
+                gender: "M",
+                birthyear: 1998,
+                imageLink: "/photos/Royyuru/RohanRoyyuru.jpg",
+                profession: "CEO at MyWork",
+              },
+            ],
+          },
+          { name: "Sarma Royyuru", gender: "M" },
+          {
+            name: "Ajay Royyuru",
+            gender: "M",
+            birthyear: 1964,
+            imageLink: "/photos/Royyuru/AjayRoyyuru.jpg",
+            spouse: {
+              name: "Nibedita Royyuru",
+              gender: "F",
+              birthyear: 1963,
+              imageLink: "/photos/Royyuru/NibeditaRoyyuru.jpg",
+            },
+            children: [
+              {
+                name: "Aditya Royyuru",
+                gender: "M",
+                birthyear: 1993,
+                imageLink: "/photos/Royyuru/AdityaRoyyuru.jpg",
+                spouse: { name: "Ella Glover", gender: "F" },
+              },
+            ],
+          },
+          {
+            name: "Vijay Royyuru",
+            gender: "M",
+            birthyear: 1964,
+            imageLink: "/photos/Royyuru/VijayRoyyuru.jpg",
+            spouse: {
+              name: "Hema Royyuru",
+              gender: "F",
+              birthyear: 1961,
+              imageLink: "/photos/Royyuru/HemaRoyyuru.jpg",
+            },
+            children: [
+              {
+                name: "Harsha Kawahara",
+                gender: "F",
+                birthyear: 1991,
+                imageLink: "/photos/Kawahara/HarshaKawahara.jpg",
+                spouse: {
+                  name: "Alan Kawahara",
+                  gender: "M",
+                  birthyear: 1991,
+                  imageLink: "/photos/Kawahara/AlanKawahara.jpg",
+                },
+              },
+              {
+                name: "Varun Royyuru",
+                gender: "M",
+                birthyear: 1998,
+                imageLink: "/photos/Royyuru/VarunRoyyuru.jpg",
+              },
+            ],
+          },
+        ],
+      },
+      {
         name: "R.L.N. Sastry",
+        gender: "M",
         deathyear: 2010,
         deathplace: "Hyderabad, India",
         imageLink: "/photos/Royyuru/RLNSastry.jpg",
@@ -291,149 +567,130 @@ export const familyData = {
         children: [
           {
             name: "Lakshminarayana Royyuru",
+            gender: "M",
             nickname: "Sarma",
             birthyear: 1955,
             imageLink: "/photos/Royyuru/SarmaRoyyuru.jpg",
-            spouse: { name: "Lakshmi Royyuru", imageLink: "/photos/Royyuru/LakshmiRoyyuru.jpg" },
+            spouse: {
+              name: "Lakshmi Royyuru",
+              gender: "F",
+              imageLink: "/photos/Royyuru/LakshmiRoyyuru.jpg",
+            },
             children: [
               {
                 name: "Avinash Royyuru",
+                gender: "M",
+                nickname: "Vinoo",
                 imageLink: "/photos/Royyuru/AvinashRoyyuru.jpg",
-                spouse: { name: "Akanksha Mehta ⟷", imageLink: "/photos/AkankshaMehta.jpg" },
+                spouse: {
+                  name: "Akanksha Mehta ⟷",
+                  gender: "F",
+                  imageLink: "/photos/AkankshaMehta.jpg",
+                },
               },
               {
                 name: "Shruti Royyuru",
+                gender: "F",
+                nickname: "Tara",
                 imageLink: "/photos/Royyuru/TaraRoyyuru.jpg",
-                spouse: { name: "Sandeep Eyyuni", imageLink: "/photos/Eyyuni/SandeepEyyuni.jpg" },
+                spouse: {
+                  name: "Sandeep Eyyuni",
+                  gender: "M",
+                  imageLink: "/photos/Eyyuni/SandeepEyyuni.jpg",
+                },
                 children: [
-                  { name: "Shruti's son", birthyear: 2025, birthplace: "California" }
-                ]
-              }
-            ]
+                  {
+                    name: "Vimanyu Eyyuni",
+                    gender: "M",
+                    birthyear: 2025,
+                    birthplace: "California",
+                    imageLink: "/photos/Eyyuni/VimanyuEyyuni.jpg",
+                  },
+                ],
+              },
+            ],
           },
           {
             name: "Subba Hota",
+            gender: "F",
             birthyear: 1958,
             imageLink: "/photos/Hota/SubbaHota.jpg",
-            spouse: { name: "Ramarao Hota", birthyear: 1951, imageLink: "/photos/Hota/RamaraoHota.jpg" },
+            spouse: {
+              name: "Ramarao Hota",
+              gender: "M",
+              birthyear: 1951,
+              imageLink: "/photos/Hota/RamaraoHota.jpg",
+            },
             children: [
               {
                 name: "Pallavi Gudipati",
+                gender: "F",
                 birthyear: 1982,
                 birthplace: "Morgantown, WV",
                 imageLink: "/photos/Gudipati/PallaviGudipati.jpg",
-                spouse: { name: "Ravi Gudipati", imageLink: "/photos/Gudipati/RaviGudipati.jpg" },
+                spouse: {
+                  name: "Ravi Gudipati",
+                  gender: "M",
+                  imageLink: "/photos/Gudipati/RaviGudipati.jpg",
+                },
                 children: [
-                  { name: "Sitara Gudipati", birthyear: 2012, birthplace: "Cleveland, Ohio", imageLink: "/photos/Gudipati/SitaraGudipati.jpg" },
-                  { name: "Vishnu Gudipati", birthyear: 2015, birthplace: "Cleveland, Ohio", imageLink: "/photos/Gudipati/VishnuGudipati.jpg" }
-                ]
+                  {
+                    name: "Sitara Gudipati",
+                    gender: "F",
+                    birthyear: 2012,
+                    birthplace: "Cleveland, Ohio",
+                    imageLink: "/photos/Gudipati/SitaraGudipati.jpg",
+                  },
+                  {
+                    name: "Vishnu Gudipati",
+                    gender: "M",
+                    birthyear: 2015,
+                    birthplace: "Cleveland, Ohio",
+                    imageLink: "/photos/Gudipati/VishnuGudipati.jpg",
+                  },
+                ],
               },
               {
                 name: "Partha Hota",
+                gender: "M",
                 birthyear: 1985,
                 birthplace: "Morgantown, WV",
                 profession: "Radiologist",
                 imageLink: "/photos/Hota/ParthaHota.jpg",
-                spouse: { name: "Kristen Hota", imageLink: "/photos/Hota/KristenZuber.jpg" },
+                spouse: {
+                  name: "Kristen Hota",
+                  gender: "F",
+                  imageLink: "/photos/Hota/KristenZuber.jpg",
+                },
                 children: [
-                  { name: "Wilhelmina Hota", birthyear: 2025, birthplace: "Philadelphia, PA", imageLink: "/photos/Hota/WillaHota.jpg" }
-                ]
-              }
-            ]
+                  {
+                    name: "Wilhelmina Hota",
+                    gender: "F",
+                    birthyear: 2025,
+                    birthplace: "Philadelphia, PA",
+                    imageLink: "/photos/Hota/WillaHota.jpg",
+                  },
+                ],
+              },
+            ],
           },
           {
             name: "Padma Robinson",
+            gender: "F",
             birthyear: 1961,
             profession: "Director, Advanced Analytics",
-            imageLink: "/photos/Robinson/PadmaRobinson.jpg"
+            imageLink: "/photos/Robinson/PadmaRobinson.jpg",
             // Married John Robinson - children listed under Robinson tree
-          }
-        ]
-      },
-      {
-        name: "Suryanarayana Murthy",
-        imageLink: "/photos/Royyuru/SuryanarayanaMurthy.jpg",
-        spouse: { name: "V Sesharathnam", imageLink: "/photos/Royyuru/Sesharathnam.jpg" },
-        children: [
-          {
-            name: "Dixit Royyuru",
-            imageLink: "/photos/Royyuru/DixitRoyyuru.jpg",
-            spouse: { name: "Asha Royyuru", imageLink: "/photos/Royyuru/AshaRoyyuru.jpg" },
-            children: [
-              { name: "Nikhil Dixit", imageLink: "/photos/Royyuru/NikhilRoyyuru.jpg", profession: "Finance (FP&A)" },
-              { name: "Rohan Dixit", birthyear: 1998, imageLink: "/photos/Royyuru/RohanRoyyuru.jpg", profession: "CEO at MyWork" }
-            ]
           },
-          {
-            name: "Ajay Royyuru",
-            birthyear: 1964,
-            imageLink: "/photos/Royyuru/AjayRoyyuru.jpg",
-            spouse: { name: "Nibedita Royyuru", birthyear: 1963, imageLink: "/photos/Royyuru/NibeditaRoyyuru.jpg" },
-            children: [
-              {
-                name: "Aditya Royyuru",
-                birthyear: 1993,
-                imageLink: "/photos/Royyuru/AdityaRoyyuru.jpg",
-                spouse: { name: "Ella Glover" }
-              }
-            ]
-          },
-          {
-            name: "Vijay Royyuru",
-            birthyear: 1964,
-            imageLink: "/photos/Royyuru/VijayRoyyuru.jpg",
-            spouse: { name: "Hema Royyuru", birthyear: 1961, imageLink: "/photos/Royyuru/HemaRoyyuru.jpg" },
-            children: [
-              {
-                name: "Harsha Kawahara",
-                birthyear: 1991,
-                imageLink: "/photos/Kawahara/HarshaKawahara.jpg",
-                spouse: { name: "Alan Kawahara", birthyear: 1991, imageLink: "/photos/Kawahara/AlanKawahara.jpg" }
-              },
-              { name: "Varun Royyuru", birthyear: 1998, imageLink: "/photos/Royyuru/VarunRoyyuru.jpg" }
-            ]
-          },
-          {
-            name: "Kameswari Parimi",
-            spouse: { ref: "Royyuru.Venkateswari Parimi.P.L.N. Sarma" }
-          }
-        ]
-      },
-      {
-        name: "R. Subramanium",
-        children: [
-          { name: "Chitti Babu" },
-          { name: "Subbalakshmi" }
-        ]
-      },
-      {
-        name: "Dabbu's Dad",
-        deathyear: "unknown",
-        deathcause: "disappeared",
-        children: [
-          { name: "Baba" },
-          { name: "Pandu" },
-          { name: "Rohini", nickname: "Chinnamma" },
-          { name: "Dabbu" }
-        ]
-      },
-      {
-        name: "Venkateswari Parimi",
-        children: [
-          { name: "Umapathy" },
-          { name: "P.L.N. Sarma" }
-        ]
+        ],
       },
       {
         name: "Ammalu",
+        gender: "F",
         deathyear: 2023,
-        children: [
-          { name: "Jyothi" },
-          { name: "Babu Rao" },
-          { name: "Rama" }
-        ]
-      }
-    ]
+        children: [{ name: "Jyothi", gender: "F" }, { name: "Babu Rao", gender: "M" }, { name: "Rama", gender: "M" }],
+      },
+    ],
   },
 
   // ============================================================
@@ -443,120 +700,135 @@ export const familyData = {
     founders: [
       {
         name: "V.B.R. Sarma",
+        gender: "M",
         deathyear: "~",
-        profession: "Accountant"
+        profession: "Accountant",
       },
       {
         name: "V. Padmavathi",
+        gender: "F",
+        birthyear: 1914,
         deathyear: "~",
-        fromFamily: { ref: "Evani.Lakshmi Narasimham Evani" } // She came from the Evani family
-      }
+        fromFamily: { ref: "Evani.Sita Mahalakshmi Evani" }, // She came from the Evani family
+      },
     ],
     children: [
       {
-        name: "Sita Devi Royyuru",
-        birthyear: 1938,
-        deathyear: 1995,
-        deathplace: "Hyderabad, India",
-        imageLink: "/photos/Royyuru/SitaRoyyuru.jpg"
-        // Married R.L.N. Sastry - children listed under Royyuru tree
-      },
-      {
-        name: "V Pardhasaradhi",
-        nickname: "Pardha",
-        imageLink: "/photos/PardhasaradhiViswanadham.jpg",
-        spouse: { name: "Annapurna Viswanadham" },
-        children: [
-          {
-            name: "Surendra Viswanadham",
-            nickname: "Suri",
-            imageLink: "/photos/SuriViswanadham.jpg",
-            spouse: { name: "Suri's wife" },
-            children: [
-              { name: "Nandini Viswanadham" }
-            ]
-          },
-          {
-            name: "Jitu Viswanadham",
-            imageLink: "/photos/JituViswanadham.jpg",
-            spouse: { name: "Jitu's wife" },
-            children: [
-              { name: "Aditya Viswanadham", imageLink: "/photos/AdityaViswanadham.jpg" }
-            ]
-          }
-        ]
-      },
-      {
         name: "VVS Sastry",
+        gender: "M",
         nickname: "Srini",
         birthyear: 1930,
         birthplace: "Visakhapatnam, India",
-        spouse: { name: "Sita Viswanadham", birthyear: 1935, birthplace: "Visakhapatnam, India", imageLink: "/photos/SitaViswanadham.jpg" },
+        spouse: {
+          name: "Sita Viswanadham",
+          gender: "F",
+          birthyear: 1935,
+          birthplace: "Visakhapatnam, India",
+          imageLink: "/photos/SitaViswanadham.jpg",
+        },
         children: [
           {
             name: "V Bhaskar",
+            gender: "M",
             nickname: "Bhanu",
             birthyear: 1966,
             birthplace: "New Delhi, India",
             imageLink: "/photos/BhanuViswanadham.jpg",
-            spouse: { name: "Monica Viswanadham", deathyear: 2019, imageLink: "/photos/MonicaViswanadham.jpg" },
+            spouse: {
+              name: "Monica Viswanadham",
+              gender: "F",
+              deathyear: 2019,
+              imageLink: "/photos/MonicaViswanadham.jpg",
+            },
             children: [
-              { name: "Mira Viswanadham", imageLink: "/photos/MiraViswanadham.jpg" }
-            ]
-          }
-        ]
+              {
+                name: "Mira Viswanadham",
+                gender: "F",
+                imageLink: "/photos/MiraViswanadham.jpg",
+              },
+            ],
+          },
+        ],
       },
       {
         name: "VV Sastry",
-        nickname: "Raja"
+        gender: "M",
+        nickname: "Raja",
+        spouse: {
+          name: "Lakshmi Viswanadham",
+          gender: "F",
+        },
       },
       {
         name: "V Atchutaramaiah",
+        gender: "M",
         birthyear: 1936,
         children: [
           {
             name: "Padma Murthi",
+            gender: "F",
             imageLink: "/photos/Murthi/PadmaMurthi.jpg",
-            spouse: { name: "B.P.S. Murthi", profession: "Marketing Professor", imageLink: "/photos/Murthi/BPSMurthi.jpg" },
+            spouse: {
+              name: "B.P.S. Murthi",
+              gender: "M",
+              profession: "Marketing Professor",
+              imageLink: "/photos/Murthi/BPSMurthi.jpg",
+            },
             children: [
               {
-                name: "Sweta",
+                name: "Dr. Sweta",
+                gender: "F",
                 imageLink: "/photos/Sweta.jpg",
-                children: [
-                  { name: "Kamya" },
-                  { name: "Sweta's son" }
-                ]
-              }
-            ]
+                children: [{ name: "Kamya", gender: "F" }, { name: "Sweta's son", gender: "M" }],
+              },
+            ],
           },
           {
             name: "Bhaskar Viswanatham",
+            gender: "M",
             nickname: "Bujju",
             profession: "Chartered Accountant/Tax Consultant",
             imageLink: "/photos/BujjuViswanatham.jpg",
-            spouse: { name: "Suchitra Viswanatham" },
+            spouse: { name: "Suchitra Viswanatham", gender: "F" },
             children: [
-              { name: "Anandita Viswanatham", profession: "Doctor", imageLink: "/photos/AnanditaViswanatham.jpg" },
               {
                 name: "Aditya Viswanatham",
+                gender: "M",
                 profession: "Software Engineer",
                 imageLink: "/photos/AdityaViswanatham.jpg",
                 birthyear: 1999,
-                spouse: { name: "Rukmini Viswanatham" }
-              }
-            ]
+                spouse: { name: "Rukmini Viswanatham", gender: "F" },
+              },
+              {
+                name: "Anandita Viswanatham",
+                gender: "F",
+                profession: "Doctor",
+                imageLink: "/photos/AnanditaViswanatham.jpg",
+              },
+            ],
           },
           {
             name: "Sudha Dhara",
+            gender: "F",
             imageLink: "/photos/Dhara/SudhaDhara.jpg",
+            spouse: {
+              name: "Narendra Dhara",
+              gender: "M",
+            },
             children: [
-              { name: "Amulya Dhara *", imageLink: "/photos/Dhara/AmulyaDhara.jpg" }
-            ]
-          }
-        ]
+              {
+                name: "Amulya Dhara *",
+                gender: "F",
+                imageLink: "/photos/Dhara/AmulyaDhara.jpg",
+              },
+            ],
+          },
+        ],
       },
+
       {
         name: "V Prakasa Rao",
+        gender: "M",
         birthyear: 1941,
         deathyear: 2024,
         deathplace: "Rajahmundry, India",
@@ -564,115 +836,219 @@ export const familyData = {
         children: [
           {
             name: "Prabha",
-            children: [
-              { name: "Prabha's son" },
-              { name: "Prabha's daughter" }
-            ]
+            gender: "M",
+            spouse: { name: "Prabha's wife", gender: "F" },
+            children: [{ name: "Prabha's son", gender: "M" }, { name: "Prabha's daughter", gender: "F" }],
           },
           {
             name: "Krishna Rao VVS",
+            gender: "M",
+            spouse: { name: "Syamala Krishna", gender: "F" },
             imageLink: "/photos/KrishnaRaoVVS.jpg",
-            children: [
-              { name: "Anirudh" }
-            ]
-          }
-        ]
+            children: [{ name: "Anirudh", gender: "M", imageLink: "/photos/Anirudh.jpg" }],
+          },
+        ],
       },
+
       {
         name: "Dr. Sastry",
+        gender: "M",
         nickname: "Butchi",
         imageLink: "/photos/Butchi.jpg",
         children: [
           {
             name: "Padmini Shanmugam",
+            gender: "F",
+            spouse: { name: "Dr Shanmugam", gender: "M" },
             imageLink: "/photos/PadminiShanmugam.jpg",
             children: [
-              { name: "Padmini's son 1" },
-              { name: "Padmini's son 2" }
-            ]
+              { name: "Padmini's son 1", gender: "M" },
+              { name: "Padmini's son 2", gender: "M" },
+            ],
           },
-          { name: "Sunny" }
-        ]
+          { name: "Bhaskar", gender: "M", nickname: "Sunny" },
+        ],
       },
       {
         name: "V Sundaram",
+        gender: "M",
         children: [
           {
-            name: "Bhaskar",
+            name: "Bhaskar Viswanadham",
+            gender: "M",
+            spouse: { name: "Jyoti", gender: "F" },
             nickname: "Bachee",
             deathyear: "2020",
             deathcause: "Covid-19",
             imageLink: "/photos/BacheeViswanadham.jpg",
             children: [
-              { name: "Bachee's daughter 1", imageLink: "/photos/BacheeDaughter1.jpg" },
-              { name: "Bachee's daughter 2", imageLink: "/photos/BacheeDaughter2.jpg" }
-            ]
+              {
+                name: "Yashila",
+                gender: "F",
+                imageLink: "/photos/BacheeDaughter1.jpg",
+              },
+              {
+                name: "Bachee's daughter 2",
+                gender: "F",
+                imageLink: "/photos/BacheeDaughter2.jpg",
+              },
+            ],
           },
           {
-            name: "Sriram",
+            name: "Sriram Viswanadham",
+            gender: "M",
+            spouse: { name: "Pavani", gender: "F" },
             deathyear: "2020",
             deathcause: "Covid-19",
             imageLink: "/photos/SriramViswanadham.jpg",
             children: [
-              { name: "Sriram's son", imageLink: "/photos/Sriram'sSon.jpg" },
-              { name: "Sriram's daughter", imageLink: "/photos/Sriram'sDaughter.jpg" }
-            ]
-          }
-        ]
+              {
+                name: "Sriram's daughter",
+                gender: "F",
+                imageLink: "/photos/Sriram'sDaughter.jpg",
+              },
+              { name: "Sriyan", gender: "M", imageLink: "/photos/Sriram'sSon.jpg" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "V Pardhasaradhi",
+        gender: "M",
+        nickname: "Pardha",
+        imageLink: "/photos/PardhasaradhiViswanadham.jpg",
+        spouse: { name: "Annapurna Viswanadham", gender: "F" },
+        children: [
+          {
+            name: "Jitu Viswanadham",
+            gender: "M",
+            imageLink: "/photos/JituViswanadham.jpg",
+            spouse: { name: "Jitu's wife", gender: "F" },
+            children: [
+              {
+                name: "Aditya Viswanadham",
+                gender: "M",
+                imageLink: "/photos/AdityaViswanadham.jpg",
+              },
+            ],
+          },
+          {
+            name: "Surendra Viswanadham",
+            gender: "M",
+            nickname: "Suri",
+            imageLink: "/photos/SuriViswanadham.jpg",
+            spouse: {
+              name: "Aparna Viswanadham",
+              gender: "F",
+              imageLink: "/photos/AparnaViswanadham.jpg",
+            },
+            children: [
+              {
+                name: "Nandini Viswanadham",
+                gender: "F",
+                imageLink: "/photos/NandiniViswanadham.jpg",
+              },
+            ],
+          },
+        ],
       },
       {
         name: "Ravikanta Chavali",
+        gender: "F",
         deathyear: 2024,
         deathplace: "Chennai, India",
         imageLink: "/photos/Chavali/RavikantaChavali.jpg",
         children: [
           {
             name: "Neeru Palepu *",
+            gender: "F",
             birthyear: 1966,
             imageLink: "/photos/Palepu/NeeruPalepu.jpg",
-            spouse: { name: "Prasad Palepu" },
+            spouse: { name: "Prasad Palepu", gender: "M" },
             children: [
-              { name: "Anjana Palepu", imageLink: "/photos/Palepu/AnjanaPalepu.jpg" },
-              { name: "Sneha Palepu", imageLink: "/photos/Palepu/SnehaPalepu.jpg" },
-              { name: "Nethra Palepu", imageLink: "/photos/Palepu/NethraPalepu.jpg" }
-            ]
-          }
-        ]
+              {
+                name: "Anjana Palepu",
+                gender: "F",
+                imageLink: "/photos/Palepu/AnjanaPalepu.jpg",
+              },
+              {
+                name: "Sneha Palepu",
+                gender: "F",
+                imageLink: "/photos/Palepu/SnehaPalepu.jpg",
+              },
+              {
+                name: "Nethra Palepu",
+                gender: "F",
+                profession: "Psychologist",
+                imageLink: "/photos/Palepu/NethraPalepu.jpg",
+              },
+            ],
+          },
+        ],
       },
+
+      {
+        name: "Sita Devi Royyuru",
+        gender: "F",
+        birthyear: 1938,
+        deathyear: 1995,
+        deathplace: "Hyderabad, India",
+        imageLink: "/photos/Royyuru/SitaRoyyuru.jpg",
+        // Married R.L.N. Sastry - children listed under Royyuru tree
+      },
+
       {
         name: "Radha Yenamandra",
+        gender: "F",
         deathyear: 1968,
-        spouse: { name: "Dharma Rao" },
+        spouse: { name: "Dharma Rao", gender: "M" },
         children: [
-          { name: "Neeru Palepu (* by Ravi dodda)", birthyear: 1966 }
-        ]
+          {
+            name: "Neeru Palepu (* by Ravi dodda)",
+            gender: "F",
+            birthyear: 1966,
+            imageLink: "/photos/Palepu/NeeruPalepu.jpg",
+          },
+        ],
       },
       {
         name: "Durga Hari",
+        gender: "F",
         birthyear: 1947,
         deathyear: 2025,
         imageLink: "/photos/Hari/DurgaHari.jpg",
         children: [
           {
-            name: "Anant Hari",
-            imageLink: "/photos/Hari/AnantHari.jpg",
-            children: [
-              { name: "Anant's son" }
-            ]
-          },
-          {
             name: "Vinod Hari",
+            gender: "M",
+            spouse: { name: "Srividya Hari", gender: "F" },
             imageLink: "/photos/Hari/VinodHari.jpg",
             profession: "Banking & Financial Services",
             children: [
-              { name: "Karthik Hari", imageLink: "/photos/Hari/KarthikHari.jpg" },
-              { name: "Shanmukha Shaurya Hari", birthyear: 2014, imageLink: "/photos/Hari/ShanmukhaHari.jpg" }
-            ]
-          }
-        ]
+              {
+                name: "Karthik Hari",
+                gender: "M",
+                imageLink: "/photos/Hari/KarthikHari.jpg",
+              },
+              {
+                name: "Shanmukha Shaurya Hari",
+                gender: "M",
+                birthyear: 2014,
+                imageLink: "/photos/Hari/ShanmukhaHari.jpg",
+              },
+            ],
+          },
+          {
+            name: "Anant Hari",
+            gender: "M",
+            spouse: { name: "Pratyusha Hari", gender: "F" },
+            imageLink: "/photos/Hari/AnantHari.jpg",
+            children: [{ name: "Anant's son", gender: "M" }],
+          },
+        ],
       },
-      { name: "Rajeshwari Chainulu" }
-    ]
+      { name: "Rajeshwari Chainulu", gender: "F", spouse: { name: "Dr. Chainulu", gender: "M" } },
+    ],
   },
 
   // ============================================================
@@ -681,122 +1057,238 @@ export const familyData = {
   Evani: {
     founders: [
       {
-        name: "Sita Evani",
-        imageLink: "/photos/Evani/SitaEvani.jpg"
+        name: "Sita Mahalakshmi Evani",
+        gender: "F",
+        imageLink: "/photos/Evani/SitaEvani.jpg",
+        birthyear: 1888,
+        deathyear: 1971,
       },
       {
-        name: "Subbayya Sastry Evani"
-      }
+        name: "Subbayya Sastry Evani",
+        gender: "M",
+        birthyear: 1884,
+        deathyear: 1974,
+      },
     ],
     children: [
       {
         name: "Lakshmi Narasimham Evani",
+        gender: "M",
         birthyear: 1904,
         deathyear: 1976,
-        spouse: { name: "Atchutam Evani", birthyear: 1919 },
+        spouse: { name: "Atchutam Evani", gender: "F", birthyear: 1919 },
         children: [
           {
             name: "Syamalarao Evani",
+            gender: "M",
             nickname: "Syam",
             imageLink: "/photos/Evani/SyamalaraoEvani.jpg",
             birthplace: "Srikakulam, Andhra Pradesh, India",
             profession: "Research Scientist (Dow Chemical)",
             birthyear: 1928,
             deathyear: 2011,
-            spouse: { name: "Veeramathi Evani", nickname: "Rama" },
+            spouse: { name: "Veeramathi Evani", gender: "F", nickname: "Rama" },
             children: [
-              { name: "Venkatarama Narasimham Evani", nickname: "Bobby", birthyear: 1960 },
-              { name: "Lakshman Evani", nickname: "Lucky", birthyear: 1967 },
-              { name: "Venu Gopala Sarma Evani", birthyear: 1974 }
-            ]
+              {
+                name: "Venkatarama Narasimham Evani",
+                gender: "M",
+                nickname: "Bobby",
+                birthyear: 1960,
+              },
+              { name: "Lakshman Evani", gender: "M", nickname: "Lucky", birthyear: 1967 },
+              { name: "Venu Gopala Sarma Evani", gender: "M", birthyear: 1974 },
+            ],
           },
-          { name: "Manikyamba Tenneti" },
+          { name: "Manikyamba Tenneti", gender: "F" },
           {
             name: "Subbaya Sastry Evani",
+            gender: "M",
             nickname: "Sastry",
-            spouse: { name: "Lakshmi Evani" },
+            spouse: { name: "Lakshmi Evani", gender: "F" },
             children: [
               {
                 name: "Sastry Evani",
+                gender: "M",
                 birthyear: 1963,
                 birthplace: "Kakinada, India",
-                spouse: { name: "Jyothi Evani" },
-                children: [
-                  { name: "Anjali Evani", birthyear: 2003 }
-                ]
+                spouse: { name: "Jyothi Evani", gender: "F" },
+                children: [{ name: "Anjali Evani", gender: "F", birthyear: 2003 }],
               },
               {
                 name: "Lakshmi Dalwalla",
+                gender: "F",
                 birthyear: 1965,
                 birthplace: "Kakinada, India",
                 imageLink: "/photos/Dalwalla/LakshmiDalwalla.jpg",
-                spouse: { name: "Paresh Dalwalla", birthyear: 1968, imageLink: "/photos/Dalwalla/PareshDalwalla.jpg" },
+                spouse: {
+                  name: "Paresh Dalwalla",
+                  gender: "M",
+                  birthyear: 1968,
+                  imageLink: "/photos/Dalwalla/PareshDalwalla.jpg",
+                },
                 children: [
-                  { name: "Mitali Dalwalla", birthyear: 1999, imageLink: "/photos/Dalwalla/MitaliDalwalla.jpg" }
-                ]
+                  {
+                    name: "Mitali Dalwalla",
+                    gender: "F",
+                    birthyear: 1999,
+                    imageLink: "/photos/Dalwalla/MitaliDalwalla.jpg",
+                  },
+                ],
               },
               {
                 name: "Satyakant Evani",
+                gender: "M",
                 nickname: "Purna",
                 birthyear: 1971,
                 birthplace: "Bokaro Steel City, India",
-                spouse: { name: "Lisa Evani" }
-              }
-            ]
+                spouse: { name: "Lisa Evani", gender: "F" },
+              },
+            ],
           },
           {
             name: "Kameswara Sarma Evani",
+            gender: "M",
             nickname: "Thambi",
-            spouse: { name: "Lakshmi Evani" },
-            children: [
-              { name: "Ajaisimha Evani", nickname: "Ajai" }
-            ]
+            spouse: { name: "Lakshmi Evani", gender: "F" },
+            children: [{ name: "Ajaisimha Evani", gender: "M", nickname: "Ajai" }],
           },
           {
             name: "Kameswari Kunapuli",
+            gender: "F",
+            spouse: { name: "KVS Suryanarayana", gender: "M" },
             nickname: "Papa",
             imageLink: "/photos/Kunapuli/KameswariKunapuli.jpg",
-            spouse: { name: "Kameswari's Husband" },
             children: [
               {
                 name: "Saraswathi Jayanthy",
+                gender: "F",
                 nickname: "Achuta",
                 birthyear: 1960,
                 imageLink: "/photos/Achuta&Ramamurthy.jpg",
-                spouse: { name: "Ramamurthy J.V.", birthyear: 1953, imageLink: "/photos/Achuta&Ramamurthy.jpg" },
+                spouse: {
+                  name: "Ramamurthy J.V.",
+                  gender: "M",
+                  birthyear: 1953,
+                  imageLink: "/photos/Achuta&Ramamurthy.jpg",
+                },
                 children: [
-                  { name: "Surya Jayanthy", nickname: "Karthik", birthyear: 1985, imageLink: "/photos/KarthikJayanthy.jpg" }
-                ]
+                  {
+                    name: "Surya Jayanthy",
+                    gender: "M",
+                    nickname: "Karthik",
+                    birthyear: 1985,
+                    imageLink: "/photos/KarthikJayanthy.jpg",
+                  },
+                ],
               },
               {
                 name: "Satya Kunapuli",
+                gender: "M",
                 nickname: "Babu",
                 imageLink: "/photos/Kunapuli/SatyaKunapuli.jpg",
-                spouse: { name: "Suma Kunapuli", imageLink: "/photos/Kunapuli/SumaKunapuli.jpg" },
+                spouse: {
+                  name: "Suma Kunapuli",
+                  gender: "F",
+                  imageLink: "/photos/Kunapuli/SumaKunapuli.jpg",
+                },
                 children: [
-                  { name: "Shalini Kunapuli", imageLink: "/photos/Kunapuli/ShaliniKunapuli.jpg" },
-                  { name: "Sangita Kunapuli", imageLink: "/photos/Kunapuli/SangitaKunapuli.jpg" }
-                ]
-              }
-            ]
-          }
-        ]
+                  {
+                    name: "Shalini Kunapuli",
+                    birthyear: 1998,
+                    gender: "F",
+                    imageLink: "/photos/Kunapuli/ShaliniKunapuli.jpg",
+                  },
+                  {
+                    name: "Sangita Kunapuli",
+                    birthyear: 2001,
+                    gender: "F",
+                    imageLink: "/photos/Kunapuli/SangitaKunapuli.jpg",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
-      { name: "Subbaraya Sastry Evani" },
-      { name: "Ramalingeswara Evani", imageLink: "/photos/Evani/RamalingeswaraEvani.jpg" },
+      { name: "Subbaraya Sastry Evani", gender: "M" },
+      {
+        name: "Ramalingeswara Evani",
+        gender: "M",
+        imageLink: "/photos/Evani/RamalingeswaraEvani.jpg",
+      },
       {
         name: "Annapoorna Bhagavatula",
+        gender: "F",
         birthyear: 1906,
         deathyear: 1987,
-        spouse: { name: "Subrahmaniam Bhagavatula" }
+        spouse: { name: "Subrahmaniam Bhagavatula", gender: "M" },
       },
-      { name: "Mahalakshmi Gunupudi" },
-      { name: "Janaki Mithipati" },
-      { name: "Saraswathi Kunapuli" },
-      { name: "Kamala Malladi" },
-      { name: "Subbalakshmi Gunturu", imageLink: "/photos/SubbalakshmiGunturu.jpg" },
-      { name: "Prabhavathi Vuppuluri" },
-      { name: "Suryakantham Emani" }
-    ]
-  }
+      { name: "Janaki Mithipati", gender: "F", birthyear: 1915 },
+      {
+        name: "Mahalakshmi Gunupudi",
+        gender: "F",
+        birthyear: 1910,
+        deathyear: 1975,
+        children: [
+          {
+            name: "Nageswarao Gunupudi",
+            gender: "M",
+            children: [
+              {
+                name: "Pavan Gunupudi",
+                gender: "M",
+                spouse: { name: "Sailaja Gunupudi", gender: "F" },
+                children: [
+                  { name: "Dhatri Gunupudi", gender: "F" },
+                  { name: "Maitri Gunupudi", gender: "F" },
+                  { name: "Keerti Gunupudi", gender: "F" },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Saraswathi Kunapuli",
+        gender: "F",
+        birthyear: 1912,
+        spouse: { name: "Satyanarayana Kunapuli", gender: "M", birthyear: 1904 },
+      },
+      { name: "Kamala Malladi", gender: "F", birthyear: 1921, deathyear: 1977 },
+      {
+        name: "Subbalakshmi Gunturu",
+        gender: "F",
+        imageLink: "/photos/SubbalakshmiGunturu.jpg",
+      },
+      {
+        name: "Prabhavathi Vuppuluri",
+        gender: "F",
+        spouse: { name: "Kalidas Vuppuluri", gender: "M" },
+        children: [
+          {
+            name: "Madhu Vuppuluri",
+            gender: "M",
+            imageLink: "/photos/Vuppuluri/MadhuVuppuluri.jpg",
+            spouse: {
+              name: "Seeta Vuppuluri",
+              gender: "F",
+              nickname: "Baby",
+              imageLink: "/photos/Vuppuluri/SeetaVuppuluri.jpg",
+            },
+             children: [{ name: "Pratibha", gender: "F", spouse: {name: "Philip Au", gender: "M"} }, { name: "Nima", gender: "F" }],
+          },
+          {
+            name: "Sita Sastry Bhagavatula",
+            gender: "F",
+            children: [
+              { name: "Sireesha Malviya", gender: "F" },
+              { name: "Kalyanram Bhagavatula", gender: "M" },
+            ],
+          },
+          { name: "Subhash Vuppuluri", gender: "M" },
+        ],
+      },
+      { name: "Suryakantham Emani", gender: "M" },
+    ],
+  },
 };

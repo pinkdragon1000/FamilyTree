@@ -139,8 +139,12 @@ function FounderMini({ person, onViewAncestors, onJumpToTree }) {
     deathyear,
     deathplace,
     profession,
-    imageLink
+    imageLink,
+    gender
   } = person;
+
+  // Gender symbol helper
+  const genderSymbol = gender === 'M' ? ' ♂' : gender === 'F' ? ' ♀' : '';
 
   const isAdopted = name?.includes('*');
   const isDivorced = name?.includes('⟷');
@@ -189,7 +193,7 @@ function FounderMini({ person, onViewAncestors, onJumpToTree }) {
 
       <div className="founder-mini-info">
         <div className="founder-mini-name">
-          {displayName}
+          {displayName}{genderSymbol}
           {isAdopted && <span className="symbol-text symbol-adopted" title="Adopted"> *</span>}
           {isFromOtherMarriage && <span className="symbol-text symbol-other-marriage" title="From another marriage"> ½</span>}
           {isDivorced && <span className="symbol-text symbol-divorced" title="Divorced"> ⟷</span>}

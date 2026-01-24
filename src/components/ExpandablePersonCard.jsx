@@ -142,8 +142,12 @@ function PersonMini({ person, onJumpToTree, getParentCoupleForPerson, navigateUp
     deathyear,
     deathplace,
     profession,
-    imageLink
+    imageLink,
+    gender
   } = person;
+
+  // Gender symbol helper
+  const genderSymbol = gender === 'M' ? ' ♂' : gender === 'F' ? ' ♀' : '';
 
   // Check if this person has parents we can navigate to
   const parentCouple = getParentCoupleForPerson ? getParentCoupleForPerson(id) : null;
@@ -189,7 +193,7 @@ function PersonMini({ person, onJumpToTree, getParentCoupleForPerson, navigateUp
 
       <div className="person-mini-info">
         <div className="person-mini-name">
-          {displayName}
+          {displayName}{genderSymbol}
         </div>
         {nickname && <div className="person-mini-nickname">"{nickname}"</div>}
         {profession && <div className="person-mini-profession">{profession}</div>}

@@ -833,6 +833,8 @@ class FTDrawer {
     const imageLink = node.data.imageLink;
     const profession = node.data.profession;
     const nickname = node.data.nickname;
+    const gender = node.data.gender;
+    const genderSymbol = gender === 'M' ? ' ♂' : gender === 'F' ? ' ♀' : '';
     
     var content = ``;
     
@@ -841,7 +843,7 @@ class FTDrawer {
       content += `<img src="${imageLink}" alt="${node.get_name()}" style="width: 100px; height: auto; display: block; margin: 0 auto 10px auto; border-radius: 5px;"><br>`;
     }
     
-    content += `<span style='margin-left: 2.5px;'><b>` + node.get_name() + `</b></span>`;
+    content += `<span style='margin-left: 2.5px;'><b>` + node.get_name() + genderSymbol + `</b></span>`;
     
     // Add nickname if available
     if (nickname) {

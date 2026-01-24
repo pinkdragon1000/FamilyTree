@@ -406,13 +406,7 @@ function getChildrenFromUnion(unionId, unions, persons) {
 
   return union.children
     .map(childId => ({ id: childId, ...persons[childId] }))
-    .filter(child => child.name)
-    .sort((a, b) => {
-      if (a.birthyear && b.birthyear) {
-        return Number(a.birthyear) - Number(b.birthyear);
-      }
-      return (a.name || '').localeCompare(b.name || '');
-    });
+    .filter(child => child.name);
 }
 
 /**

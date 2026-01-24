@@ -69,9 +69,12 @@ function Legend({ showNodeColors = false }) {
           <div className={showNodeColors ? 'legend-section' : ''}>
             {showNodeColors && <div className="legend-subtitle">Symbols:</div>}
             <div className="legend-notes">
+              <p><strong>♂</strong> Male</p>
+              <p><strong>♀</strong> Female</p>
               <p><strong>*</strong> Adopted or not biologically related</p>
               <p><strong>½</strong> From another marriage</p>
               <p><strong>~</strong> Passed away, year unknown</p>
+              <p><strong>○</strong> Stillborn</p>
               <p><strong>⟷</strong> Divorced out of the family</p>
             </div>
           </div>
