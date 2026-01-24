@@ -48,7 +48,7 @@ export const data = {
     // Union u1: Carmel & Retha Robinson
     id1: {
       name: "Carmel Robinson",
-      birthyear: 1917,
+      birthyear: 1918,
       deathyear: 1998,
       own_unions: ["u1"],
       profession: "Store Owner of Ben Franklin - Ripley, WV stores",
@@ -82,11 +82,19 @@ export const data = {
       own_unions: ["u8"],
       parent_union: "u1",
     },
+    id221: {
+      name: "Karma Jane",
+      birthyear: 1952,
+      deathyear: 1952,
+      own_unions: [],
+      parent_union: "u1",
+    },
 
     // Union u2: Rex & Wilma Davis
     id5: {
       name: "Rex Davis",
       own_unions: ["u2"],
+      birthyear: 1909,
       deathyear: 1994,
     },
     id6: {
@@ -119,12 +127,13 @@ export const data = {
       name: "Patty Malov",
       own_unions: ["u9"],
       parent_union: "u2",
-      imageLink: "/photos/Davis/PattyMalov.jpg",
+      imageLink: "/photos/Malov/PattyMalov.jpg",
     },
     id17: {
       name: "Rebecca Davis",
       own_unions: ["u22"],
       parent_union: "u2",
+      birthyear: 1936,
       imageLink: "/photos/Davis/RebeccaDavis.jpg",
     },
     id52: {
@@ -199,6 +208,7 @@ export const data = {
     id214: {
       name: "Nick Anderson",
       own_unions: ["u77"],
+      imageLink: "/photos/Robinson/HannahRobinson.jpg",
     },
 
     // Union u5: John & Padma Robinson
@@ -224,11 +234,13 @@ export const data = {
       name: "Jared Kamann",
       own_unions: ["u50"],
       parent_union: "u6",
+      imageLink: "/photos/Kamann/JaredKamann.jpg"
     },
     id20: {
       name: "Kurt Kamann",
       own_unions: [],
       parent_union: "u6",
+      imageLink: "/photos/Kamann/KurtKamann.jpg"
     },
     id21: {
       name: "Gabe Kamann",
@@ -289,6 +301,13 @@ export const data = {
       birthyear: 2023,
       imageLink: "/photos/Johnson/OliverJohnson.jpg"
     },
+    id220: {
+      name: "Theo Johnson",
+      own_unions: [],
+      parent_union: "u12",
+      birthyear: 2025,
+      imageLink: "/photos/Johnson/TheoJohnson.jpg"
+    },
 
 
     // Union u8: Ron & Lois Robinson
@@ -315,8 +334,10 @@ export const data = {
     // Union u9: Patty & Alex Malov
     id35: {
       name: "Alex Malov",
+      birthyear: 1952,
       deathyear: 2023,
       own_unions: ["u9"],
+      imageLink: "/photos/Malov/AlexMalov.jpg"
     },
 
     // Union u10: Jodie & Chris Gardill
@@ -477,21 +498,25 @@ export const data = {
       name: "Tristan Kamann",
       own_unions: [],
       parent_union: "u50",
+      imageLink: "/photos/Kamann/TristanKamann.jpg"
     },
     id145: {
       name: "Quinn Kamann",
       own_unions: [],
       parent_union: "u50",
+      imageLink: "/photos/Kamann/QuinnKamann.jpg"
     },
     id146: {
       name: "Wyatt Kamann",
       own_unions: [],
       parent_union: "u50",
+      imageLink: "/photos/Kamann/WyattKamann.jpg"
     },
     id147: {
       name: "Rhett Kamann",
       own_unions: [],
       parent_union: "u50",
+      imageLink: "/photos/Kamann/RhettKamann.jpg"
     },
 
 
@@ -1523,6 +1548,7 @@ export const data = {
       own_unions: ["u71"],
       birthplace: "Kakinada, India",
       birthyear: "1965",
+      imageLink: "/photos/Dalwalla/LakshmiDalwalla.jpg"
     },
     id200: {
       name: "Satyakant Evani",
@@ -1538,6 +1564,7 @@ export const data = {
       name: "Paresh Dalwalla",
       own_unions: ["u71"],
       birthyear: "1968",
+      imageLink: "/photos/Dalwalla/PareshDalwalla.jpg"
     },
     // Children of u71
     id201: {
@@ -1545,6 +1572,7 @@ export const data = {
       parent_union: "u71",
       own_unions: [],
       birthyear: "1999",
+      imageLink: "/photos/Dalwalla/MitaliDalwalla.jpg"
     },
 
     // Union u72: Satyakant & Lisa Evani
