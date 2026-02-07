@@ -151,6 +151,10 @@ function processChildren(familyName, children, parentUnionId, parentPath = "") {
         const spouseId = processPerson(familyName, child.spouse, null, newParentPath);
         if (spouseId) {
           persons[spouseId].own_unions.push(childUnionId);
+          // Check if this spouse came from another family (for ancestor navigation)
+          if (child.spouse.fromFamily?.ref) {
+            pendingRefs.push({ personId: spouseId, ref: child.spouse.fromFamily.ref, type: "parentage" });
+          }
         }
 
         // Handle prior children from spouse's previous marriage
@@ -202,7 +206,8 @@ function processFamily(familyName, family) {
 
   // Track founding couple
   const mainFamilies = ["Robinson", "Davis", "Royyuru", "Viswanadham"];
-  const allFamilies = [...mainFamilies, "Evani"]; // Evani reachable via "View Ancestors"
+  const secondaryFamilies = ["Evani", "Furbee", "Long"];
+  const allFamilies = [...mainFamilies, ...secondaryFamilies]; // Evani reachable via "View Ancestors"
 
   if (allFamilies.includes(familyName)) {
     foundingCouples.push({

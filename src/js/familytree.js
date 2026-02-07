@@ -832,6 +832,8 @@ class FTDrawer {
     const deathPlace = node.data.deathplace;
     const imageLink = node.data.imageLink;
     const profession = node.data.profession;
+    const militaryService = node.data.militaryService;
+    const otherSpouses = node.data.otherSpouses;
     const nickname = node.data.nickname;
     const gender = node.data.gender;
     const genderSymbol = gender === 'M' ? ' ♂' : gender === 'F' ? ' ♀' : '';
@@ -854,7 +856,18 @@ class FTDrawer {
     if (profession) {
       content += `<br><span style='margin-left: 2.5px; font-style: italic;'>` + profession + `</span>`;
     }
-    
+
+    // Add military service if available
+    if (militaryService) {
+      content += `<br><span style='margin-left: 2.5px;'>🎖️ ` + militaryService + `</span>`;
+    }
+
+    // Add other spouses if available
+    if (otherSpouses && otherSpouses.length > 0) {
+      const spouseNames = otherSpouses.map(s => s.name).join(', ');
+      content += `<br><span style='margin-left: 2.5px; color: #666;'>Also married: ` + spouseNames + `</span>`;
+    }
+
     // Only add table if there's actual info to show
     const hasBirthInfo = birthYear || birthPlace;
     const hasDeathInfo = deathYear || deathPlace;

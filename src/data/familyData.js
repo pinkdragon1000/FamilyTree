@@ -16,8 +16,6 @@
  * - <-> = Divorced out of the family
  */
 
-import { image } from "d3";
-
 export const familyData = {
   // ============================================================
   // ROBINSON FAMILY
@@ -25,33 +23,66 @@ export const familyData = {
   Robinson: {
     founders: [
       {
-        name: "Carmel Robinson",
+        name: "Wilmer Robinson",
         gender: "M",
-        birthyear: 1918,
-        deathyear: 1998,
-        profession: "Store Owner of Ben Franklin - Ripley, WV stores",
-        imageLink: "/photos/Robinson/CarmelRobinson.jpg",
+        birthyear: 1886,
+        deathyear: 1975,
+        imageLink: "/photos/Robinson/WilmerRobinson.jpg"
       },
       {
-        name: "Retha Robinson",
+        name: "Elsie Robinson",
         gender: "F",
-        birthyear: 1921,
-        deathyear: 2000,
-        profession: "Store Owner of Ben Franklin - Ripley, WV stores",
-        imageLink: "/photos/Robinson/RethaRobinson.jpg",
+        birthyear: 1889,
+        deathyear: 1962
       },
     ],
     children: [
       {
-        name: "Jim Robinson",
+        name: "Reva Robinson",
+        birthyear: 1910,
+        deathyear: 2007
+      },
+      {
+        name: "Russell Robinson",
+        birthyear: 1913,
+        deathyear: 1916
+      },
+      {
+        name: "Ray Robinson",
+        birthyear: 1915,
+        deathyear: 1916
+      },
+      {
+        name: "Carmel Robinson",
         gender: "M",
-        full: "James Clark",
+        birthyear: 1918,
+        deathyear: 1998,
+        birthplace: "Canfield, WV",
+        deathplace: "Ravenswood, WV",
+        profession: "Store Owner of Ben Franklin - Ripley, WV stores",
+        militaryService: "US Navy WWII",
+        imageLink: "/photos/Robinson/CarmelRobinson.jpg",
+        spouse: {
+          name: "Retha Robinson",
+          gender: "F",
+          birthyear: 1921,
+          deathyear: 2000,
+          profession: "Store Owner of Ben Franklin - Ripley, WV stores",
+          imageLink: "/photos/Robinson/RethaRobinson.jpg",
+          fromFamily: { ref: "Long.Spicy May Long" },
+        },
+        children: [
+      {
+        name: "James Clark Robinson",
+        gender: "M",
+        nickname: "Jim",
         birthyear: 1942,
         deathyear: 2025,
         birthplace: "Charleston, WV",
         deathplace: "Bridgeport, WV",
         profession:
           "Store Owner of Ben Franklin - Salem & Grantsville, WV stores",
+        militaryService: "US Army - Vietnam War",
         imageLink: "/photos/Robinson/JimRobinson.jpg",
         spouse: { ref: "Davis.Sandra Robinson" },
         children: [
@@ -74,9 +105,9 @@ export const familyData = {
             ],
           },
           {
-            name: "Clark Robinson",
+            name: "James Clark II Robinson",
             gender: "M",
-            full: "James Clark II",
+            nickname: "Clark",
             birthyear: 1969,
             imageLink: "/photos/Robinson/Clark&JenniferRobinson.jpg",
             spouse: {
@@ -163,7 +194,8 @@ export const familyData = {
         ],
       },
       {
-        name: "Ron Robinson",
+        name: "Ronald Robinson",
+        nickname: "Ron",
         gender: "M",
         birthyear: 1947,
         imageLink: "/photos/Robinson/RonRobinson.jpg",
@@ -237,6 +269,23 @@ export const familyData = {
         birthyear: 1952,
         deathyear: 1952,
       },
+        ],
+      },
+      {
+        name: "Gale Robinson",
+        birthyear: 1922,
+        deathyear: 2007
+      },
+      {
+        name: "Daisy Robinson",
+        birthyear: 1923,
+        deathyear: "unknown"
+      },
+      {
+        name: "Wanda Robinson",
+        birthyear: 1930,
+        deathyear: 1934
+      }
     ],
   },
 
@@ -246,173 +295,226 @@ export const familyData = {
   Davis: {
     founders: [
       {
-        name: "Rex Davis",
+        name: "Benjamin Franklin Davis",
         gender: "M",
-        birthyear: 1909,
-        deathyear: 1994,
+        birthyear: 1880,
+        deathyear: 1923,
+        imageLink: "/photos/Davis/BenjaminFranklinDavis.jpg",
       },
       {
-        name: "Wilma Davis",
+        name: "Cora Davis",
         gender: "F",
-        birthyear: 1915,
-        deathyear: 2012,
-        birthplace: "Salem, WV",
-        deathplace: "Willard, Ohio",
-        imageLink: "/photos/Davis/WilmaDavis.jpg",
+        birthyear: 1889,
+        deathyear: 1958,
+        imageLink: "/photos/Davis/CoraDavis.jpg",
+        otherSpouses: [
+          { name: "William Irons", gender: "M", birthyear: 1875, deathyear: 1947 }
+        ],
       },
     ],
     children: [
-            {
-        name: "Rebecca Davis",
+      {
+        name: "Dorothy May Davis",
         gender: "F",
-        birthyear: 1936,
-        imageLink: "/photos/Davis/RebeccaDavis.jpg",
-        spouse: { name: "Bud Davis", gender: "M" },
-        children: [
-          { name: "Petie Davis ○", gender: "M" },
-          { name: "Greg Davis", gender: "M" },
-          { name: "Rodney Davis", gender: "M" },
-          {
-            name: "Jane Davis",
-            gender: "F",
-            imageLink: "/photos/Davis/JaneDavis.jpg",
-            birthyear: 1970,
-          },
-          { name: "Kevin Davis", gender: "M" },
-          { name: "Chris Davis", gender: "M", imageLink: "/photos/Davis/ChrisDavis.jpg" },
-        ],
+        birthyear: 1915,
+        deathyear: 1999
       },
-            {
-        name: "Ross Davis",
-        gender: "M",
-        birthyear: 1938,
-        deathyear: 2008,
-        birthplace: "Long Run, WV",
-        deathplace: "Davisville, WV",
-        profession: "Worked at Corning Glass",
-        children: [
-          { name: "Dave Davis", gender: "M", imageLink: "/photos/Davis/DaveDavis.jpg" },
-          { name: "Mark Davis", gender: "M" },
-        ],
+      {
+        name: "Vance Davis",
+        birthyear: 1912,
+        deathyear: 1977,
+        gender: "M"
       },
-            {
+      {
         name: "Rex Davis",
         gender: "M",
-        nickname: "Sonny",
-        profession: "Teacher",
-        imageLink: "/photos/Davis/SonnyDavis.jpg",
+        profession: "Farmer, Employee at Ohio Steel Tube Company",
+        birthyear: 1909,
+        deathyear: 1994,
+        birthplace: "Salem, WV",
+        deathplace: "Shelby, Ohio",
+        militaryService: "US Army WWII - China Burma India Theatre",
+        spouse: {
+          name: "Wilma Davis",
+          gender: "F",
+          birthyear: 1915,
+          deathyear: 2012,
+          birthplace: "Salem, WV",
+          deathplace: "Shelby, Ohio",
+          imageLink: "/photos/Davis/WilmaDavis.jpg",
+          fromFamily: { ref: "Furbee.Nellie Furbee" },
+        },
         children: [
           {
-            name: "Brian Davis",
+            name: "Rebecca Davis",
+            nickname: "Becky",
+            gender: "F",
+            birthyear: 1936,
+            imageLink: "/photos/Davis/RebeccaDavis.jpg",
+            spouse: { name: "George Davis", nickname: "Bud", gender: "M" },
+            children: [
+              { name: "Petie Davis ○", gender: "M" },
+              { name: "Greg Davis", gender: "M" },
+              { name: "Rodney Davis", gender: "M" },
+              {
+                name: "Jane Davis",
+                gender: "F",
+                imageLink: "/photos/Davis/JaneDavis.jpg",
+                birthyear: 1970,
+              },
+              { name: "Kevin Davis", gender: "M" },
+              {
+                name: "Chris Davis",
+                gender: "M",
+                imageLink: "/photos/Davis/ChrisDavis.jpg",
+              },
+            ],
+          },
+          {
+            name: "Ross Davis",
             gender: "M",
+            birthyear: 1938,
+            deathyear: 2008,
+            birthplace: "Long Run, WV",
+            deathplace: "Davisville, WV",
+            profession: "Worked at Corning Glass",
+            children: [
+              {
+                name: "Dave Davis",
+                gender: "M",
+                imageLink: "/photos/Davis/DaveDavis.jpg",
+              },
+              { name: "Mark Davis", gender: "M" },
+            ],
+          },
+          {
+            name: "Rex Davis",
+            gender: "M",
+            nickname: "Sonny",
             profession: "Teacher",
-            imageLink: "/photos/Davis/BrianDavis.jpg",
-            spouse: { name: "Tina Davis", gender: "F" },
+            imageLink: "/photos/Davis/SonnyDavis.jpg",
             children: [
               {
-                name: "Hallie Davis",
-                gender: "F",
-                imageLink: "/photos/Davis/HallieDavis.jpg",
-              },
-              {
-                name: "Andrew Davis",
+                name: "Brian Davis",
                 gender: "M",
-                imageLink: "/photos/Davis/AndrewDavis.jpg",
+                profession: "Teacher",
+                imageLink: "/photos/Davis/BrianDavis.jpg",
+                spouse: { name: "Tina Davis", gender: "F" },
+                children: [
+                  {
+                    name: "Hallie Davis",
+                    gender: "F",
+                    imageLink: "/photos/Davis/HallieDavis.jpg",
+                  },
+                  {
+                    name: "Andrew Davis",
+                    gender: "M",
+                    imageLink: "/photos/Davis/AndrewDavis.jpg",
+                  },
+                  {
+                    name: "Jessica Davis",
+                    gender: "F",
+                    imageLink: "/photos/Davis/JessDavis.jpg",
+                  },
+                ],
               },
               {
-                name: "Jessica Davis",
-                gender: "F",
-                imageLink: "/photos/Davis/JessDavis.jpg",
+                name: "Stephen Davis",
+                gender: "M",
+                birthyear: 1971,
+                imageLink: "/photos/Davis/StephenDavis.jpg",
+                spouse: { name: "Julie Soltis ⟷", gender: "F" },
+                children: [
+                  {
+                    name: "Emilee Schmetzer",
+                    gender: "F",
+                    imageLink: "/photos/Emilee&StevenSchmetzer.jpg",
+                    spouse: {
+                      name: "Steven Schmetzer",
+                      gender: "M",
+                      imageLink: "/photos/Emilee&StevenSchmetzer.jpg",
+                    },
+                  },
+                  {
+                    name: "Josh Davis",
+                    gender: "M",
+                    imageLink: "/photos/Davis/JoshDavis.jpg",
+                  },
+                ],
               },
             ],
           },
           {
-            name: "Stephen Davis",
-            gender: "M",
-            birthyear: 1971,
-            imageLink: "/photos/Davis/StephenDavis.jpg",
-            spouse: { name: "Julie Soltis ⟷", gender: "F" },
-            children: [
-              {
-                name: "Emilee Schmetzer",
-                gender: "F",
-                imageLink: "/photos/Emilee&StevenSchmetzer.jpg",
-                spouse: {
-                  name: "Steven Schmetzer",
-                  gender: "M",
-                  imageLink: "/photos/Emilee&StevenSchmetzer.jpg",
-                },
-              },
-              { name: "Josh Davis", gender: "M", imageLink: "/photos/Davis/JoshDavis.jpg" },
-            ],
+            name: "Sandra Robinson",
+            gender: "F",
+            birthyear: 1944,
+            deathyear: 2006,
+            deathplace: "Salem, WV",
+            profession:
+              "Store Owner of Ben Franklin - Salem & Grantsville, WV stores",
+            imageLink: "/photos/Robinson/SandraRobinson.jpg",
+            // Married Jim Robinson - children listed under Robinson tree
           },
-        ],
-      },
-      {
-        name: "Sandra Robinson",
-        gender: "F",
-        birthyear: 1944,
-        deathyear: 2006,
-        deathplace: "Salem, WV",
-        profession:
-          "Store Owner of Ben Franklin - Salem & Grantsville, WV stores",
-        imageLink: "/photos/Robinson/SandraRobinson.jpg",
-        // Married Jim Robinson - children listed under Robinson tree
-      },
 
-      {
-        name: "Patty Malov",
-        gender: "F",
-        imageLink: "/photos/Malov/PattyMalov.jpg",
-        spouse: {
-          name: "Alex Malov",
-          gender: "M",
-          birthyear: 1952,
-          deathyear: 2023,
-          imageLink: "/photos/Malov/AlexMalov.jpg",
-        },
-      },
-
-
-        {
-        name: "Belinda Kamann",
-        gender: "F",
-        imageLink: "/photos/Kamann/BelindaKamann.jpg",
-        spouse: {
-          name: "Kevin Kamann *",
-          gender: "M",
-          imageLink: "/photos/Kamann/KevinKamann.jpg",
-        },
-        children: [
           {
-            name: "Jared Kamann",
-            gender: "M",
-            imageLink: "/photos/Kamann/JaredKamann.jpg",
+            name: "Patricia Malov",
+            nickname: "Patty",
+            gender: "F",
+            imageLink: "/photos/Malov/PattyMalov.jpg",
+            spouse: {
+              name: "Alex Malov",
+              gender: "M",
+              birthyear: 1952,
+              deathyear: 2023,
+              imageLink: "/photos/Malov/AlexMalov.jpg",
+            },
+          },
+
+          {
+            name: "Belinda Kamann",
+            gender: "F",
+            imageLink: "/photos/Kamann/BelindaKamann.jpg",
+            spouse: {
+              name: "Kevin Kamann *",
+              gender: "M",
+              imageLink: "/photos/Kamann/KevinKamann.jpg",
+            },
             children: [
               {
-                name: "Tristan Kamann",
+                name: "Jared Kamann",
                 gender: "M",
-                imageLink: "/photos/Kamann/TristanKamann.jpg",
+                imageLink: "/photos/Kamann/JaredKamann.jpg",
+                children: [
+                  {
+                    name: "Tristan Kamann",
+                    gender: "M",
+                    imageLink: "/photos/Kamann/TristanKamann.jpg",
+                  },
+                  {
+                    name: "Quinn Kamann",
+                    gender: "F",
+                    imageLink: "/photos/Kamann/QuinnKamann.jpg",
+                  },
+                  {
+                    name: "Wyatt Kamann",
+                    gender: "M",
+                    imageLink: "/photos/Kamann/WyattKamann.jpg",
+                  },
+                  {
+                    name: "Rhett Kamann",
+                    gender: "M",
+                    imageLink: "/photos/Kamann/RhettKamann.jpg",
+                  },
+                ],
               },
               {
-                name: "Quinn Kamann",
-                gender: "F",
-                imageLink: "/photos/Kamann/QuinnKamann.jpg",
-              },
-              {
-                name: "Wyatt Kamann",
+                name: "Kurt Kamann",
                 gender: "M",
-                imageLink: "/photos/Kamann/WyattKamann.jpg",
+                imageLink: "/photos/Kamann/KurtKamann.jpg",
               },
-              {
-                name: "Rhett Kamann",
-                gender: "M",
-                imageLink: "/photos/Kamann/RhettKamann.jpg",
-              },
+              { name: "Gabe Kamann", gender: "M" },
             ],
           },
-          { name: "Kurt Kamann", gender: "M", imageLink: "/photos/Kamann/KurtKamann.jpg" },
-          { name: "Gabe Kamann", gender: "M" },
         ],
       },
     ],
@@ -438,7 +540,10 @@ export const familyData = {
       {
         name: "Venkateswari Parimi",
         gender: "F",
-        children: [{ name: "Umapathy", gender: "M" }, { name: "P.L.N. Sarma", gender: "M" }],
+        children: [
+          { name: "Umapathy", gender: "M" },
+          { name: "P.L.N. Sarma", gender: "M" },
+        ],
       },
       {
         name: "Dabbu's Dad",
@@ -688,7 +793,11 @@ export const familyData = {
         name: "Ammalu",
         gender: "F",
         deathyear: 2023,
-        children: [{ name: "Jyothi", gender: "F" }, { name: "Babu Rao", gender: "M" }, { name: "Rama", gender: "M" }],
+        children: [
+          { name: "Jyothi", gender: "F" },
+          { name: "Babu Rao", gender: "M" },
+          { name: "Rama", gender: "M" },
+        ],
       },
     ],
   },
@@ -779,7 +888,10 @@ export const familyData = {
                 name: "Dr. Sweta",
                 gender: "F",
                 imageLink: "/photos/Sweta.jpg",
-                children: [{ name: "Kamya", gender: "F" }, { name: "Sweta's son", gender: "M" }],
+                children: [
+                  { name: "Kamya", gender: "F" },
+                  { name: "Sweta's son", gender: "M" },
+                ],
               },
             ],
           },
@@ -838,14 +950,23 @@ export const familyData = {
             name: "Prabha",
             gender: "M",
             spouse: { name: "Prabha's wife", gender: "F" },
-            children: [{ name: "Prabha's son", gender: "M" }, { name: "Prabha's daughter", gender: "F" }],
+            children: [
+              { name: "Prabha's son", gender: "M" },
+              { name: "Prabha's daughter", gender: "F" },
+            ],
           },
           {
             name: "Krishna Rao VVS",
             gender: "M",
             spouse: { name: "Syamala Krishna", gender: "F" },
             imageLink: "/photos/KrishnaRaoVVS.jpg",
-            children: [{ name: "Anirudh", gender: "M", imageLink: "/photos/Anirudh.jpg" }],
+            children: [
+              {
+                name: "Anirudh",
+                gender: "M",
+                imageLink: "/photos/Anirudh.jpg",
+              },
+            ],
           },
         ],
       },
@@ -907,7 +1028,11 @@ export const familyData = {
                 gender: "F",
                 imageLink: "/photos/Sriram'sDaughter.jpg",
               },
-              { name: "Sriyan", gender: "M", imageLink: "/photos/Sriram'sSon.jpg" },
+              {
+                name: "Sriyan",
+                gender: "M",
+                imageLink: "/photos/Sriram'sSon.jpg",
+              },
             ],
           },
         ],
@@ -1047,7 +1172,11 @@ export const familyData = {
           },
         ],
       },
-      { name: "Rajeshwari Chainulu", gender: "F", spouse: { name: "Dr. Chainulu", gender: "M" } },
+      {
+        name: "Rajeshwari Chainulu",
+        gender: "F",
+        spouse: { name: "Dr. Chainulu", gender: "M" },
+      },
     ],
   },
 
@@ -1095,7 +1224,12 @@ export const familyData = {
                 nickname: "Bobby",
                 birthyear: 1960,
               },
-              { name: "Lakshman Evani", gender: "M", nickname: "Lucky", birthyear: 1967 },
+              {
+                name: "Lakshman Evani",
+                gender: "M",
+                nickname: "Lucky",
+                birthyear: 1967,
+              },
               { name: "Venu Gopala Sarma Evani", gender: "M", birthyear: 1974 },
             ],
           },
@@ -1112,7 +1246,9 @@ export const familyData = {
                 birthyear: 1963,
                 birthplace: "Kakinada, India",
                 spouse: { name: "Jyothi Evani", gender: "F" },
-                children: [{ name: "Anjali Evani", gender: "F", birthyear: 2003 }],
+                children: [
+                  { name: "Anjali Evani", gender: "F", birthyear: 2003 },
+                ],
               },
               {
                 name: "Lakshmi Dalwalla",
@@ -1150,7 +1286,9 @@ export const familyData = {
             gender: "M",
             nickname: "Thambi",
             spouse: { name: "Lakshmi Evani", gender: "F" },
-            children: [{ name: "Ajaisimha Evani", gender: "M", nickname: "Ajai" }],
+            children: [
+              { name: "Ajaisimha Evani", gender: "M", nickname: "Ajai" },
+            ],
           },
           {
             name: "Kameswari Kunapuli",
@@ -1237,11 +1375,28 @@ export const familyData = {
               {
                 name: "Pavan Gunupudi",
                 gender: "M",
-                spouse: { name: "Sailaja Gunupudi", gender: "F" },
+                imageLink: "/photos/Gunupudi/PavanGunupudi.jpg",
+                spouse: {
+                  name: "Sailaja Gunupudi",
+                  gender: "F",
+                  imageLink: "/photos/Gunupudi/SailajaGunupudi.jpg",
+                },
                 children: [
-                  { name: "Dhatri Gunupudi", gender: "F" },
-                  { name: "Maitri Gunupudi", gender: "F" },
-                  { name: "Keerti Gunupudi", gender: "F" },
+                  {
+                    name: "Dhatri Gunupudi",
+                    gender: "F",
+                    imageLink: "/photos/Gunupudi/DhatriGunupudi.jpg",
+                  },
+                  {
+                    name: "Maitri Gunupudi",
+                    gender: "F",
+                    imageLink: "/photos/Gunupudi/MaitriGunupudi.jpg",
+                  },
+                  {
+                    name: "Keerti Gunupudi",
+                    gender: "F",
+                    imageLink: "/photos/Gunupudi/KeertiGunupudi.jpg",
+                  },
                 ],
               },
             ],
@@ -1252,7 +1407,11 @@ export const familyData = {
         name: "Saraswathi Kunapuli",
         gender: "F",
         birthyear: 1912,
-        spouse: { name: "Satyanarayana Kunapuli", gender: "M", birthyear: 1904 },
+        spouse: {
+          name: "Satyanarayana Kunapuli",
+          gender: "M",
+          birthyear: 1904,
+        },
       },
       { name: "Kamala Malladi", gender: "F", birthyear: 1921, deathyear: 1977 },
       {
@@ -1263,7 +1422,12 @@ export const familyData = {
       {
         name: "Prabhavathi Vuppuluri",
         gender: "F",
-        spouse: { name: "Kalidas Vuppuluri", gender: "M" },
+        deathyear: 2020,
+        spouse: {
+          name: "Kalidas Vuppuluri",
+          gender: "M",
+          imageLink: "/photos/Vuppuluri/KalidasVuppuluri.jpg",
+        },
         children: [
           {
             name: "Madhu Vuppuluri",
@@ -1275,20 +1439,176 @@ export const familyData = {
               nickname: "Baby",
               imageLink: "/photos/Vuppuluri/SeetaVuppuluri.jpg",
             },
-             children: [{ name: "Pratibha", gender: "F", spouse: {name: "Philip Au", gender: "M"} }, { name: "Nima", gender: "F" }],
+            children: [
+              {
+                name: "Pratibha",
+                gender: "F",
+                imageLink: "/photos/Vuppuluri/PratibhaVuppuluri.jpg",
+                spouse: {
+                  name: "Philip Au",
+                  gender: "M",
+                  imageLink: "/photos/PhilipAu.jpg",
+                },
+                children: [
+                  {
+                    name: "Son 1",
+                  },
+                ],
+              },
+              {
+                name: "Nima",
+                gender: "F",
+                imageLink: "/photos/Vuppuluri/NimaVuppuluri.jpg",
+              },
+            ],
           },
           {
             name: "Sita Sastry Bhagavatula",
             gender: "F",
+            imageLink: "/photos/Bhagavatula/SitaSastryBhagavatula.jpg",
             children: [
-              { name: "Sireesha Malviya", gender: "F" },
-              { name: "Kalyanram Bhagavatula", gender: "M" },
+              {
+                name: "Sireesha Malviya",
+                gender: "F",
+                imageLink: "/photos/Malviya/SireeshaMalviya.jpg",
+              },
+              {
+                name: "Kalyanram Bhagavatula",
+                gender: "M",
+                imageLink: "/photos/Bhagavatula/KalyanramBhagavatula.jpg",
+              },
             ],
           },
-          { name: "Subhash Vuppuluri", gender: "M" },
+          {
+            name: "Subhash Vuppuluri",
+            gender: "M",
+            imageLink: "/photos/Vuppuluri/SubhashVuppuluri.jpg",
+          },
         ],
       },
-      { name: "Suryakantham Emani", gender: "M" },
+      {
+        name: "Suryakantham Emani",
+        gender: "F",
+        imageLink: "/photos/Emani/SuryakanthamEmani.jpg",
+        children: [
+          {
+            name: "Dr. Chandrika",
+            gender: "F",
+          },
+          {
+            name: "Suryakiron Emani",
+            gender: "M",
+            imageLink: "/photos/Emani/SuryakironEmani.jpg",
+          },
+        ],
+      },
     ],
   },
+
+  // ============================================================
+  // FURBEE FAMILY (Ancestors - connects to Davis via Wilma Davis)
+  // ============================================================
+
+  Furbee: {
+    founders: [
+      {
+        name: "Nellie Furbee",
+        gender: "F",
+        birthyear: 1885,
+        deathyear: 1980,
+      },
+      {
+        name: "Otis Furbee",
+        gender: "M",
+        birthyear: 1884,
+        deathyear: 1965,
+      },
+    ],
+    children: [
+      {
+        name: "Robert Furbee",
+        nickname: "Bob",
+        gender: "M",
+        birthyear: 1908,
+        deathyear: 1988,
+      },
+      {
+        name: "Augustus Furbee",
+        nickname: "Dutch",
+        gender: "M",
+        birthyear: 1910,
+        deathyear: 1986,
+      },
+      {
+        name: "Edward Furbee",
+        nickname: "Ed",
+        gender: "M",
+        birthyear: 1912,
+        deathyear: 2011,
+        imageLink: "/photos/Furbee/EdwardFurbee.jpg",
+      },
+      {
+        name: "Otis Furbee Jr.",
+        nickname: "Jinks",
+        gender: "M",
+        spouse: {
+          name: "June Furbee",
+        },
+        children: [
+          {
+            name: "Ronald Furbee",
+          },
+          {
+            name: "Charles Furbee",
+            spouse: {
+              name: "Connie Furbee",
+            },
+          },
+          {
+            name: "Nancy Phillips",
+          },
+          {
+            name: "Beth Imperio",
+            spouse: {
+              name: "David Imperio",
+            },
+          },
+        ],
+        birthyear: 1921,
+        deathyear: 2014,
+        imageLink: "/photos/Furbee/OtisJrFurbee.jpg",
+      },
+      {
+        name: "Mary Furbee",
+        gender: "F",
+        birthyear: 1923,
+        deathyear: 1993,
+      },
+    ],
+  },
+
+  Long: {
+    founders: [
+      {
+        name: "Alfred Long",
+
+      },
+      {
+        name: "Spicy May Long"
+      }
+    ],
+    children: [
+      {
+        name: "Darwin Long",
+        birthyear: 1923,
+        deathyear: 1955
+      },
+      {
+        name: "Rena Long",
+        birthyear: 1925,
+        deathyear: 1992
+      }
+    ]
+  }
+
 };

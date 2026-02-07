@@ -400,7 +400,7 @@ body {
 .text-size-card {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
 }
 
 .font-controls {
@@ -771,6 +771,15 @@ svg {
   opacity: 0.95;
 }
 
+.family-card-header:focus {
+  outline: 3px solid var(--primary-cyan);
+  outline-offset: -3px;
+}
+
+.family-card-header:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .family-card-title {
   margin: 0;
   font-size: 18px;
@@ -881,6 +890,19 @@ svg {
   font-size: 12px;
 }
 
+.founder-mini-military {
+  color: #2e5a1c;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.founder-mini-other-spouses {
+  color: #666;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 2px;
+}
+
 .founder-mini-ancestors {
   color: #1565c0;
   font-size: 12px;
@@ -890,6 +912,16 @@ svg {
 
 .founder-mini-ancestors:hover {
   text-decoration: underline;
+}
+
+.founder-mini-ancestors:focus {
+  outline: 2px solid var(--primary-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.founder-mini-ancestors:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Direct Children Section */
@@ -940,6 +972,15 @@ svg {
 
 .expandable-person-card.has-children:hover {
   background: #f0f0f0;
+}
+
+.expandable-person-card.has-children:focus {
+  outline: 3px solid var(--primary-cyan);
+  outline-offset: 2px;
+}
+
+.expandable-person-card.has-children:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .expandable-person-content {
@@ -1055,10 +1096,23 @@ svg {
   margin-top: 2px;
 }
 
+.person-mini-military {
+  color: #2e5a1c;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
 .person-mini-birth,
 .person-mini-death {
   color: #333;
   font-size: 11px;
+}
+
+.person-mini-other-spouses {
+  color: #666;
+  font-size: 11px;
+  font-style: italic;
+  margin-top: 2px;
 }
 
 .person-mini-ancestors {
@@ -1070,6 +1124,16 @@ svg {
 
 .person-mini-ancestors:hover {
   text-decoration: underline;
+}
+
+.person-mini-ancestors:focus {
+  outline: 2px solid var(--primary-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.person-mini-ancestors:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Jump to tree button */
@@ -1085,6 +1149,16 @@ svg {
 
 .jump-to-tree:hover {
   text-decoration: underline;
+}
+
+.jump-to-tree:focus {
+  outline: 2px solid var(--primary-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.jump-to-tree:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .jump-to-tree svg {

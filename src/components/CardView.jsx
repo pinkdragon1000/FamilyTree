@@ -54,13 +54,23 @@ function CardView({ data, navStack, setNavStack, onJumpToTree, searchTargetId, o
               <div
                 className="family-card-header"
                 onClick={() => toggleNode(family.id)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleNode(family.id);
+                  }
+                }}
+                tabIndex={0}
+                role="button"
+                aria-expanded={familyExpanded}
+                aria-label={`${family.name} Family, ${family.totalDescendants} descendants. ${familyExpanded ? 'Collapse' : 'Expand'}`}
               >
                 <h3 className="family-card-title">{family.name} Family</h3>
                 <div className="family-card-meta">
                   <span className="descendant-count">
                     {family.totalDescendants} descendants
                   </span>
-                  <span className={`expand-arrow ${familyExpanded ? 'expanded' : ''}`}>
+                  <span className={`expand-arrow ${familyExpanded ? 'expanded' : ''}`} aria-hidden="true">
                     {familyExpanded ? '▼' : '▶'}
                   </span>
                 </div>
@@ -139,6 +149,8 @@ function FounderMini({ person, onViewAncestors, onJumpToTree }) {
     deathyear,
     deathplace,
     profession,
+    militaryService,
+    otherSpouses,
     imageLink,
     gender
   } = person;
@@ -200,8 +212,14 @@ function FounderMini({ person, onViewAncestors, onJumpToTree }) {
         </div>
         {nickname && <div className="founder-mini-nickname">"{nickname}"</div>}
         {profession && <div className="founder-mini-profession">{profession}</div>}
+        {militaryService && <div className="founder-mini-military">🎖️ {militaryService}</div>}
         {birthInfo && <div className="founder-mini-birth">{birthInfo}</div>}
         {deathInfo && <div className="founder-mini-death">{deathInfo}</div>}
+        {otherSpouses && otherSpouses.length > 0 && (
+          <div className="founder-mini-other-spouses">
+            Also married: {otherSpouses.map(s => s.name).join(', ')}
+          </div>
+        )}
         {onViewAncestors && (
           <div
             className="founder-mini-ancestors"
@@ -209,6 +227,16 @@ function FounderMini({ person, onViewAncestors, onJumpToTree }) {
               e.stopPropagation();
               onViewAncestors();
             }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                e.stopPropagation();
+                onViewAncestors();
+              }
+            }}
+            tabIndex={0}
+            role="button"
+            aria-label={`View ancestors of ${displayName}`}
           >
             ↑ View Ancestors
           </div>
@@ -220,9 +248,18 @@ function FounderMini({ person, onViewAncestors, onJumpToTree }) {
               e.stopPropagation();
               onJumpToTree(id);
             }}
-            title="View in tree"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                e.stopPropagation();
+                onJumpToTree(id);
+              }
+            }}
+            tabIndex={0}
+            role="button"
+            aria-label={`View ${displayName} in tree`}
           >
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M12 2L12 8M12 8L8 5M12 8L16 5M4 10H20M4 10V20C4 21 5 22 6 22H18C19 22 20 21 20 20V10M8 14H8.01M12 14H12.01M16 14H16.01M8 18H8.01M12 18H12.01M16 18H16.01" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             View in Tree

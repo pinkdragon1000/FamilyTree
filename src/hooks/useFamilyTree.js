@@ -398,7 +398,7 @@ function findSharedUnion(personIds, persons) {
 }
 
 /**
- * Get children from a specific union
+ * Get children from a specific union, sorted by birthyear
  */
 function getChildrenFromUnion(unionId, unions, persons) {
   const union = unions[unionId];
@@ -406,7 +406,12 @@ function getChildrenFromUnion(unionId, unions, persons) {
 
   return union.children
     .map(childId => ({ id: childId, ...persons[childId] }))
-    .filter(child => child.name);
+    .filter(child => child.name)
+    .sort((a, b) => {
+      const yearA = typeof a.birthyear === 'number' ? a.birthyear : Infinity;
+      const yearB = typeof b.birthyear === 'number' ? b.birthyear : Infinity;
+      return yearA - yearB;
+    });
 }
 
 /**
