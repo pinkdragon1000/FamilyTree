@@ -919,7 +919,12 @@ export const familyData = {
         name: "V Atchutaramaiah",
         gender: "M",
         birthyear: 1936,
-        deathyear: "unknown",
+        deathyear: 2015,
+        imageLink: "/photos/VAtchutaramaiah.jpg",
+        spouse: {
+          name: "Kameswari Viswanatham",
+          imageLink: "/photos/KameswariViswanatham.jpg"
+        },
         children: [
           {
             name: "Padma Murthi",
@@ -949,7 +954,7 @@ export const familyData = {
             nickname: "Bujju",
             profession: "Chartered Accountant/Tax Consultant",
             imageLink: "/photos/BujjuViswanatham.jpg",
-            spouse: { name: "Suchitra Viswanatham", gender: "F" },
+            spouse: { name: "Suchitra Viswanatham", gender: "F", imageLink: "/photos/SuchitraViswanatham.jpg" },
             children: [
               {
                 name: "Aditya Viswanatham",
