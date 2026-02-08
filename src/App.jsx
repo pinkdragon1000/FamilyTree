@@ -6,6 +6,7 @@ import CardView from "./components/CardView.jsx";
 import Legend from "./components/Legend.jsx";
 import TextSizeControls from "./components/TextSizeControls.jsx";
 import SearchBar from "./components/SearchBar.jsx";
+import Icon from "./components/Icons.jsx";
 import TreeLogo from "./tree.svg";
 
 const DEFAULT_FONT_SIZE = 14;
@@ -50,11 +51,13 @@ function App() {
       return saved;
     }
     // Default to card view on smaller screens
-    return window.innerWidth <= 600 ? 'card' : 'tree';
+    return window.innerWidth <= 600 ? "card" : "tree";
   });
 
   // Card view navigation stack
-  const [cardNavStack, setCardNavStack] = useState([{ couples: INITIAL_COUPLES }]);
+  const [cardNavStack, setCardNavStack] = useState([
+    { couples: INITIAL_COUPLES },
+  ]);
   const canGoBackInCards = cardNavStack.length > 1;
 
   // Search target for card view navigation
@@ -62,15 +65,15 @@ function App() {
 
   // Get the name of the descendant we'd navigate back to
   const getBackLabel = useCallback(() => {
-    if (cardNavStack.length <= 1) return 'Descendants';
+    if (cardNavStack.length <= 1) return "Descendants";
     const currentView = cardNavStack[cardNavStack.length - 1];
     // Get childName from the first couple that has one
-    const childName = currentView.couples?.find(c => c.childName)?.childName;
-    return childName || 'Descendants';
+    const childName = currentView.couples?.find((c) => c.childName)?.childName;
+    return childName || "Descendants";
   }, [cardNavStack]);
 
   const navigateBackInCards = useCallback(() => {
-    setCardNavStack(prev => prev.length > 1 ? prev.slice(0, -1) : prev);
+    setCardNavStack((prev) => (prev.length > 1 ? prev.slice(0, -1) : prev));
   }, []);
 
   const familyTreeRef = useRef(null);
@@ -100,7 +103,7 @@ function App() {
   useEffect(() => {
     document.documentElement.style.setProperty(
       "--node-label-font-size",
-      `${fontSize}px`
+      `${fontSize}px`,
     );
     localStorage.setItem(STORAGE_KEY, fontSize.toString());
 
@@ -140,7 +143,7 @@ function App() {
 
   const toggleViewMode = useCallback(() => {
     setViewMode((prev) => {
-      const newMode = prev === 'tree' ? 'card' : 'tree';
+      const newMode = prev === "tree" ? "card" : "tree";
       localStorage.setItem(VIEW_MODE_STORAGE_KEY, newMode);
       return newMode;
     });
@@ -148,8 +151,8 @@ function App() {
 
   // Jump to a specific person in tree view
   const jumpToTreePerson = useCallback((personId) => {
-    setViewMode('tree');
-    localStorage.setItem(VIEW_MODE_STORAGE_KEY, 'tree');
+    setViewMode("tree");
+    localStorage.setItem(VIEW_MODE_STORAGE_KEY, "tree");
     // Wait for view mode to switch and SVG to be visible, then navigate
     setTimeout(() => {
       if (familyTreeRef.current) {
@@ -161,27 +164,30 @@ function App() {
   }, []);
 
   // Handle search selection - always sync both views
-  const handleSearchSelect = useCallback((personId) => {
-    // Always expand card view to the person
-    setCardSearchTarget(personId);
+  const handleSearchSelect = useCallback(
+    (personId) => {
+      // Always expand card view to the person
+      setCardSearchTarget(personId);
 
-    if (viewMode === 'card') {
-      // Stay in card view, card will handle the navigation
-    } else {
-      // Navigate in tree view
-      if (familyTreeRef.current) {
-        familyTreeRef.current.navigateToNode(personId);
+      if (viewMode === "card") {
+        // Stay in card view, card will handle the navigation
+      } else {
+        // Navigate in tree view
+        if (familyTreeRef.current) {
+          familyTreeRef.current.navigateToNode(personId);
+        }
       }
-    }
-  }, [viewMode]);
+    },
+    [viewMode],
+  );
 
   // Control SVG visibility based on view mode
   useEffect(() => {
-    const svg = d3.select('body > svg');
+    const svg = d3.select("body > svg");
     if (!svg.empty()) {
-      svg.style('display', viewMode === 'tree' ? 'block' : 'none');
+      svg.style("display", viewMode === "tree" ? "block" : "none");
       // Center the tree view when switching to it
-      if (viewMode === 'tree' && familyTreeRef.current) {
+      if (viewMode === "tree" && familyTreeRef.current) {
         // Small delay to ensure SVG is visible before centering
         setTimeout(() => {
           familyTreeRef.current.centerView();
@@ -213,45 +219,77 @@ function App() {
   return (
     <>
       <div className="navbar">
-        <SearchBar data={data} onSelectPerson={handleSearchSelect} />
+        <div className="navbar-left">
+          <div
+            className="view-toggle-group"
+            role="radiogroup"
+            aria-label="View mode"
+            data-active={viewMode}
+          >
+            <span className="view-toggle-slider" />
+            <button
+              className={`view-toggle-option ${viewMode === "tree" ? "active" : ""}`}
+              onClick={() => {
+                setViewMode("tree");
+                localStorage.setItem(VIEW_MODE_STORAGE_KEY, "tree");
+              }}
+              role="radio"
+              aria-checked={viewMode === "tree"}
+            >
+              <Icon name="tree" size={16} />
+              Tree
+            </button>
+            <button
+              className={`view-toggle-option ${viewMode === "card" ? "active" : ""}`}
+              onClick={() => {
+                setViewMode("card");
+                localStorage.setItem(VIEW_MODE_STORAGE_KEY, "card");
+              }}
+              role="radio"
+              aria-checked={viewMode === "card"}
+            >
+              <Icon name="cards" size={16} />
+              Cards
+            </button>
+          </div>
+          <Legend showNodeColors={viewMode === "tree"} />
+        </div>
+
         <div className="navbar-title">
           <img className="spacer" src={TreeLogo} alt="tree logo" />
           Family Tree
         </div>
         <div className="navbar-buttons">
-          {viewMode === 'card' && canGoBackInCards && (
+          {viewMode === "card" && canGoBackInCards && (
             <button className="view-toggle" onClick={navigateBackInCards}>
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 12H5M5 12L12 19M5 12L12 5" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                <path
+                  d="M19 12H5M5 12L12 19M5 12L12 5"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
               {getBackLabel()}
             </button>
           )}
-          <Legend showNodeColors={viewMode === 'tree'} />
-          <button className="view-toggle" onClick={toggleViewMode}>
-            {viewMode === 'tree' ? (
-              <>
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="3" y="3" width="7" height="7" rx="1" />
-                  <rect x="14" y="3" width="7" height="7" rx="1" />
-                  <rect x="3" y="14" width="7" height="7" rx="1" />
-                  <rect x="14" y="14" width="7" height="7" rx="1" />
-                </svg>
-                Cards
-              </>
-            ) : (
-              <>
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L12 8M12 8L8 5M12 8L16 5M4 10H20M4 10V20C4 21 5 22 6 22H18C19 22 20 21 20 20V10M8 14H8.01M12 14H12.01M16 14H16.01M8 18H8.01M12 18H12.01M16 18H16.01" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                Tree
-              </>
-            )}
-          </button>
+
+          <SearchBar data={data} onSelectPerson={handleSearchSelect} />
         </div>
       </div>
-      {viewMode === 'card' && <CardView data={data} navStack={cardNavStack} setNavStack={setCardNavStack} onJumpToTree={jumpToTreePerson} searchTargetId={cardSearchTarget} onSearchTargetHandled={() => setCardSearchTarget(null)} />}
-      {viewMode === 'tree' && (
+      {viewMode === "card" && (
+        <CardView
+          data={data}
+          navStack={cardNavStack}
+          setNavStack={setCardNavStack}
+          onJumpToTree={jumpToTreePerson}
+          searchTargetId={cardSearchTarget}
+          onSearchTargetHandled={() => setCardSearchTarget(null)}
+        />
+      )}
+      {viewMode === "tree" && (
         <TextSizeControls
           onIncrease={increaseFontSize}
           onDecrease={decreaseFontSize}

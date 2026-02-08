@@ -70,11 +70,18 @@ export function useFamilyTree(data, navStack, setNavStack) {
       if (person.parent_union) {
         const parentUnion = unions[person.parent_union];
         if (parentUnion?.partner) {
-          for (const parentId of parentUnion.partner) {
-            if (!visited.has(parentId)) {
-              // Add current person to path (they need to be expanded to show target)
-              queue.push({ id: parentId, path: [id, ...path], isSpouse: false });
-            }
+          // Only follow the parent with the same surname (blood relative)
+          // This prevents branching into spouse's family tree
+          const childSurname = extractLastName(person.name);
+          const bloodParent = parentUnion.partner.find(parentId => {
+            const parentSurname = extractLastName(persons[parentId]?.name);
+            return parentSurname === childSurname;
+          });
+
+          // If we found a blood parent, only follow them; otherwise fall back to first parent
+          const parentToFollow = bloodParent || parentUnion.partner[0];
+          if (!visited.has(parentToFollow)) {
+            queue.push({ id: parentToFollow, path: [id, ...path], isSpouse: false });
           }
         }
       } else if (person.own_unions && person.own_unions.length > 0) {
@@ -192,10 +199,12 @@ export function useFamilyTree(data, navStack, setNavStack) {
       const spouseId = (union.partner || []).find(id => id !== personId);
       const spouse = spouseId ? { id: spouseId, ...persons[spouseId] } : null;
 
-      const unionChildren = (union.children || []).map(childId => ({
-        id: childId,
-        ...persons[childId]
-      }));
+      const unionChildren = sortChildrenByBirthYear(
+        (union.children || []).map(childId => ({
+          id: childId,
+          ...persons[childId]
+        }))
+      );
 
       // Get spouse's children from OTHER relationships
       let spouseOtherChildren = [];
@@ -207,10 +216,12 @@ export function useFamilyTree(data, navStack, setNavStack) {
             if (spouseUnionId === unionId) continue;
             const spouseUnion = unions[spouseUnionId];
             if (spouseUnion?.children) {
-              const otherKids = spouseUnion.children.map(childId => ({
-                id: childId,
-                ...persons[childId]
-              }));
+              const otherKids = sortChildrenByBirthYear(
+                spouseUnion.children.map(childId => ({
+                  id: childId,
+                  ...persons[childId]
+                }))
+              );
               spouseOtherChildren = [...spouseOtherChildren, ...otherKids];
             }
           }
@@ -398,20 +409,51 @@ function findSharedUnion(personIds, persons) {
 }
 
 /**
+ * Sort children by birthyear (primary) with original order as tiebreaker (secondary)
+ * Children with birth years are sorted by year
+ * Children without birth years stay in their original position relative to siblings
+ * (they inherit an effective year from the previous sibling to maintain relative order)
+ */
+function sortChildrenByBirthYear(children) {
+  // First pass: assign effective years
+  // People without birth years inherit from previous sibling + small offset
+  let lastKnownYear = 0;
+  const withEffectiveYears = children.map((child, index) => {
+    let effectiveYear;
+    if (typeof child.birthyear === 'number') {
+      effectiveYear = child.birthyear;
+      lastKnownYear = child.birthyear;
+    } else {
+      // No birth year - use last known year + small offset based on original index
+      // This keeps them right after the previous person in sort order
+      effectiveYear = lastKnownYear + (index + 1) * 0.001;
+    }
+    return { ...child, _effectiveYear: effectiveYear, _originalIndex: index };
+  });
+
+  // Sort by effective year, with original index as final tiebreaker
+  return withEffectiveYears
+    .sort((a, b) => {
+      if (a._effectiveYear !== b._effectiveYear) {
+        return a._effectiveYear - b._effectiveYear;
+      }
+      return a._originalIndex - b._originalIndex;
+    })
+    .map(({ _effectiveYear, _originalIndex, ...child }) => child);
+}
+
+/**
  * Get children from a specific union, sorted by birthyear
  */
 function getChildrenFromUnion(unionId, unions, persons) {
   const union = unions[unionId];
   if (!union || !union.children) return [];
 
-  return union.children
+  const children = union.children
     .map(childId => ({ id: childId, ...persons[childId] }))
-    .filter(child => child.name)
-    .sort((a, b) => {
-      const yearA = typeof a.birthyear === 'number' ? a.birthyear : Infinity;
-      const yearB = typeof b.birthyear === 'number' ? b.birthyear : Infinity;
-      return yearA - yearB;
-    });
+    .filter(child => child.name);
+
+  return sortChildrenByBirthYear(children);
 }
 
 /**

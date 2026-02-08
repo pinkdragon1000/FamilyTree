@@ -44,6 +44,12 @@ body {
   z-index: 100;
 }
 
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .navbar-title {
   display: flex;
   align-items: center;
@@ -134,7 +140,6 @@ body {
 .search-results {
   position: absolute;
   top: 100%;
-  left: 0;
   right: 0;
   margin-top: 8px;
   background: white;
@@ -497,7 +502,66 @@ svg {
   gap: 10px;
 }
 
-/* View Toggle Button */
+/* View Toggle Radio Group */
+.view-toggle-group {
+  position: relative;
+  display: flex;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.view-toggle-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(50% - 3px);
+  height: calc(100% - 4px);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+.view-toggle-group[data-active="card"] .view-toggle-slider {
+  transform: translateX(calc(100% + 2px));
+}
+
+.view-toggle-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  border-radius: 16px;
+  padding: 4px 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.25s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  z-index: 1;
+}
+
+.view-toggle-option svg {
+  flex-shrink: 0;
+}
+
+.view-toggle-option:hover {
+  color: white;
+}
+
+.view-toggle-option.active {
+  color: #333;
+}
+
+/* Back Button */
 .view-toggle {
   display: flex;
   align-items: center;

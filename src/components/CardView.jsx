@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useFamilyTree } from '../hooks/useFamilyTree';
 import ExpandablePersonCard from './ExpandablePersonCard';
+import Icon from './Icons.jsx';
 
 /**
  * CardView component displays family members starting with 4 founding couples,
@@ -259,9 +260,7 @@ function FounderMini({ person, onViewAncestors, onJumpToTree }) {
             role="button"
             aria-label={`View ${displayName} in tree`}
           >
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M12 2L12 8M12 8L8 5M12 8L16 5M4 10H20M4 10V20C4 21 5 22 6 22H18C19 22 20 21 20 20V10M8 14H8.01M12 14H12.01M16 14H16.01M8 18H8.01M12 18H12.01M16 18H16.01" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <Icon name="tree" />
             View in Tree
           </div>
         )}
