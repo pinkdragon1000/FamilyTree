@@ -63,15 +63,6 @@ function App() {
   // Search target for card view navigation
   const [cardSearchTarget, setCardSearchTarget] = useState(null);
 
-  // Get the name of the descendant we'd navigate back to
-  const getBackLabel = useCallback(() => {
-    if (cardNavStack.length <= 1) return "Descendants";
-    const currentView = cardNavStack[cardNavStack.length - 1];
-    // Get childName from the first couple that has one
-    const childName = currentView.couples?.find((c) => c.childName)?.childName;
-    return childName || "Descendants";
-  }, [cardNavStack]);
-
   const navigateBackInCards = useCallback(() => {
     setCardNavStack((prev) => (prev.length > 1 ? prev.slice(0, -1) : prev));
   }, []);
@@ -219,49 +210,9 @@ function App() {
   return (
     <>
       <div className="navbar">
-        <div className="navbar-left">
-          <div
-            className="view-toggle-group"
-            role="radiogroup"
-            aria-label="View mode"
-            data-active={viewMode}
-          >
-            <span className="view-toggle-slider" />
-            <button
-              className={`view-toggle-option ${viewMode === "tree" ? "active" : ""}`}
-              onClick={() => {
-                setViewMode("tree");
-                localStorage.setItem(VIEW_MODE_STORAGE_KEY, "tree");
-              }}
-              role="radio"
-              aria-checked={viewMode === "tree"}
-            >
-              <Icon name="tree" size={16} />
-              Tree
-            </button>
-            <button
-              className={`view-toggle-option ${viewMode === "card" ? "active" : ""}`}
-              onClick={() => {
-                setViewMode("card");
-                localStorage.setItem(VIEW_MODE_STORAGE_KEY, "card");
-              }}
-              role="radio"
-              aria-checked={viewMode === "card"}
-            >
-              <Icon name="cards" size={16} />
-              Cards
-            </button>
-          </div>
-          <Legend showNodeColors={viewMode === "tree"} />
-        </div>
-
-        <div className="navbar-title">
-          <img className="spacer" src={TreeLogo} alt="tree logo" />
-          Family Tree
-        </div>
-        <div className="navbar-buttons">
+        <div className="navbar-row navbar-row-top">
           {viewMode === "card" && canGoBackInCards && (
-            <button className="view-toggle" onClick={navigateBackInCards}>
+            <button className="view-toggle back-button" onClick={navigateBackInCards}>
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M19 12H5M5 12L12 19M5 12L12 5"
@@ -272,10 +223,49 @@ function App() {
                   strokeLinejoin="round"
                 />
               </svg>
-              {getBackLabel()}
             </button>
           )}
-
+          <div className="navbar-title">
+            <img className="spacer" src={TreeLogo} alt="tree logo" />
+            Family Tree
+          </div>
+        </div>
+        <div className="navbar-row navbar-row-bottom">
+          <div className="navbar-row-bottom-left">
+            <div
+              className="view-toggle-group"
+              role="radiogroup"
+              aria-label="View mode"
+              data-active={viewMode}
+            >
+              <span className="view-toggle-slider" />
+              <button
+                className={`view-toggle-option ${viewMode === "tree" ? "active" : ""}`}
+                onClick={() => {
+                  setViewMode("tree");
+                  localStorage.setItem(VIEW_MODE_STORAGE_KEY, "tree");
+                }}
+                role="radio"
+                aria-checked={viewMode === "tree"}
+              >
+                <Icon name="tree" size={16} />
+                Tree
+              </button>
+              <button
+                className={`view-toggle-option ${viewMode === "card" ? "active" : ""}`}
+                onClick={() => {
+                  setViewMode("card");
+                  localStorage.setItem(VIEW_MODE_STORAGE_KEY, "card");
+                }}
+                role="radio"
+                aria-checked={viewMode === "card"}
+              >
+                <Icon name="cards" size={16} />
+                Cards
+              </button>
+            </div>
+            <Legend showNodeColors={viewMode === "tree"} />
+          </div>
           <SearchBar data={data} onSelectPerson={handleSearchSelect} />
         </div>
       </div>

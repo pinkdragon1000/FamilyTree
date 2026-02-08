@@ -8,4 +8,4 @@ npm i
 npm run dev
 ```
 
-[View the App](https://smrfamilytree.web.app/)
+[View the App](https://smrfamilytree.web.app/) | [Product Requirements Document](PRD.md)
