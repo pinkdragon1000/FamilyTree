@@ -20,24 +20,16 @@ jobs:
           node-version: "lts/*"
           cache: "npm"
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Install frontend dependencies
-        run: npm install
-
-      - name: Generate family data for functions
-        run: node scripts/generateFamilyDataJson.js
-
-      - name: Install functions dependencies
-        run: cd functions && npm install
-
-      - name: Build frontend
-        env:
-          VITE_RECAPTCHA_SITE_KEY: ${{ secrets.VITE_RECAPTCHA_SITE_KEY }}
-        run: npm run build
-
-      - name: Deploy to Firebase
+      - name: Deploy to Firebase Hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: firebase deploy --token="$FIREBASE_TOKEN"
+        run: firebase deploy --only hosting --token="$FIREBASE_TOKEN"
