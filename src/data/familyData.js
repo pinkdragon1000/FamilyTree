@@ -928,9 +928,11 @@ export const familyData = {
         name: "VV Sastry",
         gender: "M",
         nickname: "Raja",
+        imageLink: "/photos/VVSastry.jpg",
         spouse: {
           name: "Lakshmi Viswanadham",
           gender: "F",
+          imageLink: "/photos/LakshmiViswanadham.jpg",
         },
       },
       {
@@ -1077,6 +1079,7 @@ export const familyData = {
         spouse: {
           name: "Kameswari Viswanadham",
           imageLink: "/photos/KameswariViswanadham.jpg",
+          gender: "F"
         },
         children: [
           {
@@ -1108,7 +1111,7 @@ export const familyData = {
           {
             name: "Vinod Hari",
             gender: "M",
-            spouse: { name: "Srividya Hari", gender: "F" },
+            spouse: { name: "Srividya Hari", gender: "F", imageLink: "/photos/Hari/SrividyaHari.jpg" },
             imageLink: "/photos/Hari/VinodHari.jpg",
             profession: "Banking & Financial Services",
             children: [
