@@ -41,16 +41,19 @@ export const familyData = {
         name: "Reva Robinson",
         birthyear: 1910,
         deathyear: 2007,
+        gender: "F"
       },
       {
         name: "Russell Robinson",
         birthyear: 1913,
         deathyear: 1916,
+        gender: "M"
       },
       {
         name: "Ray Robinson",
         birthyear: 1915,
         deathyear: 1916,
+        gender: "M"
       },
       {
         name: "Carmel Robinson",
@@ -275,16 +278,19 @@ export const familyData = {
         name: "Gale Robinson",
         birthyear: 1922,
         deathyear: 2007,
+        gender: "M"
       },
       {
         name: "Daisy Robinson",
         birthyear: 1923,
         deathyear: "unknown",
+        gender: "F"
       },
       {
         name: "Wanda Robinson",
         birthyear: 1930,
         deathyear: 1934,
+        gender: "F"
       },
     ],
   },
@@ -861,6 +867,7 @@ export const familyData = {
               {
                 name: "Sneha Palepu",
                 gender: "F",
+                birthyear: 1992,
                 imageLink: "/photos/Palepu/SnehaPalepu.jpg",
                 spouse: {
                   name: "Sneha's husband",
@@ -934,6 +941,7 @@ export const familyData = {
         imageLink: "/photos/VAtchutaramaiah.jpg",
         spouse: {
           name: "Kameswari Viswanatham",
+          gender: "F",
           imageLink: "/photos/KameswariViswanatham.jpg",
         },
         children: [

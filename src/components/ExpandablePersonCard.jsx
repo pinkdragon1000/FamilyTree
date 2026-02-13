@@ -181,7 +181,7 @@ function PersonMini({
   } = person;
 
   // Gender symbol helper
-  const genderSymbol = gender === "M" ? " ♂" : gender === "F" ? " ♀" : "";
+  const genderSymbol = gender === "M" ? "♂" : gender === "F" ? "♀" : null;
 
   // Check if this person has parents we can navigate to
   const parentCouple = getParentCoupleForPerson
@@ -229,8 +229,7 @@ function PersonMini({
 
       <div className="person-mini-info">
         <div className="person-mini-name">
-          {displayName}
-          {genderSymbol}
+          <span className="name-with-symbols">{displayName}{genderSymbol && <span className="gender-symbol">{genderSymbol}</span>}</span>
         </div>
         {nickname && <div className="person-mini-nickname">"{nickname}"</div>}
         {profession && (
