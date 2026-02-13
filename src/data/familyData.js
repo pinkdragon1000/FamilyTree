@@ -846,23 +846,34 @@ export const familyData = {
             gender: "F",
             birthyear: 1966,
             imageLink: "/photos/Palepu/NeeruPalepu.jpg",
-            spouse: { name: "Prasad Palepu", gender: "M" },
+            spouse: { name: "Prasad Palepu", gender: "M", imageLink: "/photos/Palepu/PrasadPalepu.jpg" },
             children: [
               {
                 name: "Anjana Palepu",
                 gender: "F",
                 imageLink: "/photos/Palepu/AnjanaPalepu.jpg",
+                spouse: {
+                  name: "Anjana's husband",
+                  gender: "M",
+                  imageLink: "/photos/Anjana'sHusband.jpg",
+                },
               },
               {
                 name: "Sneha Palepu",
                 gender: "F",
                 imageLink: "/photos/Palepu/SnehaPalepu.jpg",
+                spouse: {
+                  name: "Sneha's husband",
+                  gender: "M",
+                  imageLink: "/photos/Sneha'sHusband.jpg",
+                },
               },
               {
                 name: "Nethra Palepu",
                 gender: "F",
                 profession: "Psychologist",
                 imageLink: "/photos/Palepu/NethraPalepu.jpg",
+                spouse: { name: "Nethra's husband", gender: "M" },
               },
             ],
           },
@@ -923,7 +934,7 @@ export const familyData = {
         imageLink: "/photos/VAtchutaramaiah.jpg",
         spouse: {
           name: "Kameswari Viswanatham",
-          imageLink: "/photos/KameswariViswanatham.jpg"
+          imageLink: "/photos/KameswariViswanatham.jpg",
         },
         children: [
           {
@@ -954,7 +965,11 @@ export const familyData = {
             nickname: "Bujju",
             profession: "Chartered Accountant/Tax Consultant",
             imageLink: "/photos/BujjuViswanatham.jpg",
-            spouse: { name: "Suchitra Viswanatham", gender: "F", imageLink: "/photos/SuchitraViswanatham.jpg" },
+            spouse: {
+              name: "Suchitra Viswanatham",
+              gender: "F",
+              imageLink: "/photos/SuchitraViswanatham.jpg",
+            },
             children: [
               {
                 name: "Aditya Viswanatham",
@@ -1051,6 +1066,10 @@ export const familyData = {
         gender: "M",
         nickname: "Butchi",
         imageLink: "/photos/Butchi.jpg",
+        spouse: {
+          name: "Kameswari Viswanadham",
+          imageLink: "/photos/KameswariViswanadham.jpg",
+        },
         children: [
           {
             name: "Padmini Shanmugam",
@@ -1062,7 +1081,12 @@ export const familyData = {
               { name: "Padmini's son 2", gender: "M" },
             ],
           },
-          { name: "Bhaskar", gender: "M", nickname: "Sunny" },
+          {
+            name: "Bhaskar Viswanadham",
+            gender: "M",
+            nickname: "Sunny",
+            imageLink: "/photos/SunnyViswanadham.jpg",
+          },
         ],
       },
 
@@ -1155,7 +1179,11 @@ export const familyData = {
         gender: "M",
         nickname: "Pardha",
         imageLink: "/photos/PardhasaradhiViswanadham.jpg",
-        spouse: { name: "Annapurna Viswanadham", gender: "F" },
+        spouse: {
+          name: "Annapurna Viswanadham",
+          gender: "F",
+          imageLink: "/photos/AnnapurnaViswanadham.jpg",
+        },
         children: [
           {
             name: "Jitu Viswanadham",
@@ -1236,14 +1264,19 @@ export const familyData = {
             profession: "Research Scientist (Dow Chemical)",
             birthyear: 1928,
             deathyear: 2011,
-            spouse: { name: "Veeramathi Evani", gender: "F", nickname: "Rama", imageLink: "/photos/Evani/VeeramathiEvani.jpg" },
+            spouse: {
+              name: "Veeramathi Evani",
+              gender: "F",
+              nickname: "Rama",
+              imageLink: "/photos/Evani/VeeramathiEvani.jpg",
+            },
             children: [
               {
                 name: "Venkatarama Narasimham Evani",
                 gender: "M",
                 nickname: "Bobby",
                 birthyear: 1960,
-                imageLink: "/photos/Evani/BobbyEvani.jpg"
+                imageLink: "/photos/Evani/BobbyEvani.jpg",
               },
               {
                 name: "Lakshman Evani",
@@ -1252,13 +1285,28 @@ export const familyData = {
                 imageLink: "/photos/Evani/LuckyEvani.jpg",
                 birthyear: 1967,
               },
-              { name: "Venu Gopala Sarma Evani", gender: "M", birthyear: 1974, imageLink: "/photos/Evani/VenuEvani.jpg",
-                spouse: {name: "Monal Patel"},
-                children: [{name: "Anjali Evani", birthyear: "2009", imageLink: "/photos/Evani/AnjaliEvani.jpg"}]
-               },
+              {
+                name: "Venu Gopala Sarma Evani",
+                gender: "M",
+                birthyear: 1974,
+                imageLink: "/photos/Evani/VenuEvani.jpg",
+                spouse: { name: "Monal Patel" },
+                children: [
+                  {
+                    name: "Anjali Evani",
+                    birthyear: "2009",
+                    imageLink: "/photos/Evani/AnjaliEvani.jpg",
+                  },
+                ],
+              },
             ],
           },
-          { name: "Manikyamba Tenneti", gender: "F", birthyear: 1925, imageLink: "/photos/ManikyambaTenneti.jpg" },
+          {
+            name: "Manikyamba Tenneti",
+            gender: "F",
+            birthyear: 1925,
+            imageLink: "/photos/ManikyambaTenneti.jpg",
+          },
           {
             name: "Subbaya Sastry Evani",
             gender: "M",
@@ -1271,9 +1319,18 @@ export const familyData = {
                 birthyear: 1963,
                 birthplace: "Kakinada, India",
                 imageLink: "/photos/Evani/SastryEvani.jpg",
-                spouse: { name: "Jyothi Evani", gender: "F", imageLink: "/photos/Evani/JyothiEvani.jpg" },
+                spouse: {
+                  name: "Jyothi Evani",
+                  gender: "F",
+                  imageLink: "/photos/Evani/JyothiEvani.jpg",
+                },
                 children: [
-                  { name: "Anjani Evani", gender: "F", birthyear: 2003, imageLink: "/photos/Evani/AnjaniEvani.jpg" },
+                  {
+                    name: "Anjani Evani",
+                    gender: "F",
+                    birthyear: 2003,
+                    imageLink: "/photos/Evani/AnjaniEvani.jpg",
+                  },
                 ],
               },
               {
@@ -1519,7 +1576,7 @@ export const familyData = {
         imageLink: "/photos/Emani/SuryakanthamEmani.jpg",
         spouse: {
           name: "Venkateswarlu Emani",
-          imageLink: "/photos/Emani/VenkateswarluEmani.jpg"
+          imageLink: "/photos/Emani/VenkateswarluEmani.jpg",
         },
         children: [
           {
@@ -1564,7 +1621,7 @@ export const familyData = {
         deathyear: 1988,
         birthplace: "Salem, WV",
         deathplace: "Clarksburg, WV",
-        spouse: {name: "Wavelene Davis", birthyear: 1912, deathyear: 1964}
+        spouse: { name: "Wavelene Davis", birthyear: 1912, deathyear: 1964 },
       },
       {
         name: "Augustus Furbee",
@@ -1596,7 +1653,7 @@ export const familyData = {
             deathyear: 2017,
             birthplace: "Salem, WV",
             deathplace: "Ravenswood, WV",
-            imageLink: "/photos/Furbee/RonaldFurbee.jpg"
+            imageLink: "/photos/Furbee/RonaldFurbee.jpg",
           },
           {
             name: "Charles Furbee",
@@ -1613,7 +1670,7 @@ export const familyData = {
             name: "Beth Imperio",
             spouse: {
               name: "David Imperio",
-              nickname: "Dave"
+              nickname: "Dave",
             },
           },
         ],

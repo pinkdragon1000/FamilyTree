@@ -132,7 +132,9 @@ body {
   .legend-item span {
     word-break: break-word;
   }
+
 }
+
 
 /* Search Bar */
 .search-bar {
@@ -550,7 +552,7 @@ svg {
   z-index: 0;
 }
 
-.view-toggle-group[data-active="card"] .view-toggle-slider {
+.view-toggle-group[data-active="tree"] .view-toggle-slider {
   transform: translateX(calc(100% + 2px));
 }
 
@@ -1253,4 +1255,12 @@ svg {
 .jump-to-tree svg {
   width: 12px;
   height: 12px;
+}
+
+/* Mobile: hide view toggle and jump-to-tree (must come after base styles) */
+@media (max-width: 600px) {
+  .view-toggle-group,
+  .jump-to-tree {
+    display: none;
+  }
 }

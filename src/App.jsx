@@ -50,8 +50,7 @@ function App() {
     if (saved) {
       return saved;
     }
-    // Default to card view on smaller screens
-    return window.innerWidth <= 600 ? "card" : "tree";
+    return "card";
   });
 
   // Card view navigation stack
@@ -240,18 +239,6 @@ function App() {
             >
               <span className="view-toggle-slider" />
               <button
-                className={`view-toggle-option ${viewMode === "tree" ? "active" : ""}`}
-                onClick={() => {
-                  setViewMode("tree");
-                  localStorage.setItem(VIEW_MODE_STORAGE_KEY, "tree");
-                }}
-                role="radio"
-                aria-checked={viewMode === "tree"}
-              >
-                <Icon name="tree" size={16} />
-                Tree
-              </button>
-              <button
                 className={`view-toggle-option ${viewMode === "card" ? "active" : ""}`}
                 onClick={() => {
                   setViewMode("card");
@@ -262,6 +249,18 @@ function App() {
               >
                 <Icon name="cards" size={16} />
                 Cards
+              </button>
+              <button
+                className={`view-toggle-option ${viewMode === "tree" ? "active" : ""}`}
+                onClick={() => {
+                  setViewMode("tree");
+                  localStorage.setItem(VIEW_MODE_STORAGE_KEY, "tree");
+                }}
+                role="radio"
+                aria-checked={viewMode === "tree"}
+              >
+                <Icon name="tree" size={16} />
+                Tree
               </button>
             </div>
             <Legend showNodeColors={viewMode === "tree"} />
