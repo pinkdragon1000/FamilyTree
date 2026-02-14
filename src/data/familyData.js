@@ -41,19 +41,19 @@ export const familyData = {
         name: "Reva Robinson",
         birthyear: 1910,
         deathyear: 2007,
-        gender: "F"
+        gender: "F",
       },
       {
         name: "Russell Robinson",
         birthyear: 1913,
         deathyear: 1916,
-        gender: "M"
+        gender: "M",
       },
       {
         name: "Ray Robinson",
         birthyear: 1915,
         deathyear: 1916,
-        gender: "M"
+        gender: "M",
       },
       {
         name: "Carmel Robinson",
@@ -88,6 +88,14 @@ export const familyData = {
             militaryService: "US Army - Vietnam War",
             imageLink: "/photos/Robinson/JimRobinson.jpg",
             spouse: { ref: "Davis.Sandra Robinson" },
+            familyPhotos: [
+              "/familyPhotos/robinson.jpg",
+              "/familyPhotos/robinson2.jpg",
+              "/familyPhotos/robinson3.jpg",
+              "/familyPhotos/robinson4.jpg",
+              "/familyPhotos/robinson5.jpg",
+              "/familyPhotos/robinson6.jpg",
+            ],
             children: [
               {
                 name: "John Robinson",
@@ -112,13 +120,14 @@ export const familyData = {
                 gender: "M",
                 nickname: "Clark",
                 birthyear: 1969,
-                imageLink: "/photos/Robinson/Clark&JenniferRobinson.jpg",
+                imageLink: "/photos/Robinson/ClarkRobinson.jpg",
                 spouse: {
                   name: "Jennifer Robinson",
                   gender: "F",
                   birthyear: 1970,
                   profession: "Psychologist",
-                  imageLink: "/photos/Robinson/Clark&JenniferRobinson.jpg",
+                  imageLink: "/photos/Robinson/JenniferRobinson.jpg",
+                  fromFamily: { ref: "Conant.Linda Conant" },
                   priorChildren: [
                     {
                       name: "Chelsea Bly ½",
@@ -278,19 +287,19 @@ export const familyData = {
         name: "Gale Robinson",
         birthyear: 1922,
         deathyear: 2007,
-        gender: "M"
+        gender: "M",
       },
       {
         name: "Daisy Robinson",
         birthyear: 1923,
         deathyear: "unknown",
-        gender: "F"
+        gender: "F",
       },
       {
         name: "Wanda Robinson",
         birthyear: 1930,
         deathyear: 1934,
-        gender: "F"
+        gender: "F",
       },
     ],
   },
@@ -852,7 +861,11 @@ export const familyData = {
             gender: "F",
             birthyear: 1966,
             imageLink: "/photos/Palepu/NeeruPalepu.jpg",
-            spouse: { name: "Prasad Palepu", gender: "M", imageLink: "/photos/Palepu/PrasadPalepu.jpg" },
+            spouse: {
+              name: "Prasad Palepu",
+              gender: "M",
+              imageLink: "/photos/Palepu/PrasadPalepu.jpg",
+            },
             children: [
               {
                 name: "Anjana Palepu",
@@ -959,7 +972,7 @@ export const familyData = {
             },
             children: [
               {
-                name: "Dr. Sweta",
+                name: "Dr. Shweta",
                 gender: "F",
                 imageLink: "/photos/Sweta.jpg",
                 children: [
@@ -1079,7 +1092,7 @@ export const familyData = {
         spouse: {
           name: "Kameswari Viswanadham",
           imageLink: "/photos/KameswariViswanadham.jpg",
-          gender: "F"
+          gender: "F",
         },
         children: [
           {
@@ -1111,7 +1124,11 @@ export const familyData = {
           {
             name: "Vinod Hari",
             gender: "M",
-            spouse: { name: "Srividya Hari", gender: "F", imageLink: "/photos/Hari/SrividyaHari.jpg" },
+            spouse: {
+              name: "Srividya Hari",
+              gender: "F",
+              imageLink: "/photos/Hari/SrividyaHari.jpg",
+            },
             imageLink: "/photos/Hari/VinodHari.jpg",
             profession: "Banking & Financial Services",
             children: [
@@ -1301,7 +1318,7 @@ export const familyData = {
                 gender: "M",
                 birthyear: 1974,
                 imageLink: "/photos/Evani/VenuEvani.jpg",
-                spouse: { name: "Monal Patel" },
+                spouse: { name: "Monal Patel ⟷" },
                 children: [
                   {
                     name: "Anjali Evani",
@@ -1717,6 +1734,29 @@ export const familyData = {
         name: "Rena Long",
         birthyear: 1925,
         deathyear: 1992,
+      },
+    ],
+  },
+
+  Conant: {
+    founders: [
+      {
+        name: "Dale Conant",
+        imageLink: "/photos/Conant/DaleConant.jpg",
+      },
+      {
+        name: "Linda Conant",
+        imageLink: "/photos/Conant/LindaConant.jpg",
+      },
+    ],
+    children: [
+      {
+        name: "Christine Landis",
+        imageLink: "/photos/ChristineLandis.jpg",
+      },
+      {
+        name: "Mandi Robinson",
+        imageLink: "/photos/MandiRobinson.jpg",
       },
     ],
   },

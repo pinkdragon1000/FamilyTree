@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useFamilyTree } from '../hooks/useFamilyTree';
 import ExpandablePersonCard from './ExpandablePersonCard';
+import FamilyPhotoCarousel from './FamilyPhotoCarousel';
 import Icon from './Icons.jsx';
 
 /**
@@ -128,6 +129,11 @@ function CardView({ data, navStack, setNavStack, onJumpToTree, searchTargetId, o
                 <div className="no-children">No children recorded</div>
               )}
             </div>
+
+            {/* Family photos */}
+            {family.familyPhotos && (
+              <FamilyPhotoCarousel photos={family.familyPhotos} />
+            )}
           </section>
         );
       })}

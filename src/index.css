@@ -1269,6 +1269,127 @@ svg {
   height: 12px;
 }
 
+
+
+/* ===== Family Photo Carousel ===== */
+
+.family-photos-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(233, 30, 99, 0.1);
+  border: 1px solid rgba(233, 30, 99, 0.3);
+  border-radius: 20px;
+  padding: 6px 14px;
+  color: var(--primary-pink);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 8px 0;
+}
+
+.family-photos-btn:hover {
+  background: rgba(233, 30, 99, 0.2);
+}
+
+.photo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-modal {
+  position: relative;
+  width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.photo-modal-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+  z-index: 1;
+}
+
+.photo-modal-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.photo-modal-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.photo-modal-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  line-height: 1;
+}
+
+.photo-modal-arrow:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.photo-modal-prev {
+  left: 8px;
+}
+
+.photo-modal-next {
+  right: 8px;
+}
+
+.photo-modal-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.photo-modal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.photo-modal-dot.active {
+  background: white;
+}
+
 /* Mobile: hide view toggle and jump-to-tree (must come after base styles) */
 @media (max-width: 600px) {
   .view-toggle-group,

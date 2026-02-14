@@ -1,4 +1,5 @@
 import Icon from './Icons.jsx';
+import FamilyPhotoCarousel from './FamilyPhotoCarousel';
 
 /**
  * ExpandablePersonCard - Shows a person with their spouse and expandable children
@@ -88,18 +89,8 @@ function ExpandablePersonCard({
       {expanded &&
         familyData.map((unionData, idx) => (
           <div key={unionData.unionId} className="children-section">
-            {/* Show additional spouses for subsequent unions */}
-            {idx > 0 && unionData.spouse && (
-              <div className="additional-spouse">
-                <span className="spouse-label">Also married to:</span>
-                <PersonMini
-                  person={unionData.spouse}
-                  onJumpToTree={onJumpToTree}
-                  getParentCoupleForPerson={getParentCoupleForPerson}
-                  navigateUp={navigateUp}
-                  showAncestors={true}
-                />
-              </div>
+            {unionData.familyPhotos && (
+              <FamilyPhotoCarousel photos={unionData.familyPhotos} />
             )}
 
             {unionData.children.length > 0 && (
@@ -131,6 +122,33 @@ function ExpandablePersonCard({
                   </div>
                   <div className="children-list">
                     {unionData.spouseOtherChildren.map((child) => (
+                      <ExpandablePersonCard
+                        key={child.id}
+                        person={child}
+                        getChildrenForPerson={getChildrenForPerson}
+                        hasChildren={hasChildren}
+                        getSpousesForPerson={getSpousesForPerson}
+                        isExpanded={isExpanded}
+                        toggleNode={toggleNode}
+                        depth={depth + 1}
+                        onJumpToTree={onJumpToTree}
+                        getParentCoupleForPerson={getParentCoupleForPerson}
+                        navigateUp={navigateUp}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            {/* Show person's own children from other relationships */}
+            {unionData.personOtherChildren &&
+              unionData.personOtherChildren.length > 0 && (
+                <div className="other-relationship-section">
+                  <div className="other-relationship-label">
+                    {unionData.personName}'s children from other relationship:
+                  </div>
+                  <div className="children-list">
+                    {unionData.personOtherChildren.map((child) => (
                       <ExpandablePersonCard
                         key={child.id}
                         person={child}

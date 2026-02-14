@@ -12,6 +12,7 @@ const persons = {};
 const personNameToId = {}; // "FamilyName.PersonName" -> id
 const pendingRefs = []; // References to resolve after first pass
 const foundingCouples = []; // Track founding couples with their IDs
+const unionPhotos = {}; // Track familyPhotos per union ID
 
 /**
  * Generate a unique person ID
@@ -184,6 +185,11 @@ function processChildren(familyName, children, parentUnionId, parentPath = "") {
         }
       }
 
+      // Store family photos for this union
+      if (child.familyPhotos) {
+        unionPhotos[childUnionId] = child.familyPhotos;
+      }
+
       // Process this child's children
       if (child.children) {
         processChildren(familyName, child.children, childUnionId, newParentPath);
@@ -203,6 +209,11 @@ function processChildren(familyName, children, parentUnionId, parentPath = "") {
 function processFamily(familyName, family) {
   const [founder1, founder2] = family.founders;
   const { unionId, id1, id2 } = processCouple(familyName, founder1, founder2);
+
+  // Store family photos for this founding union
+  if (family.familyPhotos) {
+    unionPhotos[unionId] = family.familyPhotos;
+  }
 
   // Track founding couple
   const mainFamilies = ["Robinson", "Davis", "Royyuru", "Viswanadham"];
@@ -290,7 +301,8 @@ function getUnions() {
       if (unionId in unions) {
         unions[unionId].partner.push(personId);
       } else {
-        unions[unionId] = { partner: [personId], children: [] };
+        const photos = unionPhotos[unionId];
+        unions[unionId] = { partner: [personId], children: [], ...(photos && { familyPhotos: photos }) };
       }
     }
 
@@ -336,6 +348,7 @@ export function buildTreeData() {
   Object.keys(personNameToId).forEach(k => delete personNameToId[k]);
   pendingRefs.length = 0;
   foundingCouples.length = 0;
+  Object.keys(unionPhotos).forEach(k => delete unionPhotos[k]);
 
   // Process each family
   for (const [familyName, family] of Object.entries(familyData)) {

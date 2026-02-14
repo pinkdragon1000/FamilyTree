@@ -24,6 +24,7 @@ export function useFamilyTree(data, navStack, setNavStack) {
       // Find the union between this couple
       const unionId = findSharedUnion(couple.ids, persons);
       const directChildren = unionId ? getChildrenFromUnion(unionId, unions, persons) : [];
+      const familyPhotos = unionId && unions[unionId]?.familyPhotos ? unions[unionId].familyPhotos : null;
 
       // Count total descendants for display
       const totalDescendants = countAllDescendants(couple.ids, persons, unions);
@@ -37,7 +38,8 @@ export function useFamilyTree(data, navStack, setNavStack) {
         couple: couplePersons,
         directChildren,
         totalDescendants,
-        parentsInfo // { hasParents: bool, parentCouples: [...] }
+        parentsInfo, // { hasParents: bool, parentCouples: [...] }
+        familyPhotos
       };
     });
   }, [currentView, persons, unions]);
@@ -192,7 +194,34 @@ export function useFamilyTree(data, navStack, setNavStack) {
     const result = [];
     const seenSpouses = new Set();
 
+    // First pass: collect children from prior-children unions (no spouse)
+    // These are unions where the person is the only partner
+    let personOtherChildren = [];
+    const priorUnionIds = new Set();
+
     for (const unionId of person.own_unions) {
+      const union = unions[unionId];
+      if (!union) continue;
+
+      const partners = union.partner || [];
+      const spouseId = partners.find(id => id !== personId);
+
+      // If no spouse and has children, this is a prior-children union
+      if (!spouseId && union.children && union.children.length > 0) {
+        priorUnionIds.add(unionId);
+        const otherKids = sortChildrenByBirthYear(
+          union.children.map(childId => ({
+            id: childId,
+            ...persons[childId]
+          }))
+        );
+        personOtherChildren = [...personOtherChildren, ...otherKids];
+      }
+    }
+
+    for (const unionId of person.own_unions) {
+      if (priorUnionIds.has(unionId)) continue; // Skip prior-children unions
+
       const union = unions[unionId];
       if (!union) continue;
 
@@ -233,8 +262,14 @@ export function useFamilyTree(data, navStack, setNavStack) {
           unionId,
           spouse,
           children: unionChildren,
-          spouseOtherChildren: spouseOtherChildren.length > 0 ? spouseOtherChildren : null
+          spouseOtherChildren: spouseOtherChildren.length > 0 ? spouseOtherChildren : null,
+          // Attach the person's own prior children to the first union with a spouse
+          personOtherChildren: personOtherChildren.length > 0 ? personOtherChildren : null,
+          personName: person.name,
+          familyPhotos: union.familyPhotos || null
         });
+        // Only attach personOtherChildren to the first union
+        personOtherChildren = [];
       }
     }
 
