@@ -708,6 +708,7 @@ export const familyData = {
               gender: "F",
               imageLink: "/photos/Royyuru/LakshmiRoyyuru.jpg",
             },
+            familyPhotos: ["/familyPhotos/lakshminarayanaroyyurufam.jpg"],
             children: [
               {
                 name: "Avinash Royyuru",
@@ -765,6 +766,7 @@ export const familyData = {
                   gender: "M",
                   imageLink: "/photos/Gudipati/RaviGudipati.jpg",
                 },
+                familyPhotos: ["/familyPhotos/gudipati.jpg"],
                 children: [
                   {
                     name: "Sitara Gudipati",
@@ -794,6 +796,7 @@ export const familyData = {
                   gender: "F",
                   imageLink: "/photos/Hota/KristenZuber.jpg",
                 },
+                familyPhotos: ["/familyPhotos/parthahotafam.jpg"],
                 children: [
                   {
                     name: "Wilhelmina Hota",
@@ -848,9 +851,7 @@ export const familyData = {
         fromFamily: { ref: "Evani.Sita Mahalakshmi Evani" }, // She came from the Evani family
       },
     ],
-    familyPhotos: [
-      "/familyPhotos/viswanadham.jpg",
-    ],
+    familyPhotos: ["/familyPhotos/viswanadham.jpg"],
     children: [
       {
         name: "Ravikanta Chavali",
