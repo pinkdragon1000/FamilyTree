@@ -95,6 +95,7 @@ export const familyData = {
               "/familyPhotos/robinson4.jpg",
               "/familyPhotos/robinson5.jpg",
               "/familyPhotos/robinson6.jpg",
+              "/familyPhotos/robinson7.jpg",
             ],
             children: [
               {
@@ -697,7 +698,7 @@ export const familyData = {
         deathplace: "Hyderabad, India",
         imageLink: "/photos/Royyuru/RLNSastry.jpg",
         spouse: { ref: "Viswanadham.Sita Devi Royyuru" },
-        familyPhotos: ["/familyPhotos/rlnsastryfam.jpg"],
+        familyPhotos: ["/familyPhotos/rlnsastryfam.jpg", "/familyPhotos/rlnsastryfam2.jpg", "/familyPhotos/rlnsastryfam3.jpg"],
         children: [
           {
             name: "Lakshminarayana Royyuru",

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 
 function FamilyPhotoCarousel({ photos }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ function FamilyPhotoCarousel({ photos }) {
         📷 Photos ({photos.length})
       </button>
 
-      {isOpen && (
+      {isOpen && createPortal(
         <div className="photo-modal-overlay" onClick={() => setIsOpen(false)}>
           <div className="photo-modal" onClick={(e) => e.stopPropagation()}>
             <button className="photo-modal-close" onClick={() => setIsOpen(false)} aria-label="Close">✕</button>
@@ -44,7 +45,8 @@ function FamilyPhotoCarousel({ photos }) {
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
