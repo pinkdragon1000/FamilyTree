@@ -1273,6 +1273,10 @@ svg {
 
 /* ===== Family Photo Carousel ===== */
 
+.family-card > .family-photos-btn {
+  margin-left: 16px;
+}
+
 .family-photos-btn {
   display: inline-flex;
   align-items: center;

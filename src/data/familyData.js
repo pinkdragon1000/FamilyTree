@@ -848,6 +848,9 @@ export const familyData = {
         fromFamily: { ref: "Evani.Sita Mahalakshmi Evani" }, // She came from the Evani family
       },
     ],
+    familyPhotos: [
+      "/familyPhotos/viswanadham.jpg",
+    ],
     children: [
       {
         name: "Ravikanta Chavali",

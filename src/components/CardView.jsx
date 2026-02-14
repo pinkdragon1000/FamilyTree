@@ -101,6 +101,11 @@ function CardView({ data, navStack, setNavStack, onJumpToTree, searchTargetId, o
                 })}
               </div>
 
+              {/* Family photos - shown right before children */}
+              {familyExpanded && family.familyPhotos && (
+                <FamilyPhotoCarousel photos={family.familyPhotos} />
+              )}
+
               {/* Direct children (first level) */}
               {familyExpanded && family.directChildren.length > 0 && (
                 <div className="direct-children">
@@ -129,11 +134,6 @@ function CardView({ data, navStack, setNavStack, onJumpToTree, searchTargetId, o
                 <div className="no-children">No children recorded</div>
               )}
             </div>
-
-            {/* Family photos */}
-            {family.familyPhotos && (
-              <FamilyPhotoCarousel photos={family.familyPhotos} />
-            )}
           </section>
         );
       })}
