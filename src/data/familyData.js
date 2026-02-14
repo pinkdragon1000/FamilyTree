@@ -104,6 +104,7 @@ export const familyData = {
                 profession: "Device Software Engineer",
                 imageLink: "/photos/Robinson/JohnRobinson.jpg",
                 spouse: { ref: "Royyuru.R.L.N. Sastry.Padma Robinson" },
+                familyPhotos: ["/familyPhotos/johnrobinsonfam.jpg", "/familyPhotos/johnrobinsonfam2.jpg", "/familyPhotos/johnrobinsonfam3.jpg"],
                 children: [
                   {
                     name: "Sita Robinson",
@@ -696,6 +697,7 @@ export const familyData = {
         deathplace: "Hyderabad, India",
         imageLink: "/photos/Royyuru/RLNSastry.jpg",
         spouse: { ref: "Viswanadham.Sita Devi Royyuru" },
+        familyPhotos: ["/familyPhotos/rlnsastryfam.jpg"],
         children: [
           {
             name: "Lakshminarayana Royyuru",
