@@ -441,16 +441,19 @@ export const familyData = {
                     name: "Hallie Davis",
                     gender: "F",
                     imageLink: "/photos/Davis/HallieDavis.jpg",
-                  },
-                  {
-                    name: "Andrew Davis",
-                    gender: "M",
-                    imageLink: "/photos/Davis/AndrewDavis.jpg",
+                    birthyear: 2001
                   },
                   {
                     name: "Jessica Davis",
                     gender: "F",
                     imageLink: "/photos/Davis/JessDavis.jpg",
+                    birthyear: 2003
+                  },
+                  {
+                    name: "Andrew Davis",
+                    gender: "M",
+                    birthyear: 2007,
+                    imageLink: "/photos/Davis/AndrewDavis.jpg",
                   },
                 ],
               },
@@ -551,6 +554,7 @@ export const familyData = {
               {
                 name: "Gabe Kamann",
                 gender: "M",
+                birthyear: 2005,
                 imageLink: "/photos/Kamann/GabeKamann.jpg",
               },
             ],
