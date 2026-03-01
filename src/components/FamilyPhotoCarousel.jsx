@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 
 function FamilyPhotoCarousel({ photos }) {
@@ -6,8 +6,20 @@ function FamilyPhotoCarousel({ photos }) {
   const [index, setIndex] = useState(0);
   if (!photos || photos.length === 0) return null;
 
-  const prev = (e) => { e.stopPropagation(); setIndex((index - 1 + photos.length) % photos.length); };
-  const next = (e) => { e.stopPropagation(); setIndex((index + 1) % photos.length); };
+  const prev = (e) => { if (e) e.stopPropagation(); setIndex((i) => (i - 1 + photos.length) % photos.length); };
+  const next = (e) => { if (e) e.stopPropagation(); setIndex((i) => (i + 1) % photos.length); };
+
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === 'ArrowLeft') prev();
+    else if (e.key === 'ArrowRight') next();
+    else if (e.key === 'Escape') setIsOpen(false);
+  }, [photos.length]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, handleKeyDown]);
 
   return (
     <>

@@ -8,6 +8,7 @@ import TextSizeControls from "./components/TextSizeControls.jsx";
 import SearchBar from "./components/SearchBar.jsx";
 import Icon from "./components/Icons.jsx";
 import TreeLogo from "./tree.svg";
+import PasswordGate, { isAuthenticated } from "./components/PasswordGate.jsx";
 
 const DEFAULT_FONT_SIZE = 14;
 const MIN_FONT_SIZE = 10;
@@ -40,6 +41,7 @@ const getNodeSeparation = (size) => {
 };
 
 function App() {
+  const [authed, setAuthed] = useState(isAuthenticated);
   const [fontSize, setFontSize] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? parseInt(saved, 10) : DEFAULT_FONT_SIZE;
@@ -206,6 +208,10 @@ function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [increaseFontSize, decreaseFontSize, resetFontSize]);
 
+  if (!authed) {
+    return <PasswordGate onAuthenticated={() => setAuthed(true)} />;
+  }
+
   return (
     <>
       <div className="navbar">
@@ -228,6 +234,20 @@ function App() {
             <img className="spacer" src={TreeLogo} alt="tree logo" />
             Family Tree
           </div>
+          <button
+            className="logout-button"
+            onClick={() => {
+              sessionStorage.removeItem("familyTreeAuth");
+              setAuthed(false);
+            }}
+            title="Log out"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{pointerEvents: "none"}}>
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+          </button>
         </div>
         <div className="navbar-row navbar-row-bottom">
           <div className="navbar-row-bottom-left">

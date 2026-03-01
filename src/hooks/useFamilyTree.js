@@ -166,10 +166,30 @@ export function useFamilyTree(data, navStack, setNavStack) {
         }, 150);
       } else {
         // Secondary family (like Evani) - navigate to new screen
-        setExpandedNodes(new Set());
+        const nodesToExpand = new Set([foundFamilyId, ...path]);
+        setExpandedNodes(nodesToExpand);
         setNavStack(prev => [...prev, {
           couples: [{ ids: family.ids, name: family.name }]
         }]);
+
+        // Scroll to the parents and highlight both after DOM updates
+        setTimeout(() => {
+          const parentElements = parentCouple.ids
+            .map(id => document.querySelector(`[data-person-id="${id}"]`))
+            .filter(el => el);
+
+          if (parentElements.length > 0) {
+            parentElements[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            parentElements.forEach(el => {
+              el.classList.add('search-highlight');
+            });
+            setTimeout(() => {
+              parentElements.forEach(el => {
+                el.classList.remove('search-highlight');
+              });
+            }, 2000);
+          }
+        }, 150);
       }
     } else {
       // Parent not reachable from founding families - navigate to new screen

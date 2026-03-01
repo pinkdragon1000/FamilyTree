@@ -199,14 +199,17 @@ function PersonMini({
   } = person;
 
   // Gender symbol helper
-  const genderSymbol = gender === "M" ? "♂" : gender === "F" ? "♀" : null;
+  const genderSymbol = gender === "M" ? "♂\uFE0E" : gender === "F" ? "♀\uFE0E" : null;
 
   // Check if this person has parents we can navigate to
   const parentCouple = getParentCoupleForPerson
     ? getParentCoupleForPerson(id)
     : null;
 
-  const displayName = name;
+  const isAdopted = name?.includes('*');
+  const isDivorced = name?.includes('⟷');
+  const isFromOtherMarriage = name?.includes('½');
+  const displayName = name?.replace(/[*⟷½]/g, '').trim();
 
   // Format birth info - only if we have real data
   const formatBirth = () => {
@@ -247,7 +250,7 @@ function PersonMini({
 
       <div className="person-mini-info">
         <div className="person-mini-name">
-          <span className="name-with-symbols">{displayName}{genderSymbol && <span className="gender-symbol">{genderSymbol}</span>}</span>
+          <span className="name-with-symbols">{displayName}{isAdopted && <span className="symbol-text symbol-adopted" title="Adopted"> *</span>}{isFromOtherMarriage && <span className="symbol-text symbol-other-marriage" title="From another marriage"> ½</span>}{isDivorced && <span className="symbol-text symbol-divorced" title="Divorced"> ⟷</span>}{genderSymbol && <span className="gender-symbol">{genderSymbol}</span>}</span>
         </div>
         {nickname && <div className="person-mini-nickname">"{nickname}"</div>}
         {profession && (

@@ -163,7 +163,7 @@ function FounderMini({ person, onViewAncestors, onJumpToTree }) {
   } = person;
 
   // Gender symbol helper
-  const genderSymbol = gender === 'M' ? '♂' : gender === 'F' ? '♀' : null;
+  const genderSymbol = gender === 'M' ? '♂\uFE0E' : gender === 'F' ? '♀\uFE0E' : null;
 
   const isAdopted = name?.includes('*');
   const isDivorced = name?.includes('⟷');
@@ -212,7 +212,7 @@ function FounderMini({ person, onViewAncestors, onJumpToTree }) {
 
       <div className="founder-mini-info">
         <div className="founder-mini-name">
-          <span className="name-with-symbols">{displayName}{genderSymbol && <span className="gender-symbol">{genderSymbol}</span>}{isAdopted && <span className="symbol-text symbol-adopted" title="Adopted"> *</span>}{isFromOtherMarriage && <span className="symbol-text symbol-other-marriage" title="From another marriage"> ½</span>}{isDivorced && <span className="symbol-text symbol-divorced" title="Divorced"> ⟷</span>}</span>
+          <span className="name-with-symbols">{displayName}{isAdopted && <span className="symbol-text symbol-adopted" title="Adopted"> *</span>}{isFromOtherMarriage && <span className="symbol-text symbol-other-marriage" title="From another marriage"> ½</span>}{isDivorced && <span className="symbol-text symbol-divorced" title="Divorced"> ⟷</span>}{genderSymbol && <span className="gender-symbol">{genderSymbol}</span>}</span>
         </div>
         {nickname && <div className="founder-mini-nickname">"{nickname}"</div>}
         {profession && <div className="founder-mini-profession">{profession}</div>}
