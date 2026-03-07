@@ -237,7 +237,7 @@ function App() {
           <button
             className="logout-button"
             onClick={() => {
-              sessionStorage.removeItem("familyTreeAuth");
+              localStorage.removeItem("familyTreeAuth");
               setAuthed(false);
             }}
             title="Log out"

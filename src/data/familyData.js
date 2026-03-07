@@ -691,7 +691,7 @@ export const familyData = {
                 birthyear: 1993,
                 imageLink: "/photos/Royyuru/AdityaRoyyuru.jpg",
                 spouse: {
-                  name: "Ella Royyyuru",
+                  name: "Ella Royyuru",
                   gender: "F",
                   imageLink: "/photos/Royyuru/EllaRoyyuru.jpg",
                 },
@@ -825,7 +825,9 @@ export const familyData = {
                 spouse: {
                   name: "Ravi Gudipati",
                   gender: "M",
+                  birthyear: 1976,
                   imageLink: "/photos/Gudipati/RaviGudipati.jpg",
+                  fromFamily: { ref: "Gudipati.Indira Gudipati" },
                 },
                 familyPhotos: ["/familyPhotos/gudipati.jpg"],
                 children: [
@@ -1307,7 +1309,7 @@ export const familyData = {
             imageLink: "/photos/SriramViswanadham.jpg",
             children: [
               {
-                name: "Sriram's daughter",
+                name: "Srishti",
                 gender: "F",
                 imageLink: "/photos/Sriram'sDaughter.jpg",
               },
@@ -2017,4 +2019,46 @@ export const familyData = {
       },
     ],
   },
+  Gudipati: {
+      founders: [
+      {
+        name: "Gopal Gudipati",
+        gender: "M",
+        birthyear: 1939,
+        deathyear: 2021,
+        imageLink: "/photos/Gudipati/GopalGudipati.jpg",
+      },
+      {
+        name: "Indira Gudipati",
+        gender: "F",
+        birthyear: 1945,
+        imageLink: "/photos/Gudipati/IndiraGudipati.jpg",
+      },
+    ],
+    children: [
+      {
+        name: "Tara Manjula Yellapantula",
+        nickname: "Manju",
+        imageLink: "/photos/Yellapantula/Manju.jpg",
+        gender: "F",
+        birthyear: 1971,
+        children: [
+          {
+            name: "Sneha Yellapantula",
+            birthyear: 2002,
+            imageLink: "/photos/Yellapantula/Sneha.jpg",
+            gender: "F",
+          },
+          {
+            name: "Maanasa Yellapantula",
+            nickname: "Mansi",
+            imageLink: "/photos/Yellapantula/Mansi.jpg",
+            gender: "F"
+          }
+        ]
+      },
+    ]
+}
+
 };
+

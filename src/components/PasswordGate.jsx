@@ -9,7 +9,7 @@ const VALID_PASSWORD = import.meta.env.VITE_PASSWORD?.trim().toLowerCase() ?? ""
 const SESSION_KEY = "familyTreeAuth";
 
 export function isAuthenticated() {
-  return !VALID_PASSWORD || sessionStorage.getItem(SESSION_KEY) === "1";
+  return !VALID_PASSWORD || localStorage.getItem(SESSION_KEY) === "1";
 }
 
 export default function PasswordGate({ onAuthenticated }) {
@@ -19,7 +19,7 @@ export default function PasswordGate({ onAuthenticated }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password.trim().toLowerCase() === VALID_PASSWORD) {
-      sessionStorage.setItem(SESSION_KEY, "1");
+      localStorage.setItem(SESSION_KEY, "1");
       onAuthenticated();
     } else {
       setError(true);
