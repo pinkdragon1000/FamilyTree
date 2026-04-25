@@ -15,6 +15,7 @@ function ExpandablePersonCard({
   onJumpToTree,
   getParentCoupleForPerson,
   navigateUp,
+  onPersonClick,
 }) {
   const personHasChildren = hasChildren(person.id);
   const expanded = isExpanded(person.id);
@@ -90,7 +91,7 @@ function ExpandablePersonCard({
         familyData.map((unionData, idx) => (
           <div key={unionData.unionId} className="children-section">
             {unionData.familyPhotos && (
-              <FamilyPhotoCarousel photos={unionData.familyPhotos} />
+              <FamilyPhotoCarousel photos={unionData.familyPhotos} onPersonClick={onPersonClick} />
             )}
 
             {unionData.children.length > 0 && (
@@ -108,6 +109,7 @@ function ExpandablePersonCard({
                     onJumpToTree={onJumpToTree}
                     getParentCoupleForPerson={getParentCoupleForPerson}
                     navigateUp={navigateUp}
+                    onPersonClick={onPersonClick}
                   />
                 ))}
               </div>
@@ -134,6 +136,7 @@ function ExpandablePersonCard({
                         onJumpToTree={onJumpToTree}
                         getParentCoupleForPerson={getParentCoupleForPerson}
                         navigateUp={navigateUp}
+                        onPersonClick={onPersonClick}
                       />
                     ))}
                   </div>
@@ -161,6 +164,7 @@ function ExpandablePersonCard({
                         onJumpToTree={onJumpToTree}
                         getParentCoupleForPerson={getParentCoupleForPerson}
                         navigateUp={navigateUp}
+                        onPersonClick={onPersonClick}
                       />
                     ))}
                   </div>

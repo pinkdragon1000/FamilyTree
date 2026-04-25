@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { useFamilyTree } from '../hooks/useFamilyTree';
 import ExpandablePersonCard from './ExpandablePersonCard';
 import FamilyPhotoCarousel from './FamilyPhotoCarousel';
@@ -20,6 +20,34 @@ function CardView({ data, navStack, setNavStack, onJumpToTree, searchTargetId, o
     getParentCoupleForPerson,
     navigateToPersonInCards
   } = useFamilyTree(data, navStack, setNavStack);
+
+  // Build a clean-name → person ID lookup for photo chip navigation
+  const nameToId = useMemo(() => {
+    const map = {};
+    for (const [id, person] of Object.entries(data.persons)) {
+      if (person.name) {
+        const clean = person.name.replace(/[*⟷½~○]/g, '').trim();
+        map[clean] = id;
+      }
+    }
+    return map;
+  }, [data.persons]);
+
+  const handlePersonChipClick = useCallback((name) => {
+    const id = nameToId[name];
+    if (!id) return;
+    const targetId = navigateToPersonInCards(id);
+    if (targetId) {
+      setTimeout(() => {
+        const el = document.querySelector(`[data-person-id="${targetId}"]`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('search-highlight');
+          setTimeout(() => el.classList.remove('search-highlight'), 2000);
+        }
+      }, 100);
+    }
+  }, [nameToId, navigateToPersonInCards]);
 
   // Handle search navigation
   useEffect(() => {
@@ -103,7 +131,7 @@ function CardView({ data, navStack, setNavStack, onJumpToTree, searchTargetId, o
 
               {/* Family photos - shown right before children */}
               {familyExpanded && family.familyPhotos && (
-                <FamilyPhotoCarousel photos={family.familyPhotos} />
+                <FamilyPhotoCarousel photos={family.familyPhotos} onPersonClick={handlePersonChipClick} />
               )}
 
               {/* Direct children (first level) */}
@@ -124,6 +152,7 @@ function CardView({ data, navStack, setNavStack, onJumpToTree, searchTargetId, o
                         onJumpToTree={onJumpToTree}
                         getParentCoupleForPerson={getParentCoupleForPerson}
                         navigateUp={navigateUp}
+                        onPersonClick={handlePersonChipClick}
                       />
                     ))}
                   </div>

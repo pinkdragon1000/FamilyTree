@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 
-function FamilyPhotoCarousel({ photos }) {
+function FamilyPhotoCarousel({ photos, onPersonClick }) {
   const [isOpen, setIsOpen] = useState(false);
   const [index, setIndex] = useState(0);
   if (!photos || photos.length === 0) return null;
@@ -21,6 +21,8 @@ function FamilyPhotoCarousel({ photos }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, handleKeyDown]);
 
+  const current = photos[index];
+
   return (
     <>
       <button
@@ -39,7 +41,7 @@ function FamilyPhotoCarousel({ photos }) {
               {photos.length > 1 && (
                 <button className="photo-modal-arrow photo-modal-prev" onClick={prev} aria-label="Previous">‹</button>
               )}
-              <img src={photos[index]} alt={`Family photo ${index + 1} of ${photos.length}`} className="photo-modal-img" />
+              <img src={current.src} alt={`Family photo ${index + 1} of ${photos.length}`} className="photo-modal-img" />
               {photos.length > 1 && (
                 <button className="photo-modal-arrow photo-modal-next" onClick={next} aria-label="Next">›</button>
               )}
@@ -54,6 +56,24 @@ function FamilyPhotoCarousel({ photos }) {
                     onClick={() => setIndex(i)}
                   />
                 ))}
+              </div>
+            )}
+
+            {current.people?.length > 0 && (
+              <div className="photo-modal-people">
+                {current.people.map((name, i) =>
+                  onPersonClick ? (
+                    <button
+                      key={i}
+                      className="photo-modal-person-chip photo-modal-person-chip--clickable"
+                      onClick={(e) => { e.stopPropagation(); setIsOpen(false); onPersonClick(name); }}
+                    >
+                      {name}
+                    </button>
+                  ) : (
+                    <span key={i} className="photo-modal-person-chip">{name}</span>
+                  )
+                )}
               </div>
             )}
           </div>

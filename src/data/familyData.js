@@ -91,13 +91,39 @@ export const familyData = {
             imageLink: "/photos/Robinson/JimRobinson.jpg",
             spouse: { ref: "Davis.Sandra Robinson" },
             familyPhotos: [
-              "/familyPhotos/robinson.jpg",
-              "/familyPhotos/robinson2.jpg",
-              "/familyPhotos/robinson3.jpg",
-              "/familyPhotos/robinson4.jpg",
-              "/familyPhotos/robinson5.jpg",
-              "/familyPhotos/robinson6.jpg",
-              "/familyPhotos/robinson7.jpg",
+              {
+                src: "/familyPhotos/robinson.jpg",
+                people: [
+                  "John Robinson",
+                  "Clark Robinson",
+                  "Jim Robinson",
+                  "Sandra Robinson",
+                ],
+              },
+              {
+                src: "/familyPhotos/robinson2.jpg",
+                people: [
+                  "Sandra Robinson",
+                  "John Robinson",
+                  "Jim Robinson",
+                  "Clark Robinson",
+                ],
+              },
+              { src: "/familyPhotos/robinson3.jpg" },
+              { src: "/familyPhotos/robinson4.jpg" },
+              { src: "/familyPhotos/robinson5.jpg" },
+              { src: "/familyPhotos/robinson6.jpg" },
+              {
+                src: "/familyPhotos/robinson7.jpg",
+                people: [
+                  "Kayden Johnson",
+                  "Oliver Johnson",
+                  "Lauren Johnson",
+                  "Sita Robinson",
+                  "Hannah Robinson",
+                  "Elijah Robinson",
+                ],
+              },
             ],
             children: [
               {
@@ -109,9 +135,30 @@ export const familyData = {
                 imageLink: "/photos/Robinson/JohnRobinson.jpg",
                 spouse: { ref: "Royyuru.R.L.N. Sastry.Padma Robinson" },
                 familyPhotos: [
-                  "/familyPhotos/johnrobinsonfam.jpg",
-                  "/familyPhotos/johnrobinsonfam2.jpg",
-                  "/familyPhotos/johnrobinsonfam3.jpg",
+                  {
+                    src: "/familyPhotos/johnrobinsonfam.jpg",
+                    people: [
+                      "Padma Robinson",
+                      "John Robinson",
+                      "Sita Robinson",
+                    ],
+                  },
+                  {
+                    src: "/familyPhotos/johnrobinsonfam2.jpg",
+                    people: [
+                      "Padma Robinson",
+                      "Sita Robinson",
+                      "John Robinson",
+                    ],
+                  },
+                  {
+                    src: "/familyPhotos/johnrobinsonfam3.jpg",
+                    people: [
+                      "Sita Robinson",
+                      "Padma Robinson",
+                      "John Robinson",
+                    ],
+                  },
                 ],
                 children: [
                   {
@@ -131,6 +178,7 @@ export const familyData = {
                 birthyear: 1969,
                 imageLink: "/photos/Robinson/ClarkRobinson.jpg",
                 birthplace: "Clarksburg, WV",
+                familyPhotos: [{ src: "/familyPhotos/clarkrobinsonfam.jpg" }],
                 spouse: {
                   name: "Jennifer Robinson",
                   gender: "F",
@@ -142,24 +190,29 @@ export const familyData = {
                     {
                       name: "Chelsea Bly ½",
                       gender: "F",
+                      birthplace: "WV",
+                      birthyear: 1991,
                       imageLink: "/photos/Bly/ChelseaBly.jpg",
                       spouse: { name: "Steven Bly", gender: "M" },
                       children: [
                         {
                           name: "Sawyer Bly",
                           gender: "M",
+                          birthplace: "WV",
                           birthyear: 2018,
                           imageLink: "/photos/Bly/SawyerBly.jpg",
                         },
                         {
                           name: "Riley Bly",
                           gender: "M",
+                          birthplace: "WV",
                           birthyear: 2019,
                           imageLink: "/photos/Bly/RileyBly.jpg",
                         },
                         {
                           name: "Declan Bly",
                           gender: "M",
+                          birthplace: "WV",
                           birthyear: 2024,
                           imageLink: "/photos/Bly/DeclanBly.jpg",
                         },
@@ -174,6 +227,7 @@ export const familyData = {
                     birthyear: 1997,
                     profession: "Radiologist Technician",
                     imageLink: "/photos/Johnson/Lauren&KaydenJohnson.jpg",
+                    birthplace: "WV",
                     spouse: {
                       name: "Kayden Johnson",
                       gender: "M",
@@ -184,12 +238,14 @@ export const familyData = {
                         name: "Oliver Johnson",
                         gender: "M",
                         birthyear: 2023,
+                        birthplace: "WV",
                         imageLink: "/photos/Johnson/OliverJohnson.jpg",
                       },
                       {
                         name: "Theo Johnson",
                         gender: "M",
                         birthyear: 2025,
+                        birthplace: "WV",
                         imageLink: "/photos/Johnson/TheoJohnson.jpg",
                       },
                     ],
@@ -198,12 +254,14 @@ export const familyData = {
                     name: "Elijah Robinson",
                     gender: "M",
                     birthyear: 2002,
+                    birthplace: "WV",
                     imageLink: "/photos/Robinson/ElijahRobinson.jpg",
                   },
                   {
                     name: "Hannah Robinson",
                     gender: "F",
                     birthyear: 2005,
+                    birthplace: "WV",
                     imageLink: "/photos/Robinson/HannahRobinson.jpg",
                     spouse: {
                       name: "Nick Anderson",
@@ -228,6 +286,39 @@ export const familyData = {
             },
             children: [
               {
+                name: "Monica Robinson",
+                gender: "F",
+                birthyear: 1973,
+                imageLink: "/photos/Hager/MonicaHager.jpg",
+                birthplace: "Germany",
+                spouse: {
+                  name: "Jason Hager",
+                  gender: "M",
+                  imageLink: "/photos/Hager/JasonHager.jpg",
+                },
+                children: [
+                  {
+                    name: "Maddie Hager",
+                    gender: "F",
+                    birthyear: 2003,
+                    birthplace: "WV",
+                    imageLink: "/photos/Hager/MaddieHager.jpg",
+                  },
+                  {
+                    name: "Marlee Hager *",
+                    gender: "F",
+                    imageLink: "/photos/Hager/MarleeHager.jpg",
+                    birthyear: 2011,
+                  },
+                  {
+                    name: "Meghan Hager *",
+                    gender: "F",
+                    imageLink: "/photos/Hager/MeghanHager.jpg",
+                    birthyear: 2014,
+                  },
+                ],
+              },
+              {
                 name: "Jodie Gardill",
                 gender: "F",
                 birthyear: 1976,
@@ -242,49 +333,22 @@ export const familyData = {
                     name: "Kaleb Gardill",
                     gender: "M",
                     birthyear: 2006,
+                    birthplace: "WV",
                     imageLink: "/photos/Gardill/KalebGardill.jpg",
                   },
                   {
                     name: "Brenna Gardill",
                     gender: "F",
                     birthyear: 2008,
+                    birthplace: "WV",
                     imageLink: "/photos/Gardill/BrennaGardill.jpg",
                   },
                   {
                     name: "Darcie Gardill",
                     gender: "F",
                     birthyear: 2009,
+                    birthplace: "WV",
                     imageLink: "/photos/Gardill/DarcieGardill.jpg",
-                  },
-                ],
-              },
-              {
-                name: "Monica Hager",
-                gender: "F",
-                imageLink: "/photos/Hager/MonicaHager.jpg",
-                spouse: {
-                  name: "Jason Hager",
-                  gender: "M",
-                  imageLink: "/photos/Hager/JasonHager.jpg",
-                },
-                children: [
-                  {
-                    name: "Maddie Hager",
-                    gender: "F",
-                    birthyear: 2003,
-                    imageLink: "/photos/Hager/MaddieHager.jpg",
-                  },
-                  {
-                    name: "Marlee Hager *",
-                    gender: "F",
-                    imageLink: "/photos/Hager/MarleeHager.jpg",
-                    birthyear: 2011,
-                  },
-                  {
-                    name: "Meghan Hager *",
-                    gender: "F",
-                    imageLink: "/photos/Hager/MeghanHager.jpg",
-                    birthyear: 2014,
                   },
                 ],
               },
@@ -302,7 +366,27 @@ export const familyData = {
         name: "Gale Robinson",
         birthyear: 1922,
         deathyear: 2007,
+        deathplace: "Chardon, OH",
         gender: "M",
+        profession: "Quality Control at General Motors",
+        spouse: {
+          name: "Evadelle Robinson",
+          gender: "F",
+        },
+        children: [
+          {
+            name: "Marilyn Bushek",
+            gender: "F",
+            spouse: { name: "Leonard Bushek", gender: "M" },
+          },
+          {
+            name: "William Gale Robinson",
+            gender: "M",
+            spouse: { name: "Theresa Robinson", gender: "F" },
+          },
+          { name: "Larry Joe Robinson", gender: "M" },
+        ],
+        militaryService: "US Army WWII - European Theater",
       },
       {
         name: "Daisy Robinson",
@@ -402,7 +486,18 @@ export const familyData = {
               {
                 name: "Chris Davis",
                 gender: "M",
+                spouse: { name: "Rhonda Davis", gender: "F" },
                 imageLink: "/photos/Davis/ChrisDavis.jpg",
+                children: [
+                  {
+                    name: "Jaxen Davis",
+                    gender: "M",
+                  },
+                  { name: "Eljah Davis", gender: "M" },
+                  { name: "Cora Davis", gender: "F" },
+                  { name: "Waverly Davis", gender: "F" },
+                  { name: "Sophie Davis", gender: "F" },
+                ],
               },
             ],
           },
@@ -441,13 +536,13 @@ export const familyData = {
                     name: "Hallie Davis",
                     gender: "F",
                     imageLink: "/photos/Davis/HallieDavis.jpg",
-                    birthyear: 2001
+                    birthyear: 2001,
                   },
                   {
                     name: "Jessica Davis",
                     gender: "F",
                     imageLink: "/photos/Davis/JessDavis.jpg",
-                    birthyear: 2003
+                    birthyear: 2003,
                   },
                   {
                     name: "Andrew Davis",
@@ -573,7 +668,7 @@ export const familyData = {
         name: "R.L.N. Sarma *",
         gender: "M",
         deathyear: "~",
-        imageLink:"/photos/Royyuru/RLNSarma.jpg"
+        imageLink: "/photos/Royyuru/RLNSarma.jpg",
       },
       {
         name: "R. Subbalakshmi",
@@ -582,7 +677,10 @@ export const familyData = {
         imageLink: "/photos/Royyuru/RSubbalakshmi.jpg",
       },
     ],
-    familyPhotos: ["/familyPhotos/rlnsarmafam.jpg", "/familyPhotos/royyurufam.jpg"],
+    familyPhotos: [
+      { src: "/familyPhotos/rlnsarmafam.jpg" },
+      { src: "/familyPhotos/royyurufam.jpg" },
+    ],
     children: [
       {
         name: "Venkateswari Parimi",
@@ -604,7 +702,12 @@ export const familyData = {
         deathyear: "unknown",
         deathcause: "disappeared",
         imageLink: "/photos/Royyuru/Dabbu'sDad.jpg",
-        spouse: { name: "Dabbu's Mom", gender: "F", died: "unknown", imageLink: "/photos/Royyuru/Dabbu'sMom.jpg" },
+        spouse: {
+          name: "Dabbu's Mom",
+          gender: "F",
+          died: "unknown",
+          imageLink: "/photos/Royyuru/Dabbu'sMom.jpg",
+        },
         children: [
           { name: "Pandu", gender: "F", died: "unknown" },
           { name: "Baba", gender: "M" },
@@ -617,7 +720,10 @@ export const familyData = {
         gender: "M",
         deathyear: "unknown",
         imageLink: "/photos/Royyuru/RSubramanium.jpg",
-        spouse: {name: "Chitti's mother", imageLink: "/photos/Royyuru/Chitti'sMother.jpg"},
+        spouse: {
+          name: "Chitti's mother",
+          imageLink: "/photos/Royyuru/Chitti'sMother.jpg",
+        },
         children: [
           { name: "Subbalakshmi", gender: "F" },
           { name: "Nawab", gender: "M", deathyear: "unknown" },
@@ -677,7 +783,7 @@ export const familyData = {
             gender: "M",
             birthyear: 1964,
             imageLink: "/photos/Royyuru/AjayRoyyuru.jpg",
-            familyPhotos: ["/familyPhotos/ajayroyyurufam.jpg"],
+            familyPhotos: [{ src: "/familyPhotos/ajayroyyurufam.jpg" }],
             spouse: {
               name: "Nibedita Royyuru",
               gender: "F",
@@ -703,7 +809,7 @@ export const familyData = {
             gender: "M",
             birthyear: 1964,
             imageLink: "/photos/Royyuru/VijayRoyyuru.jpg",
-            familyPhotos: ["/familyPhotos/vijayroyyurufam.jpg"],
+            familyPhotos: [{ src: "/familyPhotos/vijayroyyurufam.jpg" }],
             spouse: {
               name: "Hema Royyuru",
               gender: "F",
@@ -722,10 +828,12 @@ export const familyData = {
                   birthyear: 1991,
                   imageLink: "/photos/Kawahara/AlanKawahara.jpg",
                 },
-                children: [{
-                  name: "Harsha's daughter",
-                  gender: "F"
-                }]
+                children: [
+                  {
+                    name: "Harsha's daughter",
+                    gender: "F",
+                  },
+                ],
               },
               {
                 name: "Varun Royyuru",
@@ -745,14 +853,14 @@ export const familyData = {
         imageLink: "/photos/Royyuru/RLNSastry.jpg",
         spouse: { ref: "Viswanadham.Sita Devi Royyuru" },
         familyPhotos: [
-          "/familyPhotos/rlnsastryfam.jpg",
-          "/familyPhotos/rlnsastryfam2.jpg",
-          "/familyPhotos/rlnsastryfam3.jpg",
-          "/familyPhotos/rlnsastryfam4.jpg",
-          "/familyPhotos/rlnsastryfam5.jpg",
-          "/familyPhotos/rlnsastryfam6.jpg",
-          "/familyPhotos/rlnsastryfam7.jpg",
-          "/familyPhotos/rlnsastryfam8.jpg",
+          { src: "/familyPhotos/rlnsastryfam.jpg" },
+          { src: "/familyPhotos/rlnsastryfam2.jpg" },
+          { src: "/familyPhotos/rlnsastryfam3.jpg" },
+          { src: "/familyPhotos/rlnsastryfam4.jpg" },
+          { src: "/familyPhotos/rlnsastryfam5.jpg" },
+          { src: "/familyPhotos/rlnsastryfam6.jpg" },
+          { src: "/familyPhotos/rlnsastryfam7.jpg" },
+          { src: "/familyPhotos/rlnsastryfam8.jpg" },
         ],
         children: [
           {
@@ -767,13 +875,17 @@ export const familyData = {
               gender: "F",
               imageLink: "/photos/Royyuru/LakshmiRoyyuru.jpg",
             },
-            familyPhotos: ["/familyPhotos/lakshminarayanaroyyurufam.jpg"],
+            familyPhotos: [
+              { src: "/familyPhotos/lakshminarayanaroyyurufam.jpg" },
+            ],
             children: [
               {
                 name: "Avinash Royyuru",
                 gender: "M",
                 nickname: "Vinoo",
                 imageLink: "/photos/Royyuru/AvinashRoyyuru.jpg",
+                birthyear: 1983,
+                birthplace: "Hyderabad, India",
                 spouse: {
                   name: "Akanksha Mehta ⟷",
                   gender: "F",
@@ -785,7 +897,9 @@ export const familyData = {
                 gender: "F",
                 nickname: "Tara",
                 imageLink: "/photos/Royyuru/TaraRoyyuru.jpg",
-                familyPhotos: ["/familyPhotos/shrutiroyyurufam.jpg"],
+                birthyear: 1988,
+                birthplace: "Hyderabad, India",
+                familyPhotos: [{ src: "/familyPhotos/shrutiroyyurufam.jpg" }],
                 spouse: {
                   name: "Sandeep Eyyuni",
                   gender: "M",
@@ -796,7 +910,7 @@ export const familyData = {
                     name: "Vimanyu Eyyuni",
                     gender: "M",
                     birthyear: 2025,
-                    birthplace: "California",
+                    birthplace: "Sunnyvale, California",
                     imageLink: "/photos/Eyyuni/VimanyuEyyuni.jpg",
                   },
                 ],
@@ -814,6 +928,7 @@ export const familyData = {
               gender: "M",
               birthyear: 1951,
               imageLink: "/photos/Hota/RamaraoHota.jpg",
+              birthplace: "?, India",
             },
             children: [
               {
@@ -828,8 +943,19 @@ export const familyData = {
                   birthyear: 1976,
                   imageLink: "/photos/Gudipati/RaviGudipati.jpg",
                   fromFamily: { ref: "Gudipati.Indira Gudipati" },
+                  birthplace: "?, India",
                 },
-                familyPhotos: ["/familyPhotos/gudipati.jpg"],
+                familyPhotos: [
+                  {
+                    src: "/familyPhotos/gudipati.jpg",
+                    people: [
+                      "Pallavi Gudipati",
+                      "Sitara Gudipati",
+                      "Vishnu Gudipati",
+                      "Ravi Gudipati",
+                    ],
+                  },
+                ],
                 children: [
                   {
                     name: "Sitara Gudipati",
@@ -862,7 +988,12 @@ export const familyData = {
                   imageLink: "/photos/Hota/KristenZuber.jpg",
                   fromFamily: { ref: "Zuber.Shirlene Zuber" },
                 },
-                familyPhotos: ["/familyPhotos/parthahotafam.jpg"],
+                familyPhotos: [
+                  {
+                    src: "/familyPhotos/parthahotafam.jpg",
+                    people: ["Wilhelmina Hota", "Kristen Hota", "Partha Hota"],
+                  },
+                ],
                 children: [
                   {
                     name: "Wilhelmina Hota",
@@ -880,7 +1011,7 @@ export const familyData = {
             name: "Padma Robinson",
             gender: "F",
             birthyear: 1961,
-            profession: "Director, Advanced Analytics",
+            profession: "Advanced Analytics",
             imageLink: "/photos/Robinson/PadmaRobinson.jpg",
             birthplace: "Rajahmundry, India",
             // Married John Robinson - children listed under Robinson tree
@@ -909,7 +1040,7 @@ export const familyData = {
             name: "Rama",
             gender: "F",
             imageLink: "/photos/Rama.jpg",
-            familyPhotos: ["/familyPhotos/ramafam.jpg"],
+            familyPhotos: [{ src: "/familyPhotos/ramafam.jpg" }],
             spouse: { name: "Rama's husband", gender: "M" },
             children: [{ name: "Rama's son", gender: "M" }],
           },
@@ -939,7 +1070,7 @@ export const familyData = {
         fromFamily: { ref: "Evani.Sita Mahalakshmi Evani" }, // She came from the Evani family
       },
     ],
-    familyPhotos: ["/familyPhotos/viswanadham.jpg"],
+    familyPhotos: [{ src: "/familyPhotos/viswanadham.jpg" }],
     children: [
       {
         name: "Ravikanta Chavali",
@@ -947,6 +1078,7 @@ export const familyData = {
         deathyear: 2024,
         deathplace: "Chennai, India",
         imageLink: "/photos/Chavali/RavikantaChavali.jpg",
+        spouse: { name: "CVS Sastry", gender: "M" },
         children: [
           {
             name: "Neeru Palepu *",
@@ -975,7 +1107,8 @@ export const familyData = {
                 birthyear: 1992,
                 imageLink: "/photos/Palepu/SnehaPalepu.jpg",
                 spouse: {
-                  name: "Sneha's husband",
+                  name: "Aditya Bhagavatula",
+                  nickname: "Adi",
                   gender: "M",
                   imageLink: "/photos/Sneha'sHusband.jpg",
                 },
@@ -999,7 +1132,7 @@ export const familyData = {
         deathyear: 2012,
         birthplace: "Visakhapatnam, India",
         imageLink: "/photos/VVSSastry.jpg",
-        familyPhotos: ["/familyPhotos/vvssastryfam.jpg"],
+        familyPhotos: [{ src: "/familyPhotos/vvssastryfam.jpg" }],
         spouse: {
           name: "Sita Viswanadham",
           gender: "F",
@@ -1015,6 +1148,7 @@ export const familyData = {
             birthyear: 1966,
             birthplace: "New Delhi, India",
             imageLink: "/photos/BhanuViswanadham.jpg",
+            familyPhotos: [{ src: "/familyPhotos/bhanufam.jpg" }],
             spouse: {
               name: "Monica Viswanadham",
               gender: "F",
@@ -1048,7 +1182,7 @@ export const familyData = {
         birthyear: 1936,
         deathyear: 2015,
         imageLink: "/photos/VAtchutaramaiah.jpg",
-        familyPhotos: ["/familyPhotos/vatchutaramaiahfam.jpg"],
+        familyPhotos: [{ src: "/familyPhotos/vatchutaramaiahfam.jpg" }],
         spouse: {
           name: "Kameswari Viswanatham",
           gender: "F",
@@ -1092,7 +1226,7 @@ export const familyData = {
             nickname: "Bujju",
             profession: "Chartered Accountant/Tax Consultant",
             imageLink: "/photos/BujjuViswanatham.jpg",
-            familyPhotos: ["/familyPhotos/bujjuviswanathamfam.jpg"],
+            familyPhotos: [{ src: "/familyPhotos/bujjuviswanathamfam.jpg" }],
             spouse: {
               name: "Suchitra Viswanatham",
               gender: "F",
@@ -1109,6 +1243,7 @@ export const familyData = {
                   name: "Rukmini Viswanatham",
                   gender: "F",
                   imageLink: "/photos/RukminiViswanatham.jpg",
+                  fromFamily: { ref: "Bugga.Bugga Ananthalakshmi" },
                 },
               },
               {
@@ -1128,7 +1263,7 @@ export const familyData = {
               imageLink: "/photos/Dhara/NarendraDhara.jpg",
               gender: "M",
             },
-            familyPhotos: ["/familyPhotos/sudhadharafam.jpg"],
+            familyPhotos: [{ src: "/familyPhotos/sudhadharafam.jpg" }],
             children: [
               {
                 name: "Amulya Dhara *",
@@ -1155,6 +1290,11 @@ export const familyData = {
         deathyear: 2024,
         deathplace: "Rajahmundry, India",
         imageLink: "/photos/Prakasa.jpg",
+        spouse: {
+          name: "Meenakshi Viswanadham",
+          gender: "F",
+          imageLink: "/photos/MeenakshiViswanadham.jpg",
+        },
         children: [
           {
             name: "Prabha",
@@ -1239,6 +1379,11 @@ export const familyData = {
         birthyear: 1947,
         deathyear: 2025,
         imageLink: "/photos/Hari/DurgaHari.jpg",
+        spouse: {
+          name: "Ramana Hari",
+          gender: "M",
+          imageLink: "/photos/Hari/RamanaHari.jpg",
+        },
         children: [
           {
             name: "Vinod Hari",
@@ -1278,6 +1423,12 @@ export const familyData = {
         gender: "M",
         deathyear: "2011",
         imageLink: "/photos/VSundaram.jpg",
+        spouse: {
+          name: "Lalitha Viswanadham",
+          gender: "F",
+          imageLink: "/photos/LalithaViswanadham.jpg",
+          birthyear: 1950,
+        },
         children: [
           {
             name: "Bhaskar Viswanadham",
@@ -1600,6 +1751,7 @@ export const familyData = {
         gender: "F",
         birthyear: 1906,
         deathyear: 1987,
+        imageLink: "/photos/AnnapoornaBhagavatula.jpg",
         spouse: { name: "Subrahmaniam Bhagavatula", gender: "M" },
       },
       { name: "Janaki Mithipati", gender: "F", birthyear: 1915 },
@@ -1622,7 +1774,7 @@ export const familyData = {
                   gender: "F",
                   imageLink: "/photos/Gunupudi/SailajaGunupudi.jpg",
                 },
-                familyPhotos: ["/familyPhotos/pavangunupudifam.jpg"],
+                familyPhotos: [{ src: "/familyPhotos/pavangunupudifam.jpg" }],
                 children: [
                   {
                     name: "Dhatri Gunupudi",
@@ -1760,7 +1912,11 @@ export const familyData = {
               {
                 name: "Nima Vuppuluri",
                 gender: "F",
-                spouse: {name: "Sumeet Sharma", gender: "M", imageLink: "/photos/SumeetSharma.jpg"},
+                spouse: {
+                  name: "Sumeet Sharma",
+                  gender: "M",
+                  imageLink: "/photos/SumeetSharma.jpg",
+                },
                 imageLink: "/photos/Vuppuluri/NimaVuppuluri.jpg",
               },
             ],
@@ -1986,10 +2142,76 @@ export const familyData = {
       {
         name: "Christine Landis",
         imageLink: "/photos/ChristineLandis.jpg",
+        children: [
+          {
+            name: "Eric Hudgins",
+            gender: "M",
+            spouse: { name: "Adrienne Hudgins", gender: "F" },
+            children: [
+              { name: "Caroline Hudgins", gender: "F", birthyear: 2020 },
+            ],
+          },
+          {
+            name: "Carrie Hudgins",
+            gender: "F",
+            children: [
+              {
+                name: "Kalynn Graham",
+                gender: "F",
+              },
+              {
+                name: "Kyli Prado",
+                gender: "F",
+              },
+              {
+                name: "Son",
+                gender: "M",
+              },
+            ],
+          },
+          {
+            name: "Abby Miller",
+            gender: "F",
+            spouse: { name: "Nicodemus Miller", gender: "M" },
+          },
+          {
+            name: "Mateo Landis",
+            gender: "M",
+          },
+          {
+            name: "Son 2",
+            gender: "M",
+          },
+          {
+            name: "Daughter 1",
+            gender: "F",
+          },
+        ],
       },
       {
         name: "Mandi Robinson",
         imageLink: "/photos/MandiRobinson.jpg",
+        birthyear: 1977,
+        children: [
+          {
+            name: "Corbin Howe",
+            gender: "M",
+            spouse: { name: "Kiana Howe", gender: "F" },
+            children: [
+              { name: "Daughter 1", gender: "F" },
+              { name: "Daughter 2", gender: "F" },
+            ],
+          },
+          {
+            name: "Dylan Robinson",
+            gender: "M",
+            birthyear: 1994,
+          },
+          {
+            name: "Gabe Robinson",
+            gender: "M",
+          },
+        ],
       },
     ],
   },
@@ -2020,7 +2242,7 @@ export const familyData = {
     ],
   },
   Gudipati: {
-      founders: [
+    founders: [
       {
         name: "Gopal Gudipati",
         gender: "M",
@@ -2053,12 +2275,31 @@ export const familyData = {
             name: "Maanasa Yellapantula",
             nickname: "Mansi",
             imageLink: "/photos/Yellapantula/Mansi.jpg",
-            gender: "F"
-          }
-        ]
+            gender: "F",
+          },
+        ],
       },
-    ]
-}
-
+    ],
+  },
+  Bugga: {
+    founders: [
+      {
+        name: "Bugga Subrahmanya Sarma",
+        gender: "M",
+        imageLink: "/photos/Bugga/BuggaSubrahmanyaSarma.jpg",
+      },
+      {
+        name: "Bugga Ananthalakshmi",
+        gender: "F",
+        imageLink: "/photos/Bugga/BuggaAnanthalakshmi.jpg",
+      },
+    ],
+    familyPhotos: [{ src: "/familyPhotos/buggafam.jpg" }],
+    children: [
+      {
+        name: "Rukmini's sister",
+        imageLink: "/photos/Bugga/Rukmini'sSister.jpg",
+      },
+    ],
+  },
 };
-

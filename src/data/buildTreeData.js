@@ -187,7 +187,7 @@ function processChildren(familyName, children, parentUnionId, parentPath = "") {
 
       // Store family photos for this union
       if (child.familyPhotos) {
-        unionPhotos[childUnionId] = child.familyPhotos;
+        unionPhotos[childUnionId] = (child.familyPhotos);
       }
 
       // Process this child's children
@@ -212,12 +212,12 @@ function processFamily(familyName, family) {
 
   // Store family photos for this founding union
   if (family.familyPhotos) {
-    unionPhotos[unionId] = family.familyPhotos;
+    unionPhotos[unionId] = (family.familyPhotos);
   }
 
   // Track founding couple
   const mainFamilies = ["Robinson", "Davis", "Royyuru", "Viswanadham"];
-  const secondaryFamilies = ["Evani", "Furbee", "Long", "Conant", "Zuber", "Yellapantula", "Gudipati"];
+  const secondaryFamilies = ["Evani", "Furbee", "Long", "Conant", "Zuber", "Yellapantula", "Gudipati", "Bugga"];
   const allFamilies = [...mainFamilies, ...secondaryFamilies]; // Evani reachable via "View Ancestors"
 
   if (allFamilies.includes(familyName)) {
@@ -298,10 +298,13 @@ function getUnions() {
 
   for (const [personId, person] of Object.entries(persons)) {
     for (const unionId of person.own_unions) {
+      const photos = unionPhotos[unionId];
       if (unionId in unions) {
         unions[unionId].partner.push(personId);
+        if (photos && !unions[unionId].familyPhotos) {
+          unions[unionId].familyPhotos = photos;
+        }
       } else {
-        const photos = unionPhotos[unionId];
         unions[unionId] = { partner: [personId], children: [], ...(photos && { familyPhotos: photos }) };
       }
     }
