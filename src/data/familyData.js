@@ -1417,7 +1417,7 @@ export const familyData = {
             gender: "M",
             spouse: { name: "Pratyusha Hari", gender: "F" },
             imageLink: "/photos/Hari/AnantHari.jpg",
-            children: [{ name: "Anant's son", gender: "M" }],
+            children: [{ name: "Amogh Hari", gender: "M" }],
           },
         ],
       },
