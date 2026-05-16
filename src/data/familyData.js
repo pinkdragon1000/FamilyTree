@@ -539,10 +539,12 @@ export const familyData = {
                     birthyear: 2001,
                   },
                   {
-                    name: "Jessica Davis",
+                    name: "Jessica Kerschensteiner-Logan",
+                    nickname: "Jess",
                     gender: "F",
                     imageLink: "/photos/Davis/JessDavis.jpg",
                     birthyear: 2003,
+                    spouse: {name: "Parker Kerschensteiner-Logan", gender: "M", birthyear: 2003,}
                   },
                   {
                     name: "Andrew Davis",
@@ -1159,6 +1161,7 @@ export const familyData = {
               {
                 name: "Mira Viswanadham",
                 gender: "F",
+                birthyear: 2009,
                 imageLink: "/photos/MiraViswanadham.jpg",
               },
             ],
@@ -2053,12 +2056,17 @@ export const familyData = {
         gender: "M",
         birthyear: 1912,
         deathyear: 2011,
+        birthplace: "Salem, WV",
+        deathplace: "Parkersburg, WV",
         imageLink: "/photos/Furbee/EdwardFurbee.jpg",
+        spouse: { name: "Edith Furbee", gender: "F" },
       },
       {
         name: "Otis Furbee Jr.",
         nickname: "Jinks",
         gender: "M",
+        birthplace: "Salem, WV",
+        deathplace: "Marietta, Ohio",
         spouse: {
           name: "June Furbee",
         },
@@ -2297,8 +2305,9 @@ export const familyData = {
     familyPhotos: [{ src: "/familyPhotos/buggafam.jpg" }],
     children: [
       {
-        name: "Rukmini's sister",
+        name: "Dheemahi Bugga",
         imageLink: "/photos/Bugga/Rukmini'sSister.jpg",
+        gender: "F",
       },
     ],
   },
