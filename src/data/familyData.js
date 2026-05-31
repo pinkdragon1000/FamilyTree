@@ -1173,6 +1173,8 @@ export const familyData = {
         gender: "M",
         nickname: "Raja",
         imageLink: "/photos/VVSastry.jpg",
+        deathyear: 2026,
+        deathplace: "Hyderabad, India",
         spouse: {
           name: "Lakshmi Viswanadham",
           gender: "F",
@@ -1385,6 +1387,7 @@ export const familyData = {
         spouse: {
           name: "Ramana Hari",
           gender: "M",
+          birthyear: 1940,
           imageLink: "/photos/Hari/RamanaHari.jpg",
         },
         children: [
