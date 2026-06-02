@@ -416,7 +416,7 @@ export const familyData = {
         imageLink: "/photos/Davis/BenjaminFranklinDavis.jpg",
       },
       {
-        name: "Cora Davis",
+        name: "Cora Orrahood",
         gender: "F",
         birthyear: 1889,
         deathyear: 1958,
@@ -522,7 +522,7 @@ export const familyData = {
             name: "Rex Davis",
             gender: "M",
             nickname: "Sonny",
-            profession: "Teacher",
+            profession: "English Professor",
             imageLink: "/photos/Davis/SonnyDavis.jpg",
             children: [
               {
@@ -1175,6 +1175,7 @@ export const familyData = {
         imageLink: "/photos/VVSastry.jpg",
         deathyear: 2026,
         deathplace: "Hyderabad, India",
+        profession: "Accountant at Indian Railway Accounts Service",
         spouse: {
           name: "Lakshmi Viswanadham",
           gender: "F",
