@@ -1179,12 +1179,14 @@ export const familyData = {
         deathyear: 2026,
         deathplace: "Hyderabad, India",
         profession: "Accountant at Indian Railway Accounts Service",
+        familyPhotos: [{ src: "/familyPhotos/vssastryfam.jpg" }],
         spouse: {
-          name: "Lakshmi Viswanadham",
+          name: "Lakshmi Sastry Viswanadham",
           gender: "F",
+          birthyear: 1941,
           deathyear: 2026,
           deathplace: "Hyderabad, India",
-          imageLink: "/photos/LakshmiViswanadham.jpg",
+          imageLink: "/photos/LakshmiSastry.jpg",
         },
       },
       {
@@ -1378,7 +1380,7 @@ export const familyData = {
           {
             name: "Bhaskar Viswanadham",
             gender: "M",
-            nickname: "Sunny",
+            nickname: "Sunny/Baz",
             imageLink: "/photos/SunnyViswanadham.jpg",
           },
         ],
