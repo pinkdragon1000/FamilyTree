@@ -1114,6 +1114,9 @@ export const familyData = {
                   gender: "M",
                   imageLink: "/photos/Sneha'sHusband.jpg",
                 },
+                children: [
+                  {name: "Ila Bhagavatula", gender: "F", birthyear: 2026, birthplace: "Sydney, Australia"}
+                ]
               },
               {
                 name: "Nethra Palepu",
