@@ -490,13 +490,27 @@ export const familyData = {
                 imageLink: "/photos/Davis/ChrisDavis.jpg",
                 children: [
                   {
-                    name: "Jaxen Davis",
+                    name: "Drew Davis",
                     gender: "M",
+                    spouse: { name: "Ashli Davis", gender: "F" },
+                    children: [
+                      {
+                        name: "Jaxen Davis",
+                        gender: "M",
+                      },
+
+                      { name: "Cora Davis", gender: "F" },
+                    ],
                   },
-                  { name: "Eljah Davis", gender: "M" },
-                  { name: "Cora Davis", gender: "F" },
-                  { name: "Waverly Davis", gender: "F" },
-                  { name: "Sophie Davis", gender: "F" },
+                  {
+                    name: "Tyler Davis",
+                    gender: "M",
+                    children: [
+                      { name: "Eljah Davis", gender: "M" },
+                      { name: "Waverly Davis", gender: "F" },
+                      { name: "Sophie Davis", gender: "F" },
+                    ],
+                  },
                 ],
               },
             ],
@@ -544,7 +558,11 @@ export const familyData = {
                     gender: "F",
                     imageLink: "/photos/Davis/JessDavis.jpg",
                     birthyear: 2003,
-                    spouse: {name: "Parker Kerschensteiner-Logan", gender: "M", birthyear: 2003,}
+                    spouse: {
+                      name: "Parker Kerschensteiner-Logan",
+                      gender: "M",
+                      birthyear: 2003,
+                    },
                   },
                   {
                     name: "Andrew Davis",
@@ -1115,8 +1133,13 @@ export const familyData = {
                   imageLink: "/photos/Sneha'sHusband.jpg",
                 },
                 children: [
-                  {name: "Ila Bhagavatula", gender: "F", birthyear: 2026, birthplace: "Sydney, Australia"}
-                ]
+                  {
+                    name: "Ila Bhagavatula",
+                    gender: "F",
+                    birthyear: 2026,
+                    birthplace: "Sydney, Australia",
+                  },
+                ],
               },
               {
                 name: "Nethra Palepu",
