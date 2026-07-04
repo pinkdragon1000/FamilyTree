@@ -186,7 +186,7 @@ export const familyData = {
                   profession: "Psychologist",
                   imageLink: "/photos/Robinson/JenniferRobinson.jpg",
                   fromFamily: { ref: "Conant.Linda Conant" },
-                  priorChildren: [
+                  otherChildren: [
                     {
                       name: "Chelsea Bly ½",
                       gender: "F",
@@ -421,6 +421,19 @@ export const familyData = {
         birthyear: 1889,
         deathyear: 1958,
         imageLink: "/photos/Davis/CoraDavis.jpg",
+        otherChildren: [
+          {
+            name: "June Grove",
+            gender: "F",
+            children: [
+              {
+                name: "Samuel Grove",
+                nickname: "Sam",
+                gender: "M",
+              },
+            ],
+          },
+        ],
         otherSpouses: [
           {
             name: "William Irons",
@@ -512,7 +525,11 @@ export const familyData = {
               {
                 name: "Chris Davis",
                 gender: "M",
-                spouse: { name: "Rhonda Davis", gender: "F" },
+                spouse: {
+                  name: "Rhonda Davis",
+                  gender: "F",
+                  imageLink: "/photos/Davis/RhondaDavis.jpg",
+                },
                 imageLink: "/photos/Davis/ChrisDavis.jpg",
                 children: [
                   {
@@ -615,6 +632,8 @@ export const familyData = {
                       name: "Parker Kerschensteiner-Logan",
                       gender: "M",
                       birthyear: 2003,
+                      imageLink:
+                        "/photos/Kerschensteiner-Logan/ParkerKerschensteiner-Logan.jpg",
                     },
                   },
                   {
@@ -691,7 +710,7 @@ export const familyData = {
                 name: "Jared Kamann",
                 gender: "M",
                 imageLink: "/photos/Kamann/JaredKamann.jpg",
-                priorChildren: [
+                otherChildren: [
                   {
                     name: "Tristan Kamann",
                     gender: "M",
@@ -701,7 +720,7 @@ export const familyData = {
                 spouse: {
                   name: "Kia Kamann",
                   gender: "F",
-                  priorChildren: [
+                  otherChildren: [
                     { name: "Zola", gender: "F" },
                     { name: "Corbin", gender: "M" },
                   ],

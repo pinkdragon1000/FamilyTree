@@ -26,6 +26,28 @@ export function useFamilyTree(data, navStack, setNavStack) {
       const directChildren = unionId ? getChildrenFromUnion(unionId, unions, persons) : [];
       const familyPhotos = unionId && unions[unionId]?.familyPhotos ? unions[unionId].familyPhotos : null;
 
+      // A founder may have children from another relationship: any of their own
+      // unions (other than the founding union) where they are the sole partner.
+      const founderOtherChildren = couple.ids.map(id => {
+        const person = persons[id];
+        if (!person?.own_unions) return null;
+
+        const kids = [];
+        for (const uid of person.own_unions) {
+          if (uid === unionId) continue; // skip the founding union
+          const union = unions[uid];
+          if (!union) continue;
+          const hasSpouse = (union.partner || []).some(pid => pid !== id);
+          if (!hasSpouse && union.children && union.children.length > 0) {
+            kids.push(...getChildrenFromUnion(uid, unions, persons));
+          }
+        }
+
+        return kids.length > 0
+          ? { parentId: id, parentName: person.name, children: kids }
+          : null;
+      }).filter(Boolean);
+
       // Count total descendants for display
       const totalDescendants = countAllDescendants(couple.ids, persons, unions);
 
@@ -37,6 +59,7 @@ export function useFamilyTree(data, navStack, setNavStack) {
         name: couple.name,
         couple: couplePersons,
         directChildren,
+        founderOtherChildren,
         totalDescendants,
         parentsInfo, // { hasParents: bool, parentCouples: [...] }
         familyPhotos
@@ -214,10 +237,10 @@ export function useFamilyTree(data, navStack, setNavStack) {
     const result = [];
     const seenSpouses = new Set();
 
-    // First pass: collect children from prior-children unions (no spouse)
+    // First pass: collect children from other-children unions (no spouse)
     // Only do this if the person also has a union WITH a spouse (otherwise it's just a single parent)
     let personOtherChildren = [];
-    const priorUnionIds = new Set();
+    const otherUnionIds = new Set();
 
     const hasUnionWithSpouse = person.own_unions.some(uid => {
       const u = unions[uid];
@@ -232,9 +255,9 @@ export function useFamilyTree(data, navStack, setNavStack) {
         const partners = union.partner || [];
         const spouseId = partners.find(id => id !== personId);
 
-        // If no spouse and has children, this is a prior-children union
+        // If no spouse and has children, this is an other-children union
         if (!spouseId && union.children && union.children.length > 0) {
-          priorUnionIds.add(unionId);
+          otherUnionIds.add(unionId);
           const otherKids = sortChildrenByBirthYear(
             union.children.map(childId => ({
               id: childId,
@@ -247,7 +270,7 @@ export function useFamilyTree(data, navStack, setNavStack) {
     }
 
     for (const unionId of person.own_unions) {
-      if (priorUnionIds.has(unionId)) continue; // Skip prior-children unions
+      if (otherUnionIds.has(unionId)) continue; // Skip other-children unions
 
       const union = unions[unionId];
       if (!union) continue;
@@ -290,7 +313,7 @@ export function useFamilyTree(data, navStack, setNavStack) {
           spouse,
           children: unionChildren,
           spouseOtherChildren: spouseOtherChildren.length > 0 ? spouseOtherChildren : null,
-          // Attach the person's own prior children to the first union with a spouse
+          // Attach the person's own other children to the first union with a spouse
           personOtherChildren: personOtherChildren.length > 0 ? personOtherChildren : null,
           personName: person.name,
           familyPhotos: union.familyPhotos || null

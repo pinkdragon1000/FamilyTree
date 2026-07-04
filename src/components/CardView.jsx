@@ -159,7 +159,34 @@ function CardView({ data, navStack, setNavStack, onJumpToTree, searchTargetId, o
                 </div>
               )}
 
-              {familyExpanded && family.directChildren.length === 0 && (
+              {/* Founders' children from another relationship */}
+              {familyExpanded && family.founderOtherChildren.map(group => (
+                <div key={group.parentId} className="direct-children other-children-section">
+                  <div className="children-label">
+                    {group.parentName?.replace(/[*⟷½~○]/g, '').trim()}'s children from other relationship:
+                  </div>
+                  <div className="children-list">
+                    {group.children.map(child => (
+                      <ExpandablePersonCard
+                        key={child.id}
+                        person={child}
+                        getChildrenForPerson={getChildrenForPerson}
+                        hasChildren={hasChildren}
+                        getSpousesForPerson={getSpousesForPerson}
+                        isExpanded={isExpanded}
+                        toggleNode={toggleNode}
+                        depth={0}
+                        onJumpToTree={onJumpToTree}
+                        getParentCoupleForPerson={getParentCoupleForPerson}
+                        navigateUp={navigateUp}
+                        onPersonClick={handlePersonChipClick}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
+
+              {familyExpanded && family.directChildren.length === 0 && family.founderOtherChildren.length === 0 && (
                 <div className="no-children">No children recorded</div>
               )}
             </div>
