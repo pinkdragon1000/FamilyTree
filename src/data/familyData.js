@@ -482,19 +482,30 @@ export const familyData = {
                 imageLink: "/photos/Davis/JaneDavis.jpg",
                 birthyear: 1970,
               },
-              { name: "Kevin Davis", gender: "M" },
+              {
+                name: "Kevin Davis",
+                gender: "M",
+                imageLink: "/photos/Davis/KevinDavis.jpg",
+              },
               {
                 name: "Beth Moore",
                 gender: "F",
-                spouse: { name: "Matt Moore", gender: "M" },
+                imageLink: "/photos/Moore/MattBethMoore.jpg",
+                spouse: {
+                  name: "Matt Moore",
+                  gender: "M",
+                  imageLink: "/photos/Moore/MattBethMoore.jpg",
+                },
                 children: [
                   {
                     name: "Matthew Moore",
                     gender: "M",
+                    imageLink: "/photos/Moore/MatthewMoore.jpg",
                   },
                   {
                     name: "Levi Moore",
                     gender: "M",
+                    imageLink: "/photos/Moore/LeviMoore.jpg",
                   },
                 ],
               },
@@ -507,24 +518,50 @@ export const familyData = {
                   {
                     name: "Drew Davis",
                     gender: "M",
-                    spouse: { name: "Ashli Davis", gender: "F" },
+                    imageLink: "/photos/Davis/DrewDavis.jpg",
+                    spouse: {
+                      name: "Ashli Davis",
+                      gender: "F",
+                      imageLink: "/photos/Davis/AshliDavis.jpg",
+                    },
                     children: [
                       {
                         name: "Jaxen Davis",
                         gender: "M",
+                        imageLink: "/photos/Davis/JaxenDavis.jpg",
                       },
-
-                      { name: "Cora Davis", gender: "F" },
+                      {
+                        name: "Cora Davis",
+                        gender: "F",
+                        imageLink: "/photos/Davis/CoraDavis2.jpg",
+                      },
                     ],
                   },
                   {
                     name: "Tyler Davis",
                     gender: "M",
-                    spouse: { name: "Kayla Davis", gender: "F" },
+                    imageLink: "/photos/Davis/TylerDavis.jpg",
+                    spouse: {
+                      name: "Kayla Davis",
+                      gender: "F",
+                      imageLink: "/photos/Davis/KaylaDavis.jpg",
+                    },
                     children: [
-                      { name: "Eljah Davis", gender: "M" },
-                      { name: "Waverly Davis", gender: "F" },
-                      { name: "Sophie Davis", gender: "F" },
+                      {
+                        name: "Elijah Davis",
+                        gender: "M",
+                        imageLink: "/photos/Davis/ElijahDavis.jpg",
+                      },
+                      {
+                        name: "Waverly Davis",
+                        gender: "F",
+                        imageLink: "/photos/Davis/WaverlyDavis.jpg",
+                      },
+                      {
+                        name: "Sophie Davis",
+                        gender: "F",
+                        imageLink: "/photos/Davis/SophieDavis.jpg",
+                      },
                     ],
                   },
                 ],
