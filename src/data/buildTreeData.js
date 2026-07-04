@@ -129,6 +129,38 @@ function processCouple(familyName, person1, person2, parentPath = "") {
 }
 
 /**
+ * Process children from a person's previous relationship.
+ * Creates a prior union for the given parent and attaches the prior children
+ * (and their own spouses/children) beneath it.
+ */
+function processPriorChildren(familyName, parentPersonId, priorChildren, parentPath = "") {
+  if (!parentPersonId || !priorChildren || priorChildren.length === 0) return;
+
+  const priorUnionId = nextUnionId();
+  persons[parentPersonId].own_unions.unshift(priorUnionId); // Add to beginning
+
+  for (const priorChild of priorChildren) {
+    const priorChildId = processPerson(familyName, priorChild, priorUnionId, parentPath);
+    if (priorChildId && priorChild.spouse) {
+      const priorChildUnionId = nextUnionId();
+      persons[priorChildId].own_unions.push(priorChildUnionId);
+
+      if (!priorChild.spouse.ref) {
+        const priorSpouseId = processPerson(familyName, priorChild.spouse, null, parentPath);
+        if (priorSpouseId) {
+          persons[priorSpouseId].own_unions.push(priorChildUnionId);
+        }
+      }
+
+      // Process prior child's children
+      if (priorChild.children) {
+        processChildren(familyName, priorChild.children, priorChildUnionId, parentPath);
+      }
+    }
+  }
+}
+
+/**
  * Process children of a union
  */
 function processChildren(familyName, children, parentUnionId, parentPath = "") {
@@ -139,6 +171,11 @@ function processChildren(familyName, children, parentUnionId, parentPath = "") {
     if (!childId) continue;
 
     const newParentPath = parentPath ? `${parentPath}.${child.name}` : child.name;
+
+    // Handle prior children from this child's own previous relationship
+    if (child.priorChildren) {
+      processPriorChildren(familyName, childId, child.priorChildren, newParentPath);
+    }
 
     // If child has a spouse, create a union for them
     if (child.spouse) {
@@ -160,28 +197,7 @@ function processChildren(familyName, children, parentUnionId, parentPath = "") {
 
         // Handle prior children from spouse's previous marriage
         if (child.spouse.priorChildren) {
-          const priorUnionId = nextUnionId();
-          persons[spouseId].own_unions.unshift(priorUnionId); // Add to beginning
-
-          for (const priorChild of child.spouse.priorChildren) {
-            const priorChildId = processPerson(familyName, priorChild, priorUnionId, newParentPath);
-            if (priorChildId && priorChild.spouse) {
-              const priorChildUnionId = nextUnionId();
-              persons[priorChildId].own_unions.push(priorChildUnionId);
-
-              if (!priorChild.spouse.ref) {
-                const priorSpouseId = processPerson(familyName, priorChild.spouse, null, newParentPath);
-                if (priorSpouseId) {
-                  persons[priorSpouseId].own_unions.push(priorChildUnionId);
-                }
-              }
-
-              // Process prior child's children
-              if (priorChild.children) {
-                processChildren(familyName, priorChild.children, priorChildUnionId, newParentPath);
-              }
-            }
-          }
+          processPriorChildren(familyName, spouseId, child.spouse.priorChildren, newParentPath);
         }
       }
 

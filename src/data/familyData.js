@@ -484,6 +484,21 @@ export const familyData = {
               },
               { name: "Kevin Davis", gender: "M" },
               {
+                name: "Beth Moore",
+                gender: "F",
+                spouse: { name: "Matt Moore", gender: "M" },
+                children: [
+                  {
+                    name: "Matthew Moore",
+                    gender: "M",
+                  },
+                  {
+                    name: "Levi Moore",
+                    gender: "M",
+                  },
+                ],
+              },
+              {
                 name: "Chris Davis",
                 gender: "M",
                 spouse: { name: "Rhonda Davis", gender: "F" },
@@ -505,6 +520,7 @@ export const familyData = {
                   {
                     name: "Tyler Davis",
                     gender: "M",
+                    spouse: { name: "Kayla Davis", gender: "F" },
                     children: [
                       { name: "Eljah Davis", gender: "M" },
                       { name: "Waverly Davis", gender: "F" },
@@ -638,12 +654,22 @@ export const familyData = {
                 name: "Jared Kamann",
                 gender: "M",
                 imageLink: "/photos/Kamann/JaredKamann.jpg",
-                children: [
+                priorChildren: [
                   {
                     name: "Tristan Kamann",
                     gender: "M",
                     imageLink: "/photos/Kamann/TristanKamann.jpg",
                   },
+                ],
+                spouse: {
+                  name: "Kia Kamann",
+                  gender: "F",
+                  priorChildren: [
+                    { name: "Zola", gender: "F" },
+                    { name: "Corbin", gender: "M" },
+                  ],
+                },
+                children: [
                   {
                     name: "Quinn Kamann",
                     gender: "F",
@@ -665,6 +691,12 @@ export const familyData = {
                 name: "Kurt Kamann",
                 gender: "M",
                 imageLink: "/photos/Kamann/KurtKamann.jpg",
+                spouse: { name: "Ashley Kamann", gender: "F" },
+                children: [
+                  { name: "Avery Kamann", gender: "M" },
+                  { name: "Aubery Kamann", gender: "F" },
+                  { name: "Kam Kamann", gender: "M" },
+                ],
               },
               {
                 name: "Gabe Kamann",
