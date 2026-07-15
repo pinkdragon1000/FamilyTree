@@ -496,14 +496,24 @@ export const familyData = {
                   {
                     name: "Jacqueline Katsifis",
                     gender: "F",
-                    spouse: { name: "Stavros Katsifis", gender: "M" },
+                    imageLink: "/photos/Katsifis/JacquelineKatsifis.jpg",
+                    spouse: {
+                      name: "Stavros Katsifis",
+                      gender: "M",
+                      imageLink: "/photos/Katsifis/StavrosKatsifis.jpg",
+                    },
                     children: [
+                      {
+                        name: "Kristo Katsifis",
+                        gender: "M",
+                        imageLink: "/photos/Katsifis/KristoKatsifis.jpg",
+                      },
                       {
                         name: "Allie Katsifis",
                         gender: "F",
                         birthyear: 2019,
+                        imageLink: "/photos/Katsifis/AllieKatsifis.jpg",
                       },
-                      { name: "Kristo Katsifis", gender: "M" },
                     ],
                   },
                   {
