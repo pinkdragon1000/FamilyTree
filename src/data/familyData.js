@@ -487,7 +487,51 @@ export const familyData = {
             spouse: { name: "George Davis", nickname: "Bud", gender: "M" },
             children: [
               { name: "Petie Davis ○", gender: "M" },
-              { name: "Greg Davis", gender: "M" },
+              {
+                name: "Greg Davis",
+                gender: "M",
+                imageLink: "/photos/Davis/GregDavis.jpg",
+                spouse: { name: "Caprice Davis", gender: "F" },
+                children: [
+                  {
+                    name: "Jacqueline Katsifis",
+                    gender: "F",
+                    spouse: { name: "Stavros Katsifis", gender: "M" },
+                    children: [
+                      {
+                        name: "Allie Katsifis",
+                        gender: "F",
+                        birthyear: 2019,
+                      },
+                      { name: "Kristo Katsifis", gender: "M" },
+                    ],
+                  },
+                  {
+                    name: "Jennifer Earnest",
+                    imageLink: "/photos/Earnest/JenniferEarnest.jpg",
+                    gender: "F",
+                    spouse: {
+                      name: "Daniel Earnest",
+                      gender: "M",
+                      imageLink: "/photos/Earnest/DanielEarnest.jpg",
+                    },
+                    children: [
+                      {
+                        name: "Aleksander Earnest",
+                        gender: "M",
+                        birthyear: 2005,
+                        imageLink: "/photos/Earnest/AleksanderEarnest.jpg",
+                      },
+                      {
+                        name: "Kira Earnest",
+                        gender: "F",
+                        birthyear: 2007,
+                        imageLink: "/photos/Earnest/KiraEarnest.jpg",
+                      },
+                    ],
+                  },
+                ],
+              },
               { name: "Rodney Davis", gender: "M" },
               {
                 name: "Jane Davis",
@@ -2078,6 +2122,7 @@ export const familyData = {
                   {
                     name: "Chaitanya Malviya",
                     gender: "M",
+                    birthyear: 2008,
                     imageLink: "/photos/Malviya/ChaitanyaMalviya.jpg",
                   },
                 ],
