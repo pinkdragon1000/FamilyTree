@@ -708,6 +708,7 @@ export const familyData = {
                   {
                     name: "Emilee Schmetzer",
                     gender: "F",
+                    birthyear: 2000,
                     imageLink: "/photos/Emilee&StevenSchmetzer.jpg",
                     spouse: {
                       name: "Steven Schmetzer",
@@ -718,6 +719,7 @@ export const familyData = {
                   {
                     name: "Josh Davis",
                     gender: "M",
+                    birthyear: 2003,
                     imageLink: "/photos/Davis/JoshDavis.jpg",
                   },
                 ],
