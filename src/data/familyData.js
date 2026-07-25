@@ -662,6 +662,7 @@ export const familyData = {
             nickname: "Sonny",
             profession: "English Professor",
             imageLink: "/photos/Davis/SonnyDavis.jpg",
+            spouse: { name: "Lorna Hale ⟷", gender: "F", birthyear: "1943" },
             children: [
               {
                 name: "Brian Davis",
@@ -2272,6 +2273,45 @@ export const familyData = {
           },
           {
             name: "Nancy Phillips",
+            children: [
+              {
+                name: "Jody",
+                gender: "F",
+                children: [
+                  { name: "Thomas Tolbert", gender: "M" },
+                  {
+                    name: "Elizabeth",
+                    gender: "F",
+                  },
+                ],
+              },
+              {
+                name: "Stacy Burchett",
+                gender: "F",
+                children: [
+                  {
+                    name: "Ashley Staats",
+                    gender: "F",
+                    birthyear: 1989,
+                    deathYear: 2003,
+                  },
+                  { name: "Amanda Pauley", gender: "F" },
+                  { name: "Samanatha", gender: "F" },
+                  {
+                    name: "Claudia Cubides",
+                    gender: "F",
+                    children: [{ name: "Karsyn", gender: "F" }],
+                  },
+                  { name: "Marina Whiting", gender: "F" },
+                  { name: "Alex", gender: "F" },
+                  { name: "Hearth", gender: "F" },
+                  { name: "Brooke Sparks", gender: "F" },
+                  { name: "Cole", gender: "M" },
+                  { name: "Chase Burchett", gender: "M" },
+                  { name: "Hunter Crow", gender: "M" },
+                ],
+              },
+            ],
           },
           {
             name: "Beth Imperio",
