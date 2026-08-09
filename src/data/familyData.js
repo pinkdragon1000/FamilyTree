@@ -303,6 +303,10 @@ export const familyData = {
                     birthyear: 2003,
                     birthplace: "WV",
                     imageLink: "/photos/Hager/MaddieHager.jpg",
+                    spouse: {
+                      name: "Brett Painter",
+                      gender: "M"
+                    }
                   },
                   {
                     name: "Marlee Hager *",
