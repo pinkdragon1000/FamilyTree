@@ -259,6 +259,7 @@ export const familyData = {
                   },
                   {
                     name: "Hannah Robinson",
+                    profession: "Registered Nurse (NICU)",
                     gender: "F",
                     birthyear: 2005,
                     birthplace: "WV",
