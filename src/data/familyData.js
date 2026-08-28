@@ -228,7 +228,9 @@ export const familyData = {
                     profession: "Radiologist Technician",
                     imageLink: "/photos/Johnson/Lauren&KaydenJohnson.jpg",
                     birthplace: "WV",
-                    familyPhotos: [{src: "/familyPhotos/laurenkaydenjohnsonfam.jpg"}],
+                    familyPhotos: [
+                      { src: "/familyPhotos/laurenkaydenjohnsonfam.jpg" },
+                    ],
                     spouse: {
                       name: "Kayden Johnson",
                       gender: "M",
@@ -307,8 +309,8 @@ export const familyData = {
                     imageLink: "/photos/Hager/MaddieHager.jpg",
                     spouse: {
                       name: "Brett Painter",
-                      gender: "M"
-                    }
+                      gender: "M",
+                    },
                   },
                   {
                     name: "Marlee Hager *",
@@ -675,6 +677,10 @@ export const familyData = {
                 gender: "M",
                 profession: "Teacher",
                 imageLink: "/photos/Davis/BrianDavis.jpg",
+                familyPhotos: [
+                  { src: "/familyPhotos/briandavisfam.jpg" },
+                  { src: "/familyPhotos/briandavisfam2.jpg" },
+                ],
                 spouse: { name: "Tina Davis", gender: "F" },
                 children: [
                   {
@@ -710,6 +716,10 @@ export const familyData = {
                 gender: "M",
                 birthyear: 1971,
                 imageLink: "/photos/Davis/StephenDavis.jpg",
+                familyPhotos: [
+                  { src: "/familyPhotos/stephendavisfam.jpg" },
+                  { src: "/familyPhotos/stephendavisfam2.jpg" },
+                ],
                 spouse: { name: "Julie Soltis ⟷", gender: "F" },
                 children: [
                   {
