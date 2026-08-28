@@ -228,6 +228,7 @@ export const familyData = {
                     profession: "Radiologist Technician",
                     imageLink: "/photos/Johnson/Lauren&KaydenJohnson.jpg",
                     birthplace: "WV",
+                    familyPhotos: [{src: "/familyPhotos/laurenkaydenjohnsonfam.jpg"}],
                     spouse: {
                       name: "Kayden Johnson",
                       gender: "M",
