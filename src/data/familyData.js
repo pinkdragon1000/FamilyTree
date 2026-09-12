@@ -908,7 +908,11 @@ export const familyData = {
         children: [
           { name: "Subbalakshmi", gender: "F" },
           { name: "Nawab", gender: "M", deathyear: "unknown" },
-          { name: "Chitti Babu", gender: "M" },
+          {
+            name: "Chitti Babu",
+            gender: "M",
+            children: [{ name: "Pranav", gender: "M" }],
+          },
         ],
       },
       {
