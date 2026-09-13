@@ -968,6 +968,7 @@ export const familyData = {
             name: "Ajay Royyuru",
             gender: "M",
             birthyear: 1964,
+            profession: "Genographer/Computational Biology",
             imageLink: "/photos/Royyuru/AjayRoyyuru.jpg",
             familyPhotos: [{ src: "/familyPhotos/ajayroyyurufam.jpg" }],
             spouse: {
@@ -1115,6 +1116,7 @@ export const familyData = {
             spouse: {
               name: "Ramarao Hota",
               gender: "M",
+              profession: "Storage Engineer",
               birthyear: 1951,
               imageLink: "/photos/Hota/RamaraoHota.jpg",
               birthplace: "?, India",
