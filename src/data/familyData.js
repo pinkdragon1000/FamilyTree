@@ -192,6 +192,7 @@ export const familyData = {
                       gender: "F",
                       birthplace: "WV",
                       birthyear: 1991,
+                      profession: "Program Manager",
                       imageLink: "/photos/Bly/ChelseaBly.jpg",
                       spouse: { name: "Steven Bly", gender: "M" },
                       children: [
@@ -1083,11 +1084,13 @@ export const familyData = {
                 nickname: "Tara",
                 imageLink: "/photos/Royyuru/TaraRoyyuru.jpg",
                 birthyear: 1988,
+                profession: "Program Manager",
                 birthplace: "Hyderabad, India",
                 familyPhotos: [{ src: "/familyPhotos/shrutiroyyurufam.jpg" }],
                 spouse: {
                   name: "Sandeep Eyyuni",
                   gender: "M",
+                  profession: "Distributed Systems Engineer",
                   imageLink: "/photos/Eyyuni/SandeepEyyuni.jpg",
                 },
                 children: [
@@ -1106,6 +1109,7 @@ export const familyData = {
             name: "Subba Hota",
             gender: "F",
             birthyear: 1958,
+            profession: "IT Director",
             imageLink: "/photos/Hota/SubbaHota.jpg",
             birthplace: "Rajahmundry, India",
             spouse: {
@@ -1120,6 +1124,7 @@ export const familyData = {
                 name: "Pallavi Gudipati",
                 gender: "F",
                 birthyear: 1982,
+                profession: "IT Business Analyst",
                 birthplace: "Morgantown, WV",
                 imageLink: "/photos/Gudipati/PallaviGudipati.jpg",
                 spouse: {
